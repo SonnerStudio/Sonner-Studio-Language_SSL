@@ -209,8 +209,8 @@ MIT License - siehe [LICENSE](LICENSE) für Details.
 
 ## 📧 Kontakt
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+- GitHub: [@SonnerStudio](https://github.com/yourusername)
+- Email: hbcomputer@freenet.de
 - Discord: SSL Community Server (demnächst)
 
 ---

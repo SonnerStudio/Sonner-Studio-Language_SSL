@@ -195,9 +195,9 @@ SSL ist ein experimentelles Projekt. Beiträge sind willkommen!
 
 ---
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- Discord: SSL Community Server (coming soon)
+- GitHub: [@SonnerStudio](https://github.com/yourusername)
+- Email: hbcomputer@freenet.de
+- Discord: [Join our community](https://discord.gg/J8eXPzpt)
 
 ---
 
