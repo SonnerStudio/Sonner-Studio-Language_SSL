@@ -145,12 +145,11 @@ cargo test
 
 ---
 
-## 📚 Dokumentation
+## 📚 Documentation
 
-- [Implementation Master Plan](docs/implementation_master.md)
-- [Phase 4: Toolchain](docs/implementation_phase4.md)
-- [Phase 5: Erweiterte Features](docs/implementation_phase5.md)
-- [Walkthrough](brain/walkthrough.md)
+- [Full Documentation](DOCUMENTATION.md)
+- [Examples](EXAMPLES.md)
+- [License](LICENSE)
 
 ---
 
