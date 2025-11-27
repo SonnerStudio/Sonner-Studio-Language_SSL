@@ -1,0 +1,28 @@
+# Binary and build artifacts
+target/
+*.exe
+*.pdb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (for VS Code extension)
+node_modules/
+*.log
+package-lock.json
+
+# Test files
+*.test
+*.tmp
+
+# Rust
+**/*.rs.bk
+Cargo.lock
