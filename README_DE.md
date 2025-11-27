@@ -14,6 +14,14 @@
 
 ---
 
+## 📖 Schnellzugriff
+
+**[📚 Vollständige Dokumentation](DOCUMENTATION_DE.md)** | **[💡 Beispiele](EXAMPLES.md)** | **[⚖️ Lizenz](LICENSE_DE.md)**
+
+Verfügbar in: [EN](DOCUMENTATION.md) | [DE](DOCUMENTATION_DE.md) | [FR](DOCUMENTATION_FR.md) | [ES](DOCUMENTATION_ES.md) | [PT](DOCUMENTATION_PT.md) | [JA](DOCUMENTATION_JA.md)
+
+---
+
 ## 🌟 Highlights
 
 SSL ist eine **experimentelle Programmiersprache**, die moderne und futuristische Konzepte vereint:
