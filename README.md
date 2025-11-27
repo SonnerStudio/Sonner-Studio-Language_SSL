@@ -1,6 +1,30 @@
-- 🩹 **Self-Healing Code**: Automatische Fehlerbehandlung mit AI-Integration
-- 🤖 **AI-Native**: Compiler mit KI-Optimierung und -Fehleranalyse
-- 🔄 **Hybrid Typsystem**: Statisch + Dynamisch + Inferenz
+# Sonner Studio Language (SSL)
+
+**An AI-native, universal programming language of the future**
+
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](#tests)
+
+---
+
+## 🌍 Languages / Sprachen
+
+**[English](README.md)** | **[Deutsch](README_DE.md)** | **[Français](README_FR.md)** | **[Español](README_ES.md)** | **[Português](README_PT.md)** | **[日本語](README_JA.md)**
+
+---
+
+## 🌟 Highlights
+
+SSL is an **experimental programming language** that combines modern and futuristic concepts:
+
+- ⚡ **Parallel-by-Design**: Native support for threads and message-passing
+- ⚛️ **Quantum Computing**: Integrated quantum simulator
+- 🩹 **Self-Healing Code**: Automatic error handling with AI integration
+- 🤖 **AI-Native**: Compiler with AI optimization and error analysis
+- 🔄 **Hybrid Type System**: Static + Dynamic + Inference
+
+---
 
 ---
 
