@@ -2,15 +2,15 @@
 
 ![SSL Logo](assets/Sonner-Studio-Language-Logo.png)
 
-**AI ネイティブな未来のユニバーサルプログラミング言語**
+**未来のAIネイティブで普遍的なプログラミング言語**
 
-[![バージョン](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/yourusername/ssl)
-[![ライセンス](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![テスト](https://img.shields.io/badge/tests-合格-brightgreen.svg)](#tests)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](#tests)
 
 ---
 
-## 🌍 言語 / Languages
+## 🌍 言語
 
 **[English](README.md)** | **[Deutsch](README_DE.md)** | **[Français](README_FR.md)** | **[Español](README_ES.md)** | **[Português](README_PT.md)** | **[日本語](README_JA.md)**
 
@@ -18,12 +18,12 @@
 
 ## 🌟 ハイライト
 
-SSL は、最新の未来的なコンセプトを組み合わせた**実験的プログラミング言語**です：
+SSLは、現代的かつ未来的なコンセプトを組み合わせた**実験的なプログラミング言語**です：
 
-- ⚡ **並列処理優先設計**: スレッドとメッセージパッシングのネイティブサポート
-- ⚛️ **量子コンピューティング**: 統合量子シミュレータ
-- 🩹 **自己修復コード**: AI統合による自動エラー処理
-- 🤖 **AIネイティブ**: AI最適化とエラー分析を備えたコンパイラ
+- ⚡ **Parallel-by-Design**: スレッドとメッセージパッシングのネイティブサポート
+- ⚛️ **Quantum Computing**: 統合された量子シミュレータ
+- 🩹 **Self-Healing Code**: AI統合による自動エラー処理
+- 🤖 **AI-Native**: AI最適化とエラー分析を備えたコンパイラ
 - 🔄 **ハイブリッド型システム**: 静的 + 動的 + 推論
 
 ---
@@ -33,8 +33,8 @@ SSL は、最新の未来的なコンセプトを組み合わせた**実験的�
 ### インストール
 
 ```bash
-git clone https://github.com/yourusername/ssl.git
-cd ssl
+git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
+cd Sonner-Studio-Language_SSL
 cargo build --release
 ```
 
@@ -46,22 +46,22 @@ fn main() {
 }
 ```
 
-実行:
+実行：
 ```bash
-ssl run examples/hello.ssl
+cargo run -- run examples/hello.ssl
 ```
 
 ---
 
 ## 📖 機能
 
-### 1. 並列処理 ⚡
+### 1. 並行性 ⚡
 
 ```ssl
 let chan = channel()
 
 spawn {
-    send(chan[0], "スレッドからこんにちは！")
+    send(chan[0], "スレッドからのこんにちは！")
 }
 
 print(recv(chan[1]))
@@ -71,7 +71,7 @@ print(recv(chan[1]))
 
 ```ssl
 let q = Qubit()
-H(q)  // Hadamard: 重ね合わせ
+H(q)  // アダマールゲート：重ね合わせ
 let result = Measure(q)
 print(result)  // 0 または 1 (50/50)
 ```
@@ -80,11 +80,22 @@ print(result)  // 0 または 1 (50/50)
 
 ```ssl
 try {
-    let result = 危険な操作()
+    let result = risky_operation()
 } recover (err) {
-    print("エラーをキャッチ:", err)
+    print("エラーを捕捉しました：", err)
     // 自動回復
 }
+```
+
+### 4. 関数と再帰
+
+```ssl
+fn fib(n: Int) -> Int {
+    if n <= 1 { return n }
+    return fib(n-1) + fib(n-2)
+}
+
+print(fib(10))  // 55
 ```
 
 ---
@@ -94,29 +105,27 @@ try {
 ### CLIコマンド
 
 ```bash
-ssl run <ファイル>   # コード実行
-ssl build <パス>    # プロジェクトコンパイル
-ssl check <ファイル> # 構文チェック
+ssl run <file>      # コードを実行
+ssl build <path>    # プロジェクトをコンパイル
+ssl check <file>    # 構文チェック
 ssl doctor          # システムチェック
-ssl lsp             # 言語サーバー起動
+ssl lsp             # 言語サーバーを起動
 ```
 
----
-
-## 🧪 テスト
+### AIデーモン (ssld)
 
 ```bash
-cargo test
+ssld  # コード分析用のAIデーモンを起動
 ```
 
-**ステータス**: 全9ユニットテスト合格 ✅
+---
+
+## 🤝 貢献
+
+SSLは実験的なプロジェクトです。貢献を歓迎します！
+
+ガイドラインについては[CONTRIBUTING.md](docs/CONTRIBUTING.md)をご覧ください。
 
 ---
 
-## 📄 ライセンス
-
-MIT License - 詳細は [LICENSE](LICENSE) を参照
-
----
-
-**❤️ と Rust で構築** 🦀
+**Built with ❤️ and Rust** 🦀

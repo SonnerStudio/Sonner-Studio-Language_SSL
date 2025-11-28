@@ -1,0 +1,25 @@
+[package]
+name = "ssl_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+logos = "0.13"
+clap = { version = "4.4", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tower-lsp = "0.20"
+tokio = { version = "1.0", features = ["full"] }
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+warp = "0.3"
+uuid = { version = "1.0", features = ["v4"] }
+num = "0.4"
+rand = "0.8"
+
+[[bin]]
+name = "ssl"
+path = "src/main.rs"
+
+[[bin]]
+name = "ssld"
+path = "src/bin/ssld.rs"
