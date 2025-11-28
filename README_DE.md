@@ -1,14 +1,3 @@
-# Sonner Studio Language (SSL)
-
-**Eine KI-native, universelle Programmiersprache der Zukunft**
-
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/yourusername/ssl)
-[![Lizenz](https://img.shields.io/badge/lizenz-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-bestanden-brightgreen.svg)](#tests)
-
----
-
-## 🌍 Sprachen / Languages
 
 **[English](README.md)** | **[Deutsch](README_DE.md)** | **[Français](README_FR.md)** | **[Español](README_ES.md)** | **[Português](README_PT.md)** | **[日本語](README_JA.md)**
 

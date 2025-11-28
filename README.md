@@ -1,5 +1,7 @@
 # Sonner Studio Language (SSL)
 
+![SSL Logo](assets/Sonner-Studio-Language-Logo.png)
+
 **An AI-native, universal programming language of the future**
 
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL)
