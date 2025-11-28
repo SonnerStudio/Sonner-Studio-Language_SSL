@@ -1,0 +1,15 @@
+package {
+    name: "ssl-core-demo",
+    version: "0.1.0",
+    type: "app"
+}
+
+dependencies {
+    "std": "latest",
+    "http-server": implements("HttpServer", "v1")
+}
+
+permissions {
+    allow network("localhost:8080")
+    allow console_log()
+}
