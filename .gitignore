@@ -10,3 +10,13 @@
 !LICENSE
 !LICENSE_*.md
 !.gitignore
+
+# Allow source code for local development (Agent needs access)
+!src/
+!examples/
+!Cargo.toml
+!spec/
+!editors/
+!test_daemon.ps1
+!docs/
+!assets/
