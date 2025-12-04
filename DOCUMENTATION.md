@@ -228,6 +228,91 @@ fn main() {
 - `X(qubit)`: Apply Pauli-X gate
 - `Measure(qubit)`: Measure qubit state
 
+### Standard Library Functions
+
+#### File System (`fs`)
+
+- `fs_read(path: String) -> String`: Read file contents
+- `fs_write(path: String, content: String)`: Write to file
+- `fs_exists(path: String) -> Bool`: Check if file exists
+- `fs_delete(path: String)`: Delete file
+
+#### HTTP Client (`http`)
+
+- `http_get(url: String) -> String`: Make HTTP GET request
+- `http_post(url: String, body: String) -> String`: Make HTTP POST request
+
+#### JSON (`json`)
+
+- `json_parse(json: String) -> Map`: Parse JSON string
+- `json_stringify(obj: Map) -> String`: Convert object to JSON
+
+#### Environment (`env`)
+
+- `env_get(key: String) -> String`: Get environment variable
+- `sys_os() -> String`: Get operating system name
+
+### Phase 8 Revolutionary Features
+
+#### Time-Travel Debugging
+
+Debug your programs by stepping backwards through execution history:
+
+```bash
+ssl run program.ssl --debug
+```
+
+Features:
+- Step backward/forward through execution
+- Inspect variables at any point in time
+- Debug complex recursive algorithms
+- Visualize program state changes
+
+#### Hot Reload / Live Programming
+
+Automatic code reloading during development:
+
+```bash
+ssl run app.ssl --watch
+```
+
+Features:
+- Instant feedback on code changes
+- No manual restarts required
+- File system watcher integration
+- Configurable debounce interval
+
+#### AI-First Programming
+
+Integrated AI code review and assistance:
+
+```bash
+export OPENAI_API_KEY=sk-...
+ssl run code.ssl --ai-review
+```
+
+Features:
+- Automated code review
+- Security vulnerability detection
+- Performance optimization suggestions
+- Best practice recommendations
+
+#### Visual Reactive Programming
+
+Define dataflow pipelines with visual syntax:
+
+```ssl
+visual {
+    input -> transform -> filter -> output
+}
+```
+
+Features:
+- ASCII art visualization in terminal
+- Reactive dataflow programming
+- Pipeline composition
+- Beautiful terminal output with Unicode icons
+
 ---
 
 ## Examples

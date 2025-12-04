@@ -1,6 +1,6 @@
 [package]
 name = "ssl_core"
-version = "0.1.0"
+version = "2.0.0"
 edition = "2021"
 
 [dependencies]
@@ -8,6 +8,7 @@ logos = "0.13"
 clap = { version = "4.4", features = ["derive"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+toml = "0.8"  # Package Manager manifests
 tower-lsp = "0.20"
 tokio = { version = "1.0", features = ["full"] }
 reqwest = { version = "0.11", features = ["blocking", "json"] }
@@ -15,6 +16,13 @@ warp = "0.3"
 uuid = { version = "1.0", features = ["v4"] }
 num = "0.4"
 rand = "0.8"
+notify = "6.0"  # File watching for hot reload
+libloading = "0.8"  # Dynamic plugin loading
+inkwell = { version = "0.4", features = ["llvm17-0"], optional = true }  # LLVM backend (v3.0)
+
+[features]
+default = []
+llvm = ["inkwell"]  # Enable with --features llvm
 
 [[bin]]
 name = "ssl"

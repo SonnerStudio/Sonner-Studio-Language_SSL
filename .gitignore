@@ -22,3 +22,19 @@
 !test_daemon.ps1
 !docs/
 !assets/
+!GIT_RELEASE_COMMANDS.md
+
+# Explicitly ignore development artifacts
+.gemini/
+*.brain/
+
+# Development documents (design docs, planning, status reports)
+docs/design/
+docs/*_STATUS*.md
+docs/*_WALKTHROUGH*.md
+docs/*_ANALYSIS*.md
+docs/*_PLAN*.md
+
+# Artifact directory files
+C:/Users/*/
+*.artifact/
