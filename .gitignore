@@ -17,13 +17,17 @@
 !src/
 !examples/
 !Cargo.toml
+!Cargo.lock
 !spec/
 !editors/
 !test_daemon.ps1
 !docs/
 !assets/
 !GIT_RELEASE_COMMANDS.md
+!RELEASE_NOTES.md
 
+# SSL 3.2: Freestanding environment linker scripts
+!linker/
 # Explicitly ignore development artifacts
 .gemini/
 *.brain/

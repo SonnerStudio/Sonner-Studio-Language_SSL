@@ -806,6 +806,37 @@ impl Interpreter {
                 self.env.set(&target_name, new_val)?;
                 Ok(None)
             }
+            // SSL 3.2: Freestanding environment statements
+            Statement::ModuleDecl { attributes: _, name: _ } => {
+                // Module declarations are handled at compile time, not runtime
+                // In interpreter mode, we just acknowledge them
+                Ok(None)
+            }
+            Statement::HardwareBlock(_hw_block) => {
+                // Hardware blocks cannot be executed in interpreted mode
+                // They require JIT/AOT compilation to native code
+                Err("Hardware blocks require native compilation. Use 'ssl compile --target' instead of 'ssl run'.".to_string())
+            }
+            Statement::PlatformBlock { target, body } => {
+                // In interpreter mode, check if we're on the target platform
+                // For now, we'll execute all platform blocks (cross-platform simulation)
+                #[cfg(target_arch = "x86_64")]
+                let current_platform = crate::ast::TargetPlatform::X86_64;
+                #[cfg(target_arch = "aarch64")]
+                let current_platform = crate::ast::TargetPlatform::ARM64;
+                #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
+                let current_platform = crate::ast::TargetPlatform::All;
+                
+                // Execute if target matches or is All
+                if target == current_platform || target == crate::ast::TargetPlatform::All {
+                    for stmt in body {
+                        if let Some(val) = self.execute_statement(stmt)? {
+                            return Ok(Some(val));
+                        }
+                    }
+                }
+                Ok(None)
+            }
         }
     }
 

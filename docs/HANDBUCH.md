@@ -1,179 +1,326 @@
-# Sonner Studio Language (SSL) v3.1 - Das Offizielle Handbuch
+# SSL Handbuch
+
+## Einführung
+
+Sonner Studio Language (SSL) ist eine moderne Programmiersprache für die KI-Ära. Dieses Handbuch behandelt die grundlegenden Sprachfunktionen und Syntax.
 
 ## Inhaltsverzeichnis
-1.  [Einführung](#1-einführung)
-2.  [Installation & Einrichtung](#2-installation--einrichtung)
-3.  [Sprachgrundlagen](#3-sprachgrundlagen)
-4.  [Funktionale Programmierung (v3.0)](#4-funktionale-programmierung)
-5.  [Der Aurora JIT-Compiler (v3.1)](#5-der-aurora-jit-compiler)
-6.  [Standard-Bibliothek](#6-standard-bibliothek)
-7.  [Tools & Ökosystem](#7-tools--ökosystem)
+
+1. [Erste Schritte](#erste-schritte)
+2. [Variablen](#variablen)
+3. [Typen](#typen)
+4. [Funktionen](#funktionen)
+5. [Kontrollfluss](#kontrollfluss)
+6. [Pattern Matching](#pattern-matching)
+7. [Datenstrukturen](#datenstrukturen)
+8. [Module](#module)
+9. [Fehlerbehandlung](#fehlerbehandlung)
+10. [Erweiterte Funktionen](#erweiterte-funktionen)
 
 ---
 
-## 1. Einführung
+## Erste Schritte
 
-Willkommen bei **SSL v3.1**, der Programmiersprache für die Zukunft der Softwareentwicklung. SSL verbindet die Sicherheit und Ausdrucksstärke der funktionalen Programmierung mit der rohen Leistung eines nativen JIT-Compilers, eingebettet in ein entwicklerfreundliches Ökosystem mit KI-Tools und Time-Travel-Debugging.
+### Hallo Welt
 
-### Kernphilosophie
--   **Hybrides Paradigma:** Mische imperativen und funktionalen Code nahtlos.
--   **Performance First:** Native Maschinencode-Generierung via LLVM.
--   **Developer Experience:** Tools, die deinen Code verstehen (KI, Hot Reload).
+```ssl
+fn main() {
+    print("Hallo, SSL!")
+}
+```
 
----
+### SSL-Code ausführen
 
-## 2. Installation & Einrichtung
-
-### Voraussetzungen
--   Rust Toolchain (aktuellste Stable-Version)
--   LLVM 17.0 (für JIT-Support)
-
-### Bauen aus dem Quellcode
 ```bash
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL
-cd Sonner-Studio-Language_SSL
-cargo build --release --features llvm
-```
+# Datei ausführen
+ssl run main.ssl
 
-### Dein erstes Programm
-Erstelle eine Datei namens `hallo.ssl`:
-```ssl
-print("Hallo, Welt!")
-```
+# Interaktive REPL
+ssl run
 
-Ausführen:
-```bash
-ssl run hallo.ssl
+# Syntax prüfen
+ssl check main.ssl
 ```
 
 ---
 
-## 3. Sprachgrundlagen
+## Variablen
 
-### Variablen
-Variablen sind in SSL v3.0+ standardmäßig **unveränderlich (immutable)**.
+### Unveränderlich (Standard)
+
 ```ssl
-let x = 10      // Unveränderlich
-// x = 20       // Fehler!
-
-let mut y = 10  // Veränderlich (Mutable)
-y = 20          // OK
+let name = "SSL"
+let alter = 1
+let pi = 3.14159
 ```
 
-### Datentypen
--   `Int`: 64-Bit Integer (vorzeichenbehaftet)
--   `Float`: 64-Bit Fließkommazahl
--   `String`: UTF-8 Zeichenkette
--   `Bool`: `true` oder `false`
--   `List<T>`: Dynamisches Array
--   `Map<K, V>`: Schlüssel-Wert-Speicher
+### Veränderlich
 
-### Kontrollfluss
 ```ssl
-if x > 10 {
-    print("Groß")
-} else {
-    print("Klein")
+var zaehler = 0
+zaehler = zaehler + 1
+```
+
+### Typ-Annotationen
+
+```ssl
+let name: String = "SSL"
+let zahlen: List<Int> = [1, 2, 3]
+```
+
+---
+
+## Typen
+
+### Primitive Typen
+
+| Typ | Beschreibung | Beispiel |
+|-----|--------------|----------|
+| Int | 64-Bit Ganzzahl | `42` |
+| Float | 64-Bit Gleitkomma | `3.14` |
+| Bool | Wahrheitswert | `true`, `false` |
+| String | UTF-8 Zeichenkette | `"hallo"` |
+| Char | Unicode-Zeichen | `'a'` |
+
+### Zusammengesetzte Typen
+
+```ssl
+// Listen
+let zahlen = [1, 2, 3, 4, 5]
+
+// Maps
+let person = {
+    name: "Alice",
+    alter: 30
 }
 
-// Schleifen
+// Tupel
+let punkt = (10, 20)
+```
+
+### Eigene Typen
+
+```ssl
+// Struct
+struct Benutzer {
+    name: String
+    email: String
+    alter: Int
+}
+
+// Enum (Summentyp)
+type Ergebnis<T, E> = Ok(T) | Err(E)
+type Option<T> = Some(T) | None
+```
+
+---
+
+## Funktionen
+
+### Einfache Funktionen
+
+```ssl
+fn addiere(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn begruesse(name: String) {
+    print("Hallo, ${name}!")
+}
+```
+
+### Lambda-Ausdrücke
+
+```ssl
+let verdoppeln = |x| x * 2
+let addieren = |a, b| a + b
+
+let zahlen = [1, 2, 3, 4, 5]
+let verdoppelt = zahlen.map(|x| x * 2)
+```
+
+---
+
+## Kontrollfluss
+
+### If/Else
+
+```ssl
+if bedingung {
+    // ...
+} else if andere_bedingung {
+    // ...
+} else {
+    // ...
+}
+
+// If als Ausdruck
+let max = if a > b { a } else { b }
+```
+
+### Schleifen
+
+```ssl
+// For-Schleife
+for element in liste {
+    print(element)
+}
+
+// For mit Bereich
 for i in 0..10 {
     print(i)
 }
-```
 
-### Funktionen
-```ssl
-fn add(a: Int, b: Int) -> Int {
-    return a + b
+// While-Schleife
+while bedingung {
+    // ...
 }
 ```
 
 ---
 
-## 4. Funktionale Programmierung
+## Pattern Matching
 
-SSL v3.0 führt mächtige funktionale Features ein.
-
-### Der Pipe-Operator (`|>`)
-Verkette Funktionsaufrufe zu lesbaren Daten-Pipelines.
 ```ssl
-// Alter Weg
-let res = square(double(5))
+match wert {
+    0 => print("null")
+    1 | 2 => print("eins oder zwei")
+    n if n < 10 => print("klein: ${n}")
+    _ => print("anderer")
+}
 
-// SSL Weg
-let res = 5 |> double |> square
+// Destrukturierung
+match punkt {
+    (0, 0) => print("Ursprung")
+    (x, 0) => print("auf X-Achse bei ${x}")
+    (0, y) => print("auf Y-Achse bei ${y}")
+    (x, y) => print("bei (${x}, ${y})")
+}
 ```
 
-### Auto-Currying
-Funktionen können teilweise angewendet werden (Partial Application).
+---
+
+## Datenstrukturen
+
+### Structs
+
 ```ssl
-fn multiply(a: Int, b: Int) -> Int { return a * b }
+struct Punkt {
+    x: Float
+    y: Float
+}
 
-let double = multiply(2)  // Gibt eine neue Funktion zurück
-print(double(10))         // Gibt 20 aus
+impl Punkt {
+    fn neu(x: Float, y: Float) -> Punkt {
+        Punkt { x, y }
+    }
+    
+    fn abstand(self, anderer: Punkt) -> Float {
+        sqrt((self.x - anderer.x)^2 + (self.y - anderer.y)^2)
+    }
+}
 ```
 
-### Immutability
-Datenstrukturen sind standardmäßig unveränderlich. Änderungen geben *neue* Kopien zurück.
+### Enums
+
 ```ssl
-let list = [1, 2, 3]
-let new_list = list.push(4)
-// list ist immer noch [1, 2, 3]
-// new_list ist [1, 2, 3, 4]
+type Farbe = Rot | Gruen | Blau | Rgb(Int, Int, Int)
+
+fn farbname(f: Farbe) -> String {
+    match f {
+        Rot => "rot"
+        Gruen => "grün"
+        Blau => "blau"
+        Rgb(r, g, b) => "rgb(${r}, ${g}, ${b})"
+    }
+}
 ```
 
 ---
 
-## 5. Der Aurora JIT-Compiler
+## Module
 
-SSL v3.1 verfügt über einen hochmodernen LLVM-basierten JIT-Compiler.
+### Importieren
 
-### Funktionsweise
-1.  **Interpretation:** Code startet sofort im Interpreter.
-2.  **Hot-Path-Erkennung:** Die Runtime identifiziert häufig ausgeführte Funktionen.
-3.  **Kompilierung:** "Heiße" Funktionen werden im Hintergrund zu nativem Maschinencode kompiliert.
-4.  **Optimierung:** LLVM wendet aggressive Optimierungen an (Inlining, Constant Folding).
-5.  **Native Ausführung:** Nachfolgende Aufrufe nutzen den ultraschnellen nativen Code.
+```ssl
+import math { sqrt, sin, cos }
+import http { Request, Response }
+import json
 
-### Performance
-Benchmarks zeigen einen **5-10x Geschwindigkeitsvorteil** bei rechenintensiven Aufgaben im Vergleich zum Interpreter.
-
----
-
-## 6. Standard-Bibliothek
-
-SSL kommt mit einer "Batteries Included" Standard-Bibliothek.
-
--   `std::io` - Datei- und Konsolen-I/O
--   `std::net` - HTTP Client/Server
--   `std::json` - JSON Parsing/Serialisierung
--   `std::math` - Fortgeschrittene Mathematik
--   `std::async` - Channels und Futures
-
----
-
-## 7. Tools & Ökosystem
-
-### Time-Travel Debugger
-Schreite in der Zeit *zurück*, um Bugs zu finden.
-```bash
-ssl run app.ssl --debug
-# Nutze @back um zurückzugehen
-```
-
-### KI Code Review
-Erhalte sofortiges Feedback zu deinem Code.
-```bash
-ssl run app.ssl --ai-review
-```
-
-### Hot Reload
-Ändere Code, während die App läuft.
-```bash
-ssl run app.ssl --watch
+// Import mit Alias
+import langer_modulname as kurz
 ```
 
 ---
 
-*© 2024 Sonner Studio. Lizenziert unter MIT/Apache 2.0.*
+## Fehlerbehandlung
+
+### Result-Typ
+
+```ssl
+fn dividiere(a: Float, b: Float) -> Result<Float, String> {
+    if b == 0.0 {
+        Err("Division durch Null")
+    } else {
+        Ok(a / b)
+    }
+}
+
+// Mit ? Operator
+fn berechne() -> Result<Float, String> {
+    let x = dividiere(10.0, 2.0)?
+    let y = dividiere(x, 3.0)?
+    Ok(y)
+}
+```
+
+---
+
+## Erweiterte Funktionen (v4.0)
+
+### Property-Based Testing
+```ssl
+@property(iterations: 1000)
+fn addition_ist_kommutativ(a: Int, b: Int) -> Bool {
+    a + b == b + a
+}
+```
+
+### Reaktive Streams
+```ssl
+let stream = Stream.from([1, 2, 3])
+    .map(|x| x * 2)
+    .subscribe(|v| print(v))
+```
+
+### Edge Deployment
+```ssl
+@edge(memory: 128)
+fn handler(request: Request) -> Response {
+    Response.json({ nachricht: "Hallo!" })
+}
+```
+
+### Formale Verifikation
+```ssl
+@requires(n >= 0)
+@ensures(result >= 0)
+fn fakultaet(n: Int) -> Int {
+    if n <= 1 { 1 } else { n * fakultaet(n - 1) }
+}
+```
+
+### Lineare Typen
+```ssl
+@linear
+struct Datei { handle: DateiHandle }
+
+let datei = Datei.oeffnen("test.txt")
+datei.schliessen()  // Pflicht! Kompilierfehler wenn vergessen
+```
+
+Weitere Details zu v4.0 Features siehe [V4.0_FEATURES.md](V4.0_FEATURES.md).
+
+---
+
+*SSL v4.0.0 - Dezember 2024*

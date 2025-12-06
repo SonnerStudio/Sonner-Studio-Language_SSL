@@ -1,414 +1,370 @@
-# Sonner Studio Language (SSL) v3.1.0
+# Sonner Studio Language (SSL) v4.0
 
 <div align="center">
 
-![SSL Logo](assets/Sonner-Studio-Language-Logo.png)
+![SSL Logo](assets/ssl-logo.png)
 
-**The World's Most Innovative Programming Language**  
-**Now with Native LLVM Backend & True JIT Compilation!**
+**A Revolutionary Programming Language for the AI Era**
 
-[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE-MIT)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE-APACHE)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](docs/CONTRIBUTING.md)
+[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/SonnerStudio/SSL)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)]()
 
-[🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [📘 **Official Manual**](docs/MANUAL.md) • [💡 Examples](#-examples) • [🌍 Languages](#-languages) • [🤝 Contributing](#-contributing)
+[English](#features) | [Deutsch](#deutsche-dokumentation)
 
 </div>
 
 ---
 
-## 🌍 Languages
-
-**[English](README.md)** • **[Deutsch](README_DE.md)** • **[Français](README_FR.md)** • **[Español](README_ES.md)** • **[Português](README_PT.md)** • **[日本語](README_JA.md)**
-
----
-
-## 🌟 What's New in SSL 3.1?
-
-### 🚀 Native LLVM Backend (NEW!)
-
-**True Native Performance:**
-SSL 3.1 introduces a fully integrated LLVM backend, replacing the previous mock JIT. This delivers **native machine code** execution for maximum performance.
-
-- **5-10x Speedup** - Compared to the interpreter (verified in benchmarks)
-- **Native Code Generation** - Compiles AST directly to optimized machine code
-- **Advanced Optimizations** - Leverages LLVM's aggressive optimization pipeline (O3)
-- **Seamless Integration** - Automatic fallback to interpreter if needed
-
-```ssl
-// This code is now compiled to native machine code!
-fn fib(n: Int) -> Int {
-    if n <= 1 { return n }
-    return fib(n - 1) + fib(n - 2)
-}
-// Execution time: ~15ms (vs ~150ms interpreted)
-```
-
-### 🎨 Functional Programming (v3.0)
-
-**Write cleaner, more expressive code:**
-
-- **Pipe Operator (`|>`)** - Chain operations beautifully
-- **Auto-Currying** - Partial application by default
-- **Function Composition (`>>`, `<<`)** - Combine functions
-- **Immutable by Default** - Safer, bug-resistant code
-
-```ssl
-// Functional pipelines
-5 |> double |> square |> add(100)  // Clean!
-
-// Auto-currying
-let add10 = add(10)  // Partial application
-add10(5)  // Returns 15
-```
-
-### ⚡ Performance Benchmarks (v3.1)
-
-| Operation | Interpreter | LLVM JIT (v3.1) | Speedup |
-|-----------|-------------|-----------------|---------|
-| Factorial(20) | 0.5ms | **0.05ms** | **10x** |
-| Fibonacci(30) | 150ms | **15ms** | **10x** |
-| Loop (1M) | 200ms | **20ms** | **10x** |
-
----
-
-## 🏆 SSL 3.1: The Complete Feature Set
-
----
-
-## 🏆 SSL 3.0: The Complete Feature Set
-
-### Core Language (v1.0-2.0)
-
-1. **⏰ Time-Travel Debugging** - Step backwards through execution
-2. **🔥 Hot Reload** - Instant code changes, no restart
-3. **🤖 AI Code Review** - Integrated AI analysis
-4. **📊 Visual Programming** - Dataflow pipelines
-5. **⚛️ Quantum Computing** - Native quantum simulation
-6. **⚡ Parallel-by-Design** - CSP concurrency
-7. **🩹 Self-Healing Code** - AI error recovery
-8. **🗺️ Modern Type System** - Generics, traits, inference
-9. **🌐 Production Stdlib** - HTTP, JSON, File I/O
-10. **📦 Package Manager** - `sslpkg` dependency management
-11. **🔌 Plugin System** - Extensible architecture
-
-### New in v3.0
-
-12. **🎨 Functional Programming** - Pipe, currying, immutability
-13. **🚀 JIT Compilation** - Aurora compiler (1.15x-10x faster)
-14. **⚡ Advanced Optimizations** - 6 optimization passes
-
----
-
-## 🚀 Quick Start
-
-### Installation
+## 🚀 Installation
 
 ```bash
-# Clone repository
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL
-cd Sonner-Studio-Language_SSL
+# Clone the repository
+git clone https://github.com/SonnerStudio/SSL.git
+cd SSL
 
-# Build (requires Rust)
-cargo build --release
+# Build and install
+cargo install --path .
 
-# Run your first SSL 3.0 program!
-cargo run --bin ssl -- run examples/functional_pipeline.ssl
+# Verify installation
+ssl doctor
 ```
-
-### Your First SSL 3.0 Program
-
-```ssl
-// Functional programming in action
-fn double(x: Int) -> Int { return x * 2 }
-fn square(x: Int) -> Int { return x * x }
-
-// Pipe operator - clean data flow
-let result = 5 |> double |> square
-print(result)  // 100
-
-// Auto-currying
-let add = fn(a: Int, b: Int) -> Int { return a + b }
-let add10 = add(10)  // Partial application
-print(add10(5))  // 15
-
-// Immutable by default
-let values = [1, 2, 3, 4, 5]
-let doubled = map(values, double)  // Functional transformation
-```
-
-**[📘 Full Migration Guide →](docs/MIGRATION_GUIDE_v3.md)**
 
 ---
 
-## 💡 Feature Showcase
+## ✨ Features
 
-### 🎨 Functional Programming (v3.0)
+SSL combines the best concepts from modern programming languages with innovative AI-first features:
 
+### Core Language Features (v1.0)
+- **Modern Syntax** - Clean, expressive, Python-like simplicity with Rust's power
+- **Pattern Matching** - Exhaustive pattern matching with guards
+- **Algebraic Data Types** - Sum types, product types, generics
+- **Higher-Order Functions** - First-class functions, closures
+- **Immutability by Default** - Explicit mutability with `var`
+- **Type Inference** - Strong static typing with inference
+
+### AI-First Programming (v2.0)
+- **AI Assistant** - Built-in code generation and explanation
+- **Natural Language Queries** - Ask questions in plain English
+- **Automatic Documentation** - AI-generated docs and comments
+- **Code Review** - AI-powered code analysis
+
+### Advanced Runtime (v3.0)
+- **LLVM Backend** - Native performance with Aurora Compiler
+- **JIT Compilation** - Hot code optimization
+- **Time-Travel Debugging** - Step backwards through execution
+- **Hot Reload** - Live programming without restarts
+- **Security Sandbox** - Safe execution environment
+
+### Freestanding/Bare-Metal (v3.2)
+- **OS Development** - Write kernels in SSL
+- **Multi-Platform** - x86-64, ARM64, Apple Silicon, Steam Deck
+- **Linker Scripts** - Custom memory layouts
+- **UEFI Support** - Modern boot process
+
+### Full-Stack Development (v4.0)
+- **WebAssembly** - Compile to WASM for browsers
+- **Native Mobile** - iOS and Android support
+- **Edge Deployment** - Cloudflare, Vercel, AWS Lambda
+- **Package Manager** - Comprehensive dependency management
+
+### Advanced Type System (v4.0)
+- **Linear Types** - Rust-inspired ownership
+- **Algebraic Effects** - Koka-inspired effect system
+- **Formal Verification** - Pre/post conditions, invariants
+- **Property-Based Testing** - QuickCheck-style testing
+
+### Distributed Computing (v4.0)
+- **CRDT Support** - Conflict-free replicated data types
+- **Reactive Streams** - First-class reactive programming
+- **GPU/SIMD** - Parallel computing support
+- **Content-Addressable Code** - Unison-inspired hashing
+
+---
+
+## 📖 Quick Start
+
+### Hello World
 ```ssl
-// Pipe operator
-let result = data
-    |> validate
-    |> transform
-    |> save
-
-// Function composition
-let process = double >> square >> add(100)
-process(5)  // (5 * 2)^2 + 100 = 200
-
-// Immutable updates
-let user = {"name": "Alice", "age": 30}
-let updated = map_with(user, "age", 31)  // Returns new map
+fn main() {
+    print("Hello, SSL!")
+}
 ```
 
-### 🚀 JIT Compilation (v3.0)
-
+### Variables and Types
 ```ssl
-// Small functions automatically inlined
-fn add(a: Int, b: Int) -> Int { return a + b }
-fn compute(x: Int) -> Int {
-    return add(x, 10)  // Inlined to: x + 10
+let name = "SSL"           // Immutable, type inferred
+var counter = 0            // Mutable
+let list: List<Int> = [1, 2, 3]
+```
+
+### Functions
+```ssl
+fn greet(name: String) -> String {
+    "Hello, ${name}!"
 }
 
-// Tail-recursion optimized
-fn sum(n: Int, acc: Int) -> Int {
-    if n == 0 { return acc }
-    return sum(n - 1, acc + n)  // O(n) → O(1) space
-}
+// Higher-order functions
+let doubled = [1, 2, 3].map(|x| x * 2)
 ```
 
-### ⏰ Time-Travel Debugging (v2.0)
-
-```bash
-ssl run your_program.ssl --debug
-```
-
-**Debug backwards through time:**
-- `@back` - Step backward
-- `@forward` - Step forward  
-- `@inspect` - View state
-- `@timeline` - Execution history
-
-### 🔥 Hot Reload (v2.0)
-
-```bash
-ssl run your_app.ssl --watch
-```
-
-Code changes apply instantly - no restart needed!
-
-### 🤖 AI Code Review (v2.0)
-
-```bash
-export OPENAI_API_KEY=sk-...
-ssl run your_code.ssl --ai-review
-```
-
-AI analyzes for bugs, security, and performance.
-
-### 📊 Visual Programming (v2.0)
-
+### Pattern Matching
 ```ssl
-visual {
-    sensor_data -> validate -> transform -> database
-}
-
-// Output:
-// [📥] sensor_data → [🔍] validate → [⚙️] transform →  [📤] database
-```
-
-### ⚛️ Quantum Computing (v2.0)
-
-```ssl
-let q = Qubit()
-H(q)  // Superposition
-CNOT(q1, q2)  // Entanglement
-let result = Measure(q)  // Wavefunction collapse
-```
-
-### ⚡ Parallel Computing (v2.0)
-
-```ssl
-let chan = channel()
-
-spawn {
-    send(chan[0], compute_result())
-}
-
-let result = recv(chan[1])
-```
-
-### 🗺️ Modern Type System (v2.0)
-
-```ssl
-// Generics
-fn map<T, U>(list: List<T>, f: fn(T) -> U) -> List<U> {
-    // Implementation
-}
-
-// Pattern matching
 match value {
-    0 => print("zero"),
-    1..10 => print("small"),
-    _ => print("large")
+    Some(x) if x > 0 => print("Positive: ${x}")
+    Some(x) => print("Non-positive: ${x}")
+    None => print("No value")
+}
+```
+
+### Data Types
+```ssl
+type Result<T, E> = Ok(T) | Err(E)
+
+struct User {
+    name: String
+    age: Int
 }
 
-// Enums with pattern matching
-enum Result {
-    Ok(Int),
-    Err(String)
+impl User {
+    fn is_adult(self) -> Bool {
+        self.age >= 18
+    }
 }
 ```
 
 ---
 
-## 📖 Documentation
-
-### Getting Started
-- **[Quick Start Guide](docs/getting-started/QUICKSTART_EN.md)** - 5-minute tutorial
-- **[Migration from SSL 2.0](docs/MIGRATION_GUIDE_v3.md)** - Upgrade guide
-- **[SSL 3.0 Features](docs/V3.0_FEATURES.md)** - Complete feature list
-
-### Language Reference
-- **[Language Guide](DOCUMENTATION.md)** - Syntax & semantics
-- **[Standard Library](docs/stdlib/)** - Built-in functions
-- **[SSL 3.0 Specification](docs/SSL_3.0_SPECIFICATION.md)** - Technical spec
-
-### Advanced Topics
-- **[Phase 8 Features](docs/DEVLOG_PHASE8.md)** - Time-travel, AI, Visual
-- **[Aurora JIT Compiler](docs/aurora/)** - JIT internals
-- **[RFCs](docs/rfcs/)** - Design proposals
-
----
-
-## 💡 Examples
-
-**[📂 Browse 20+ examples →](examples/)**
-
-### New in v3.0
-- `functional_pipeline.ssl` - Pipe operator & composition
-- `immutable_patterns.ssl` - Immutable data structures
-- `performance_demo.ssl` - JIT optimization showcase
-- `tail_recursion.ssl` - Tail-call optimization
-- `inlining_test.ssl` - Function inlining
-
-### From v2.0
-- `quantum_random.ssl` - Quantum RNG
-- `parallel_fib.ssl` - Parallel Fibonacci
-- `debug_demo.ssl` - Time-travel debugging
-- `hotreload_demo.ssl` - Live programming
-- `ai_review_demo.ssl` - AI code review
-- `visual_demo.ssl` - Visual pipelines
-
----
-
-## 🧪 CLI Toolchain
+## 🔧 CLI Commands
 
 ```bash
-# Execute program
-ssl run <file>
+# Run a file
+ssl run main.ssl
 
-# With v2.0 features
-ssl run <file> --debug        # Time-travel debugging
-ssl run <file> --watch        # Hot reload
-ssl run <file> --ai-review    # AI code review
+# Build project
+ssl build --target native
+ssl build --target wasm
+ssl build --target ios
+ssl build --target android
 
-# Other commands
-ssl check <file>              # Syntax validation
-ssl doctor                    # System diagnostics
-ssl lsp                       # Language Server Protocol
+# Deploy to edge
+ssl deploy --provider cloudflare
+
+# Package management
+ssl pkg init my-project
+ssl pkg add ssl-http
+ssl pkg build --release
+
+# Testing
+ssl test property tests/
+ssl test unit tests/
+ssl verify contracts.ssl
+
+# Development tools
+ssl check main.ssl      # Type check
+ssl lsp                 # Start language server
+ssl doctor              # Check environment
 ```
 
 ---
 
-## 🔄 Migrating from SSL 2.0
+## 📚 Examples
 
-**SSL 3.0 is 95% backward compatible!**
+### [Property-Based Testing](examples/property_test_demo.ssl)
+```ssl
+@property(iterations: 1000)
+fn reverse_is_involution(list: List<Int>) -> Bool {
+    list.reverse().reverse() == list
+}
+```
 
-### Key Changes
+### [Reactive Streams](examples/reactive_demo.ssl)
+```ssl
+let stream = Stream.from([1, 2, 3, 4, 5])
+    .map(|x| x * 2)
+    .filter(|x| x > 4)
+    .subscribe(|value| print("Received: ${value}"))
+```
 
-1. **Variables are immutable by default**
-   ```ssl
-   // SSL 2.0
-   let x = 10
-   x = 20  // Worked
-   
-   // SSL 3.0
-   let mut x = 10  // Add 'mut'
-   x = 20  // Now works
-   ```
+### [Edge API](examples/edge_api.ssl)
+```ssl
+@edge(memory: 128, timeout: 10)
+fn handler(request: Request) -> Response {
+    Response.json({ message: "Hello from Edge!" })
+}
+```
 
-2. **Map/List updates**
-   ```ssl
-   // SSL 2.0
-   let map = {"key": "value"}
-   map["key"] = "new"  // Worked
-   
-   // SSL 3.0
-   let map = {"key": "value"}
-   let new_map = map_with(map, "key", "new")  // Functional
-   ```
+### [CRDT Distributed Data](examples/crdt_demo.ssl)
+```ssl
+let counter = PNCounter.new()
+counter.increment("node-1")
+counter.decrement("node-2")
+print("Count: ${counter.count()}")
+```
 
-**[📘 Complete Migration Guide →](docs/MIGRATION_GUIDE_v3.md)**
+### [GPU/SIMD Computing](examples/gpu_compute.ssl)
+```ssl
+let a = F32x4.new(1.0, 2.0, 3.0, 4.0)
+let b = F32x4.splat(2.0)
+let result = a.mul(b)  // [2.0, 4.0, 6.0, 8.0]
+```
+
+### [Formal Verification](examples/formal_verify.ssl)
+```ssl
+@requires(n >= 0)
+@ensures(result >= 0)
+fn factorial(n: Int) -> Int {
+    if n <= 1 { 1 } else { n * factorial(n - 1) }
+}
+```
+
+### [Algebraic Effects](examples/effects_demo.ssl)
+```ssl
+effect Console {
+    fn print(msg: String) -> Unit
+    fn read() -> String
+}
+
+fn greet() with Console {
+    perform Console.print("Hello!")
+}
+```
+
+### [Linear Types](examples/linear_types_demo.ssl)
+```ssl
+@linear
+struct File { handle: FileHandle }
+
+let file = File.open("test.txt")
+let content = file.read()
+file.close()  // Required! Compile error if forgotten
+```
+
+---
+
+## 🗂️ Project Structure
+
+```
+ssl-project/
+├── ssl.toml           # Project configuration
+├── src/
+│   └── main.ssl       # Entry point
+├── lib/
+│   └── utils.ssl      # Library modules
+├── tests/
+│   └── test_main.ssl  # Tests
+└── examples/
+    └── demo.ssl       # Examples
+```
+
+### ssl.toml
+```toml
+[package]
+name = "my-project"
+version = "1.0.0"
+
+[dependencies]
+ssl-http = "1.0"
+ssl-json = "2.0"
+
+[build]
+target = "native"
+optimization = "release"
+```
+
+---
+
+## 🌐 Platform Support
+
+| Platform | Status | Command |
+|----------|--------|---------|
+| Windows (x64) | ✅ Full | `ssl build` |
+| macOS (Intel) | ✅ Full | `ssl build` |
+| macOS (Apple Silicon) | ✅ Full | `ssl build` |
+| Linux (x64) | ✅ Full | `ssl build` |
+| WebAssembly | ✅ Full | `ssl build --target wasm` |
+| iOS | ✅ Full | `ssl build --target ios` |
+| Android | ✅ Full | `ssl build --target android` |
+| Cloudflare Workers | ✅ Full | `ssl deploy --provider cloudflare` |
+| Vercel Edge | ✅ Full | `ssl deploy --provider vercel` |
+| AWS Lambda | ✅ Full | `ssl deploy --provider aws` |
+| Bare Metal | ✅ Full | `ssl build --freestanding` |
+
+---
+
+## 📈 Version History
+
+| Version | Release | Features |
+|---------|---------|----------|
+| **v4.0** | Dec 2024 | Property Testing, Reactive Streams, Edge Deploy, CRDT, GPU/SIMD, Formal Verification, Effects, Linear Types, WebAssembly, Mobile |
+| v3.2 | Nov 2024 | Freestanding, Multi-Platform, Linker Scripts, UEFI |
+| v3.1 | Nov 2024 | LLVM Backend, Native Performance, AOT Compilation |
+| v3.0 | Nov 2024 | Aurora Compiler, JIT, Security Sandbox |
+| v2.0 | Oct 2024 | AI Assistant, Package Manager, Plugin System |
+| v1.0 | Oct 2024 | Core Language, Interpreter, Pattern Matching |
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions!
+We welcome contributions! See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
-- 🐛 Bug reports
-- 💡 Feature ideas
-- 🔧 Pull requests
-- 📖 Documentation
-- 🌍 Translations
+## 📄 License
 
-**[📋 Contributing Guide →](docs/CONTRIBUTING.md)**
+MIT License - see [LICENSE](LICENSE) for details.
 
----
+## 🔗 Links
 
-## 📜 License
-
-Dual licensed under:
-- **MIT License** ([LICENSE-MIT](LICENSE-MIT))
-- **Apache License 2.0** ([LICENSE-APACHE](LICENSE-APACHE))
-
----
-
-## 🗺️ Roadmap
-
-- ✅ **v1.0-2.0**: Core, Quantum, Parallel, Time-Travel, AI, Visual
-- ✅ **v3.0**: Functional Programming, JIT Compiler, Optimizations
-- 📅 **v3.1**: Full LLVM backend (5-10x speedup)
-- 🔮 **v4.0**: WebAssembly target, AOT compilation
-
----
-
-## 🏆 Why SSL 3.0?
-
-**SSL combines features no other language has together:**
-
-1. **Functional + Imperative** - Best of both paradigms
-2. **JIT Performance** - Fast without manual optimization  
-3. **Time-Travel Debugging** - Revolutionary developer experience
-4. **AI-Assisted** - Code review & auto-healing
-5. **Quantum Ready** - Native quantum simulation
-6. **Type Safe** - Modern type system with inference
-7. **Production Ready** - Complete stdlib, robust tooling
-8. **Open Source** - MIT/Apache 2.0, community-driven
-
-**SSL 3.0 is the future of programming languages.**
+- [Documentation](docs/)
+- [Examples](examples/)
+- [Language Specification](spec/)
+- [VS Code Extension](editors/vscode/)
 
 ---
 
 <div align="center">
 
-**Built with ❤️ and Rust** 🦀
+**Sonner Studio Language** - *Programming the Future*
 
-[⭐ Star on GitHub](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL) • [📢 Discussions](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/discussions) • [🐛 Report Bug](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/issues)
-
-**v3.0.0 - The Functional Revolution** | **Released December 2024**
+Made with ❤️ by Sonner Studio
 
 </div>
+
+---
+
+# Deutsche Dokumentation
+
+## Überblick
+
+Sonner Studio Language (SSL) ist eine revolutionäre Programmiersprache für das KI-Zeitalter. SSL kombiniert die besten Konzepte moderner Programmiersprachen mit innovativen KI-first Funktionen.
+
+### Hauptmerkmale v4.0
+
+- **Moderne Syntax** - Sauber, ausdrucksstark, einfach wie Python
+- **KI-Integration** - Eingebauter KI-Assistent für Code-Generierung
+- **Native Performance** - LLVM-Backend für maximale Geschwindigkeit
+- **WebAssembly** - Kompilierung für Browser
+- **Mobile Apps** - Native iOS und Android Unterstützung
+- **Edge Deployment** - Direkte Bereitstellung auf Edge-Netzwerken
+- **CRDT** - Konfliktfreie replizierte Datentypen
+- **Formale Verifikation** - Vor-/Nachbedingungen und Invarianten
+- **Lineare Typen** - Speichersicherheit ohne Garbage Collector
+
+### Installation
+
+```bash
+git clone https://github.com/SonnerStudio/SSL.git
+cd SSL
+cargo install --path .
+```
+
+### Schnellstart
+
+```ssl
+fn main() {
+    print("Hallo, SSL!")
+}
+```
+
+Weitere Dokumentation finden Sie im [docs/](docs/) Verzeichnis.
