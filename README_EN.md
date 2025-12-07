@@ -1,18 +1,23 @@
-# Sonner Studio Language v5.0
-
-[![Deutsch](https://img.shields.io/badge/lang-Deutsch-black?style=flat-square)](README.md)
-
 <div align="center">
 
-```
-  ⚡⚡   SONNER STUDIO LANGUAGE   ⚡⚡
-        S S L   v 5 . 0
-       SELF-HOSTING EDITION
-```
+![SSL Logo](logo.png)
 
-**The first programming language written entirely in itself**
+# ⚡⚡ SONNER STUDIO LANGUAGE v5.0 ⚡⚡
+### *SELF-HOSTING EDITION*
 
-*22,696 lines of SSL code | 59 source files | 100% Self-Hosting*
+---
+
+### Choose Language / Sprache auswählen
+
+| 🇬🇧 🇺🇸 <br> **ENGLISH** | 🇩🇪 🇦🇹 🇨🇭 <br> [**DEUTSCH**](README.md) |
+| :---: | :---: |
+| *(Selected / Ausgewählt)* | *(Switch / Wechseln)* |
+
+---
+
+> **"The first programming language written entirely in itself."**
+
+`22,696 lines of SSL code` • `59 source files` • `100% Self-Hosting` • `Quantum Ready`
 
 </div>
 
