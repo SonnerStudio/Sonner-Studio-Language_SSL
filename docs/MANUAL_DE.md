@@ -1,8 +1,35 @@
-# SSL v5.0 Feature Reference
+# ⚡ SSL v5.0 Handbuch
 
-## Complete Feature List
+> **Vollständige Feature-Referenz & API-Dokumentation**
 
-Diese Dokumentation listet alle Features, die in SSL v5.0 verfügbar sind – alle in reinem SSL-Code implementiert.
+---
+
+### Sprache auswählen / Select Language
+
+| 🇩🇪 🇦🇹 🇨🇭 <br> **DEUTSCH** | 🇬🇧 🇺🇸 <br> [**ENGLISH**](MANUAL_EN.md) |
+| :---: | :---: |
+| *(Ausgewählt / Selected)* | *(Wechseln / Switch)* |
+
+---
+
+## Inhaltsverzeichnis
+
+1. [Kernsprache](#1-kernsprache)
+2. [Standardbibliothek](#2-standardbibliothek-stdlib)
+3. [Erweiterte Features](#3-erweiterte-features)
+4. [GUI Framework](#4-gui-framework)
+5. [Entwicklungstools](#5-entwicklungstools)
+6. [Quantum Computing](#6-quantum-computing)
+7. [Distributed Computing](#7-distributed-computing)
+8. [AI/ML](#8-aiml)
+
+---
+
+## Über dieses Handbuch
+
+Dieses Handbuch ist die offizielle Referenz für die **Sonner Studio Language v5.0 (Self-Hosting Edition)**. Es deckt alle Sprachfeatures, die Standardbibliothek und die spezialisierten Module (Quantum, AI, etc.) ab.
+
+Alle gezeigten Code-Beispiele sind valider SSL v5.0 Code.
 
 ---
 
