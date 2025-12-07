@@ -13,6 +13,7 @@ ssl-v5/
 
 # Erlaubte Dateien (für Installation & Doku)
 !README.md
+!README_EN.md
 !RELEASE_NOTES.md
 !BENCHMARKS.md
 !INSTALLATION.md
