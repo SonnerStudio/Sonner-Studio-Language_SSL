@@ -2,60 +2,75 @@
 
 ## Systemvoraussetzungen
 
-- Betriebssystem: Windows 10/11, macOS 12+, Linux (Ubuntu 20.04+)
-- Rust Toolchain (für Kompilierung): https://rustup.rs/
+- Betriebssystem: Windows 10/11 (x64)
 - Arbeitsspeicher: Mindestens 4 GB RAM
-- Festplattenspeicher: 500 MB für vollständige Installation
+- Festplattenspeicher: 50 MB für Installation
 
-## Installation mit Cargo (Empfohlen)
+## Installation (Windows)
 
-SSL wird mit Cargo, dem Rust-Paketmanager, installiert:
+### 1. Binary herunterladen
 
-### 1. Repository klonen
+Laden Sie die aktuelle Version aus dem `release/` Verzeichnis herunter:
+- `ssl.exe` - SSL Compiler und Interpreter
 
-```bash
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
-cd Sonner-Studio-Language_SSL
+### 2. In Pfad kopieren
+
+Kopieren Sie `ssl.exe` in ein Verzeichnis Ihrer Wahl, z.B.:
+```
+C:\Program Files\SSL\ssl.exe
 ```
 
-### 2. SSL kompilieren und installieren
+### 3. Umgebungsvariable setzen
 
-```bash
-# Release-Build erstellen
-cargo build --release
+Fügen Sie das Verzeichnis zur PATH-Umgebungsvariable hinzu:
+1. Windows-Suche: "Umgebungsvariablen"
+2. "Path" bearbeiten
+3. Neuen Eintrag hinzufügen: `C:\Program Files\SSL`
 
-# SSL global installieren
-cargo install --path .
-```
-
-### 3. Installation überprüfen
+### 4. Installation überprüfen
 
 ```bash
 ssl --version
-# Ausgabe: SSL v5.0.0 - Self-Hosting Edition
+# Ausgabe: ssl 5.0.0
 
 ssl doctor
 # Führt Systemdiagnose durch
 ```
 
-## Alternative: Direkt mit Cargo Run
+## Erste Schritte
 
-Sie können SSL auch direkt ohne Installation ausführen:
+### Hello World
 
-```bash
-# SSL-Programm ausführen
-cargo run -- run mein_programm.ssl
+Erstellen Sie eine Datei `hello.ssl`:
 
-# SSL REPL starten
-cargo run -- repl
-
-# SSL-Datei kompilieren
-cargo run -- build mein_programm.ssl
+```ssl
+fn main() {
+    println("Hello, SSL v5.0!")
+}
 ```
 
-## Plattform-spezifische Hinweise
+Ausführen:
 
-## Erste Schritte
+```bash
+ssl run hello.ssl
+```
+
+### Interaktive REPL
+
+```bash
+ssl repl
+```
+
+## Verfügbare Befehle
+
+| Befehl | Beschreibung |
+|--------|--------------|
+| `ssl run <datei>` | Programm ausführen |
+| `ssl repl` | Interaktive Shell |
+| `ssl check <datei>` | Syntax prüfen |
+| `ssl help` | Hilfe anzeigen |
+| `ssl version` | Version anzeigen |
+| `ssl doctor` | Systemdiagnose |
 
 ### Hello World
 
