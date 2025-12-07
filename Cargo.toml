@@ -1,7 +1,11 @@
 [package]
-name = "ssl_core"
-version = "4.0.0"
+name = "ssl"
+version = "5.0.0"
 edition = "2021"
+description = "Sonner Studio Language - Self-Hosting Edition"
+authors = ["SonnerStudio GmbH"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL"
 
 [dependencies]
 logos = "0.13"
