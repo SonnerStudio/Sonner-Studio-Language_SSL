@@ -3,50 +3,32 @@
 ## Systemvoraussetzungen
 
 - Betriebssystem: Windows 10/11, macOS 12+, Linux (Ubuntu 20.04+)
+- Rust Toolchain (für Kompilierung): https://rustup.rs/
 - Arbeitsspeicher: Mindestens 4 GB RAM
 - Festplattenspeicher: 500 MB für vollständige Installation
-- Optional: GPU für beschleunigte Berechnungen
 
-## Installation
+## Installation mit Cargo (Empfohlen)
 
-### Windows
+SSL wird mit Cargo, dem Rust-Paketmanager, installiert:
 
-1. Laden Sie die neueste Version von der [Releases-Seite](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases) herunter
-2. Führen Sie den Installer `ssl-v5.0.0-windows-x64.msi` aus
-3. Folgen Sie den Anweisungen des Installationsassistenten
-4. Fügen Sie SSL zum PATH hinzu (wird automatisch angeboten)
-
-### macOS
+### 1. Repository klonen
 
 ```bash
-# Mit Homebrew (empfohlen)
-brew tap sonnerstudio/ssl
-brew install ssl
-
-# Oder manuell
-curl -fsSL https://ssl-lang.dev/install.sh | sh
+git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
+cd Sonner-Studio-Language_SSL
 ```
 
-### Linux
+### 2. SSL kompilieren und installieren
 
 ```bash
-# Ubuntu/Debian
-sudo apt-get update
-sudo apt-get install ssl
+# Release-Build erstellen
+cargo build --release
 
-# Fedora
-sudo dnf install ssl
-
-# Oder mit Snap
-sudo snap install ssl
-
-# Oder manuell
-curl -fsSL https://ssl-lang.dev/install.sh | sh
+# SSL global installieren
+cargo install --path .
 ```
 
-## Überprüfung der Installation
-
-Nach der Installation können Sie die Funktionalität testen:
+### 3. Installation überprüfen
 
 ```bash
 ssl --version
@@ -55,6 +37,23 @@ ssl --version
 ssl doctor
 # Führt Systemdiagnose durch
 ```
+
+## Alternative: Direkt mit Cargo Run
+
+Sie können SSL auch direkt ohne Installation ausführen:
+
+```bash
+# SSL-Programm ausführen
+cargo run -- run mein_programm.ssl
+
+# SSL REPL starten
+cargo run -- repl
+
+# SSL-Datei kompilieren
+cargo run -- build mein_programm.ssl
+```
+
+## Plattform-spezifische Hinweise
 
 ## Erste Schritte
 

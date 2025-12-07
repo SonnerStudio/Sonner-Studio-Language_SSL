@@ -78,14 +78,16 @@ SSL v5.0 ist **9x schneller als Python**:
 Siehe [INSTALLATION.md](INSTALLATION.md) für detaillierte Anleitungen.
 
 ```bash
-# Windows
-ssl-v5.0.0-windows-x64.msi
+# Repository klonen
+git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
+cd Sonner-Studio-Language_SSL
 
-# macOS
-brew install ssl
+# Mit Cargo kompilieren und installieren
+cargo build --release
+cargo install --path .
 
-# Linux
-curl -fsSL https://ssl-lang.dev/install.sh | sh
+# Oder direkt ausführen ohne Installation
+cargo run -- run hello.ssl
 ```
 
 ## Schnellstart
