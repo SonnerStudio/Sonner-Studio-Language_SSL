@@ -1,11 +1,17 @@
 # SSL v5.0 Repository
-# NUR Dokumentation und Binary-Paket - KEIN Quellcode!
+# Installation via Cargo & Binary
 
-# Ignore alles außer explizit erlaubten Dateien
-*
+# Ignore Build-Artefakte
+target/
+*.log
+*.txt
+release/
+ssl-v5.0.0-windows-x64.zip
 
-# Erlaubte Root-Dateien
-!.gitignore
+# SSL v5.0 Quellcode (intern, geschützt!)
+ssl-v5/
+
+# Erlaubte Dateien (für Installation & Doku)
 !README.md
 !RELEASE_NOTES.md
 !BENCHMARKS.md
@@ -15,26 +21,15 @@
 !LICENSE
 !LICENSE-MIT
 !LICENSE-APACHE
-
-# Dokumentation
 !docs/
 !docs/FEATURE_REFERENCE.md
 
-# Binary-Paket für Download
-!release/
-!release/README.md
-!release/ssl.exe
-!release/SHA256SUMS.txt
+# Rust-Runtime (für cargo install benötigt)
+!src/
+!Cargo.toml
+!Cargo.lock
 
-# QUELLCODE AUSSCHLIESSEN!
-src/
-ssl-v5/
-Cargo.toml
-Cargo.lock
-target/
-examples/
-editors/
-linker/
-spec/
-assets/
-.github/
+# Development Artifacts
+.gemini/
+*.brain/
+*.artifact/
