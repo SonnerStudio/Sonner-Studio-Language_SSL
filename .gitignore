@@ -1,43 +1,43 @@
-# SSL v5.0 - GitHub Repository
-# Dokumentation und Installationsdateien - KEIN Quellcode!
+# SSL v5.0 Repository
+# Nur Dokumentation und Installationsdateien - KEIN Quellcode!
 
 # Ignore EVERYTHING by default
 *
 
-# Root-Level Dateien erlauben
+# Erlaubte Root-Dateien
 !.gitignore
+!README.md
+!RELEASE_NOTES.md
+!BENCHMARKS.md
+!INSTALLATION.md
+!ssl.toml
+!logo.png
 !LICENSE
 !LICENSE-MIT
 !LICENSE-APACHE
-!README.md
 !Cargo.toml
 !Cargo.lock
 
-# SSL v5.0 Dokumentation und Installation
-!ssl-v5/
-!ssl-v5/README.md
-!ssl-v5/RELEASE_NOTES.md
-!ssl-v5/BENCHMARKS.md
-!ssl-v5/INSTALLATION.md
-!ssl-v5/BOOTSTRAP_REPORT.md
-!ssl-v5/ssl.toml
-!ssl-v5/logo.png
-!ssl-v5/docs/
-!ssl-v5/docs/**
+# Dokumentations-Ordner
+!docs/
+!docs/FEATURE_REFERENCE.md
 
-# QUELLCODE AUSSCHLIESSEN!
-ssl-v5/src/
-ssl-v5/bootstrap/
-ssl-v5/benches/
-ssl-v5/tests/
-ssl-v5/build/
+# ALLES ANDERE IGNORIEREN
+ssl-v5/
 src/
+examples/
+editors/
+linker/
+spec/
+assets/
+target/
+.github/
 
-# Interne Dateien ausschließen
-ssl-v5/*.txt
-ssl-v5/GIT_RELEASE.md
-
-# Development Artifacts
-.gemini/
-*.brain/
-*.artifact/
+# Alte Dateien ignorieren
+DOCUMENTATION*.md
+EXAMPLES.md
+README_*.md
+LICENSE_*.md
+GIT_RELEASE*.md
+*.txt
+*.log
