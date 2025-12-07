@@ -11,6 +11,7 @@
 
 | 🇩🇪 🇦🇹 🇨🇭 <br> **DEUTSCH** | 🇬🇧 🇺🇸 <br> [**ENGLISH**](README_EN.md) |
 | :---: | :---: |
+| 📖 [**Handbuch öffnen**](docs/MANUAL_DE.md) | 📖 [**Open Manual**](docs/MANUAL_EN.md) |
 | *(Ausgewählt / Selected)* | *(Wechseln / Switch)* |
 
 ---
