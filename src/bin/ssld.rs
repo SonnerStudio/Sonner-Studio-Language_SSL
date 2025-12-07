@@ -1,9 +1,9 @@
 use std::io::{BufRead, BufReader, Write};
 use std::net::{TcpListener, TcpStream};
 use std::thread;
-use ssl_core::interpreter::Interpreter;
-use ssl_core::ast::Statement;
-use ssl_core::stdlib;
+use ssl::interpreter::Interpreter;
+use ssl::ast::Statement;
+use ssl::stdlib;
 
 fn main() {
     let listener = TcpListener::bind("0.0.0.0:8080").expect("Failed to bind to port 8080");

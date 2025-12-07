@@ -1,7 +1,7 @@
 use clap::Parser;
-use ssl_core::cli::{Cli, Commands, BuildTarget, PkgCommands, TestCommands, CrdtCommands, EdgeProvider};
-use ssl_core::lexer::Token;
-use ssl_core::{parser, interpreter, lsp, stdlib};
+use ssl::cli::{Cli, Commands, BuildTarget, PkgCommands, TestCommands, CrdtCommands, EdgeProvider};
+use ssl::lexer::Token;
+use ssl::{parser, interpreter, lsp, stdlib};
 use logos::Logos;
 use std::fs;
 use std::path::Path;
@@ -15,7 +15,7 @@ fn main() {
                 // Hot Reload Mode
                 if watch {
                     println!("🔥 Hot Reload Enabled: Watching {}", path);
-                    use ssl_core::hotreload::FileWatcher;
+                    use ssl::hotreload::FileWatcher;
                     use std::time::Duration;
                     
                     let mut watcher = FileWatcher::new(500);
@@ -75,9 +75,9 @@ fn main() {
             check_file(&file);
         }
         Commands::Doctor => {
-            println!("🩺 SSL Doctor v4.0: Checking system...\n");
+            println!("🩺 SSL Doctor v5.0: Checking system...\n");
             println!("✅ Rust: OK");
-            println!("✅ SSL Core: v4.0.0");
+            println!("✅ SSL Core: v5.0.0");
             println!("✅ WebAssembly: Ready");
             println!("✅ Package Manager: Ready");
             println!("✅ Property Testing: Ready");
@@ -111,14 +111,14 @@ fn main() {
         Commands::Pkg { action } => {
             match action {
                 PkgCommands::Init { name, lib } => {
-                    use ssl_core::package::cli;
+                    use ssl::package::cli;
                     match cli::init(name, lib) {
                         Ok(()) => {}
                         Err(e) => eprintln!("❌ Failed to initialize project: {}", e),
                     }
                 }
                 PkgCommands::Add { package, version } => {
-                    use ssl_core::package::cli;
+                    use ssl::package::cli;
                     match cli::add(package, version) {
                         Ok(()) => {}
                         Err(e) => eprintln!("❌ Failed to add package: {}", e),
@@ -236,7 +236,7 @@ fn build_native(source: &str, release: bool, output: &str) {
 
 /// Build WebAssembly module
 fn build_wasm(source: &str, release: bool, output: &str, with_js: bool) {
-    use ssl_core::wasm::{WasmTarget, WasmOutput, backend::WasmBackend};
+    use ssl::wasm::{WasmTarget, WasmOutput, backend::WasmBackend};
     
     println!("🌐 WebAssembly Build Configuration:");
     println!("   Source: {}", source);
@@ -389,7 +389,7 @@ fn run_file(path: &str, debug: bool, ai_review: bool) {
             // AI Review
             if ai_review {
                 println!("🤖 Running AI Code Review...");
-                use ssl_core::ai::{CodeReviewer, OpenAIProvider, LLMConfig};
+                use ssl::ai::{CodeReviewer, OpenAIProvider, LLMConfig};
                 // In a real app, we'd load API key from env
                 if let Ok(api_key) = std::env::var("OPENAI_API_KEY") {
                     let config = LLMConfig {

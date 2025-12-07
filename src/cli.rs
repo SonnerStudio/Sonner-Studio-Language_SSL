@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand, ValueEnum};
 
-/// SSL 4.0 Build Target
+/// SSL 5.0 Build Target
 #[derive(Debug, Clone, Copy, PartialEq, ValueEnum)]
 pub enum BuildTarget {
     /// Native binary (default)
@@ -40,8 +40,8 @@ pub enum EdgeProvider {
 
 #[derive(Parser)]
 #[command(name = "ssl")]
-#[command(about = "Sonner Studio Language Toolchain v4.0", long_about = None)]
-#[command(version = "4.0.0")]
+#[command(about = "Sonner Studio Language Toolchain v5.0", long_about = None)]
+#[command(version = "5.0.0")]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,

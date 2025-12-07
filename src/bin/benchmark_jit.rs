@@ -2,10 +2,10 @@
 // Compares Interpreter vs LLVM JIT performance
 
 use std::time::Instant;
-use ssl_core::aurora::ir::*;
-use ssl_core::aurora::{NativeExecutor, JitCompiler};
-use ssl_core::interpreter::{Interpreter, Value}; // Assuming Interpreter is public
-use ssl_core::ast::*;
+use ssl::aurora::ir::*;
+use ssl::aurora::{NativeExecutor, JitCompiler};
+use ssl::interpreter::{Interpreter, Value}; // Assuming Interpreter is public
+use ssl::ast::*;
 
 fn main() {
     println!("🚀 SSL 3.1 JIT Benchmark Suite");
