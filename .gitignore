@@ -28,6 +28,21 @@
 
 # SSL 3.2: Freestanding environment linker scripts
 !linker/
+
+# SSL v5.0 Documentation (NO SOURCE CODE!)
+!ssl-v5/
+ssl-v5/src/
+ssl-v5/bootstrap/
+!ssl-v5/README.md
+!ssl-v5/RELEASE_NOTES.md
+!ssl-v5/BENCHMARKS.md
+!ssl-v5/INSTALLATION.md
+!ssl-v5/BOOTSTRAP_REPORT.md
+!ssl-v5/ssl.toml
+!ssl-v5/logo.png
+!ssl-v5/docs/
+!ssl-v5/docs/FEATURE_REFERENCE.md
+
 # Explicitly ignore development artifacts
 .gemini/
 *.brain/
@@ -42,3 +57,4 @@ docs/*_PLAN*.md
 # Artifact directory files
 C:/Users/*/
 *.artifact/
+
