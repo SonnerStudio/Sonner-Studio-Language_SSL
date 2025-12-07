@@ -1,38 +1,20 @@
-# Ignore everything by default
+# SSL v5.0 - GitHub Repository
+# Dokumentation und Installationsdateien - KEIN Quellcode!
+
+# Ignore EVERYTHING by default
 *
 
-# Un-ignore specific documentation files
-!README.md
-!README_*.md
-!DOCUMENTATION.md
-!DOCUMENTATION_*.md
-!EXAMPLES.md
+# Root-Level Dateien erlauben
+!.gitignore
 !LICENSE
 !LICENSE-MIT
 !LICENSE-APACHE
-!LICENSE_*.md
-!.gitignore
-
-# Allow source code for local development (Agent needs access)
-!src/
-!examples/
+!README.md
 !Cargo.toml
 !Cargo.lock
-!spec/
-!editors/
-!test_daemon.ps1
-!docs/
-!assets/
-!GIT_RELEASE_COMMANDS.md
-!RELEASE_NOTES.md
 
-# SSL 3.2: Freestanding environment linker scripts
-!linker/
-
-# SSL v5.0 Documentation (NO SOURCE CODE!)
+# SSL v5.0 Dokumentation und Installation
 !ssl-v5/
-ssl-v5/src/
-ssl-v5/bootstrap/
 !ssl-v5/README.md
 !ssl-v5/RELEASE_NOTES.md
 !ssl-v5/BENCHMARKS.md
@@ -41,20 +23,21 @@ ssl-v5/bootstrap/
 !ssl-v5/ssl.toml
 !ssl-v5/logo.png
 !ssl-v5/docs/
-!ssl-v5/docs/FEATURE_REFERENCE.md
+!ssl-v5/docs/**
 
-# Explicitly ignore development artifacts
+# QUELLCODE AUSSCHLIESSEN!
+ssl-v5/src/
+ssl-v5/bootstrap/
+ssl-v5/benches/
+ssl-v5/tests/
+ssl-v5/build/
+src/
+
+# Interne Dateien ausschließen
+ssl-v5/*.txt
+ssl-v5/GIT_RELEASE.md
+
+# Development Artifacts
 .gemini/
 *.brain/
-
-# Development documents (design docs, planning, status reports)
-docs/design/
-docs/*_STATUS*.md
-docs/*_WALKTHROUGH*.md
-docs/*_ANALYSIS*.md
-docs/*_PLAN*.md
-
-# Artifact directory files
-C:/Users/*/
 *.artifact/
-
