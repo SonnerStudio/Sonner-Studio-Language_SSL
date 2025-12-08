@@ -1,0 +1,7 @@
+// Hello World in SSL v7.0
+// The classic first program
+
+fn main() -> Int {
+    print("Hello, World!")
+    return 0
+}

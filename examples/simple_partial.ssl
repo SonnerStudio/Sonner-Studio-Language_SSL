@@ -1,0 +1,14 @@
+// Simple partial application test
+
+fn add(a: Int, b: Int) -> Int {
+    return a + b
+}
+
+// Create partial function
+let add10 = partial(add, 10)
+
+// Call it
+let result = add10(5)
+
+// Should be 15
+return result

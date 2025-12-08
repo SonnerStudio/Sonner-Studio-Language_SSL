@@ -1,0 +1,23 @@
+// Fibonacci Sequence Calculator
+// Demonstrates recursion in SSL v7.0
+
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+fn main() -> Int {
+    print("Fibonacci sequence (first 10 numbers):")
+    
+    let mut i = 0
+    while i < 10 {
+        let result = fibonacci(i)
+        print(int_to_string(result))
+        i = i + 1
+    }
+    
+    return 0
+}

@@ -1,0 +1,20 @@
+// SSL 3.0 - Functional List Operations
+
+let numbers = [1, 2, 3]
+
+// Functional updates (original unchanged)
+let with_four = list_append(numbers, 4)
+let with_zero = list_prepend(numbers, 0)
+let combined = list_concat([1, 2], [3, 4])
+
+// List length
+let len = list_length(numbers)
+
+// Take/Drop
+let first_two = list_take(numbers, 2)
+let without_first = list_drop(numbers, 1)
+
+// Reverse
+let reversed = list_reverse(numbers)
+
+return list_length(with_four)

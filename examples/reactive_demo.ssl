@@ -1,0 +1,57 @@
+// SSL 4.0 - Reactive Streams Example
+// Demonstrates first-class reactive programming
+
+import reactive { Stream, Subject, interval, merge }
+
+fn main() {
+    print("🌊 SSL Reactive Streams Demo")
+    
+    // Create a stream from values
+    let numbers = Stream.from([1, 2, 3, 4, 5])
+    
+    // Transform with operators
+    let doubled = numbers
+        .map(|x| x * 2)
+        .filter(|x| x > 4)
+    
+    // Subscribe to values
+    doubled.subscribe(|value| {
+        print("Received: ${value}")
+    })
+    
+    // Subject - both emit and subscribe
+    let subject = Subject.new()
+    
+    subject.as_stream().subscribe(|msg| {
+        print("Message: ${msg}")
+    })
+    
+    subject.next("Hello")
+    subject.next("World")
+    
+    // Interval stream (emits every 1 second)
+    let ticker = interval(1000)
+        .take(5)
+        .subscribe(|tick| {
+            print("Tick: ${tick}")
+        })
+    
+    // Merge multiple streams
+    let stream1 = Stream.from([1, 2, 3])
+    let stream2 = Stream.from([4, 5, 6])
+    
+    let merged = merge([stream1, stream2])
+    merged.subscribe(|x| print("Merged: ${x}"))
+    
+    // BehaviorSubject - remembers last value
+    let state = BehaviorSubject.new(0)
+    
+    state.subscribe(|count| {
+        print("Count: ${count}")
+    })
+    
+    state.next(1)
+    state.next(2)
+    
+    print("Current value: ${state.value()}")
+}

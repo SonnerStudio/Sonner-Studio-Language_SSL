@@ -1,0 +1,4 @@
+// SSL 3.0 - List Index Assignment Test
+
+let numbers = [1, 2, 3]
+return numbers[0]

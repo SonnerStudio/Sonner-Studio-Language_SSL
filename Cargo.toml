@@ -1,37 +1,53 @@
 [package]
 name = "ssl"
-version = "5.0.0"
+version = "7.0.0"
 edition = "2021"
-description = "Sonner Studio Language - Self-Hosting Edition"
-authors = ["SonnerStudio GmbH"]
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL"
-
-[dependencies]
-logos = "0.13"
-clap = { version = "4.4", features = ["derive"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-toml = "0.8"  # Package Manager manifests
-tower-lsp = "0.20"
-tokio = { version = "1.0", features = ["full"] }
-reqwest = { version = "0.11", features = ["blocking", "json"] }
-warp = "0.3"
-uuid = { version = "1.0", features = ["v4"] }
-num = "0.4"
-rand = "0.8"
-notify = "6.0"  # File watching for hot reload
-libloading = "0.8"  # Dynamic plugin loading
-inkwell = { version = "0.4", features = ["llvm17-0"], optional = true }  # LLVM backend (v3.0)
-
-[features]
-default = []
-llvm = ["inkwell"]  # Enable with --features llvm
+authors = ["SonnerStudio <dev@sonnerstudio.com>"]
+description = "Sonner Studio Language v7.0 - Native Compilation Edition with Multi-Architecture Support"
+homepage = "https://github.com/SonnerStudio/SSL"
+repository = "https://github.com/SonnerStudio/SSL"
+documentation = "https://github.com/SonnerStudio/SSL/tree/main/docs"
+readme = "README.md"
+keywords = ["compiler", "programming-language", "native-compilation", "multi-architecture", "nlp"]
+categories = ["compilers", "development-tools", "command-line-utilities"]
+license = "Apache-2.0"
+exclude = [
+    # Exclude proprietary compiler source
+    "ssl-v7/src/*",
+    "ssl-v5/*",
+    "ssl-v6/*",
+    "*.log",
+    "*.tmp",
+    "build/*",
+    "target/*",
+]
 
 [[bin]]
 name = "ssl"
 path = "src/main.rs"
 
-[[bin]]
-name = "ssld"
-path = "src/bin/ssld.rs"
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+colored = "2.1"
+anyhow = "1.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "3.1"
+tempfile = "3.10"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[package.metadata.docs.rs]
+all-features = true
+
+[package.metadata.wix]
+upgrade-guid = "12345678-1234-1234-1234-123456789012"
+path-guid = "87654321-4321-4321-4321-210987654321"
+license = false
+eula = false

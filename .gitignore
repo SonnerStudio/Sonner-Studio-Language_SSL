@@ -1,36 +1,74 @@
-# SSL v5.0 Repository
-# Installation via Cargo & Binary
+# SSL Compiler Source Code - PROPRIETARY
+# The compiler implementation is not publicly released
 
-# Ignore Build-Artefakte
-target/
+# Source directories (PRIVATE)
+/ssl-v7/src/
+/ssl-v7/tests/
+/ssl-v5/
+/ssl-v6/
+/src/lib.rs
+/src/parser.rs
+/src/lexer.rs
+/src/compiler/
+/src/ir/
+/src/optimize/
+/src/codegen/
+
+# Keep only public CLI wrapper
+!/src/main.rs
+!/src/cli.rs
+
+# Development artifacts
+*.o
+*.obj
+*.asm
 *.log
-*.txt
-release/
-ssl-v5.0.0-windows-x64.zip
+*.tmp
+build/
+target/
+Cargo.lock
+.cargo/
 
-# SSL v5.0 Quellcode (intern, geschützt!)
-ssl-v5/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
 
-# Erlaubte Dateien (für Installation & Doku)
+# Test outputs
+test_output/
+*.test
+debug/
+
+# PUBLIC FILES (Explicitly allowed)
 !README.md
-!README_EN.md
-!RELEASE_NOTES.md
-!BENCHMARKS.md
-!INSTALLATION.md
-!ssl.toml
-!logo.png
+!README_DE.md
+!CHANGELOG.md
 !LICENSE
-!LICENSE-MIT
 !LICENSE-APACHE
+!LICENSE-MIT
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!RELEASE_GUIDE.md
+
+# Public directories
 !docs/
-!docs/FEATURE_REFERENCE.md
+!docs/**/*.md
+!examples/
+!examples/**/*.ssl
+!examples/**/README.md
+!assets/
+!assets/**/*.svg
+!assets/**/*.png
+!bin/
+!bin/ssl.exe
+!bin/ssl
+!bin/*.lib
+!bin/*.a
 
-# Rust-Runtime (für cargo install benötigt)
-!src/
+# Keep project files
 !Cargo.toml
-!Cargo.lock
-
-# Development Artifacts
-.gemini/
-*.brain/
-*.artifact/
+!ssl.toml
+!.gitignore

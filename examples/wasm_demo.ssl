@@ -1,0 +1,42 @@
+// SSL 4.0 WebAssembly Demo
+// Run: ssl build examples/wasm_demo.ssl --target wasm-js -o wasm_output
+
+// A simple function that will be exported to JavaScript
+fn add(a: Int, b: Int) -> Int {
+    return a + b
+}
+
+fn multiply(x: Int, y: Int) -> Int {
+    return x * y
+}
+
+fn factorial(n: Int) -> Int {
+    if n <= 1 {
+        return 1
+    }
+    return n * factorial(n - 1)
+}
+
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+// Main function - entry point
+fn main() {
+    print("Hello from SSL WebAssembly!")
+    
+    let sum = add(10, 20)
+    print("10 + 20 = " + sum)
+    
+    let product = multiply(6, 7)
+    print("6 * 7 = " + product)
+    
+    let fact = factorial(5)
+    print("5! = " + fact)
+    
+    let fib = fibonacci(10)
+    print("fib(10) = " + fib)
+}

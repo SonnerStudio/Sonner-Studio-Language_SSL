@@ -1,0 +1,39 @@
+// Parallel Fibonacci Calculator
+// Demonstrates parallel computing with spawn and channels
+
+fn fib(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    
+    // Sequential for small numbers (avoid overhead)
+    if n < 10 {
+        return fib(n-1) + fib(n-2)
+    }
+    
+    // Parallel for larger numbers
+    let chan = channel()
+    
+    spawn {
+        send(chan[0], fib(n-1))
+    }
+    
+    let f2 = fib(n-2)
+    let f1 = recv(chan[1])
+    
+    return f1 + f2
+}
+
+fn main() {
+    print("🧮 Parallel Fibonacci Calculator")
+    print("==================================")
+    
+    let numbers = [5, 10, 15, 20]
+    
+    for n in numbers {
+        let result = fib(n)
+        print("fib(", n, ") =", result)
+    }
+    
+    print("\n✅ Computed using parallel threads!")
+}

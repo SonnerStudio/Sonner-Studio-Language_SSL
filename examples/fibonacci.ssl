@@ -1,0 +1,15 @@
+// Fibonacci Funktion
+fn fib(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    return fib(n - 1) + fib(n - 2)
+}
+
+// Main Funktion
+fn main() {
+    let numbers = [1, 2, 3, 4, 5]
+    let result = fib(7)
+    print("Fibonacci(7) =")
+    print(result)
+}
