@@ -123,6 +123,104 @@ Quellcode → Lexer → Parser → IR Generator → Optimizer → Code Generator
 | **Non-Rectangular GUI** | v5.0 | Beliebige Fensterformen |
 | **Native Compilation** | v7.0 | Direkte x64 Assembly-Ausgabe |
 | **Multi-Architektur** | v7.0 | x86_64, ARM64, Apple Silicon |
+| **Natural Language Programming** | v7.0 | Code in 24+ Sprachen |
+
+### 🗣️ Natural Language Programming (NLP)
+
+**Revolutionäres Feature:** Programmieren Sie in Ihrer Muttersprache! SSL v7.0 unterstützt Natural Language Programming mit vollständiger Schlüsselwort-Übersetzung und Bezeichner-Support in 24+ Sprachvarianten.
+
+#### Unterstützte Sprachen (9 Hauptsprachen + 15 Dialekte)
+
+| Sprache | Code | Region | Schlüsselwörter | Beispiel |
+|---------|------|--------|-----------------|----------|
+| **Englisch** | `en` | 🇬🇧 🇺🇸 | ✅ Vollständig | `function`, `if`, `while` |
+| **Deutsch** | `de` | 🇩🇪 🇦🇹 🇨🇭 | ✅ Vollständig | `funktion`, `wenn`, `solange` |
+| **Französisch** | `fr` | 🇫🇷 | ✅ Vollständig | `fonction`, `si`, `pendant` |
+| **Spanisch** | `es` | 🇪🇸 | ✅ Vollständig | `función`, `si`, `mientras` |
+| **Portugiesisch** | `pt` | 🇵🇹 🇧🇷 | ✅ Vollständig | `função`, `se`, `enquanto` |
+| **Hebräisch** | `he` | 🇮🇱 | ✅ Vollständig | `פונקציה`, `אם`, `כל עוד` |
+| **Japanisch** | `ja` | 🇯🇵 | ✅ Vollständig | `関数`, `もし`, `間` |
+| **Hindi** | `hi` | 🇮🇳 | ✅ Vollständig | `फ़ंक्शन`, `यदि`, `जबकि` |
+| **Bengali** | `bn` | 🇧🇩 | ✅ Vollständig | `ফাংশন`, `যদি`, `যখন` |
+
+#### Regionale Dialekte
+
+**Deutsche Varianten:**
+- 🇩🇪 Standarddeutsch (Hochdeutsch)
+- 🇦🇹 Österreichisches Deutsch
+- 🇨🇭 Schweizerdeutsch
+- Norddeutsch, Mitteldeutsch, Ostdeutsch, Westdeutsch, Süddeutsch
+
+**Englische Varianten:**
+- 🇺🇸 Amerikanisches Englisch
+- 🇬🇧 Britisches Englisch
+- 🇦🇺 Australisches Englisch
+- 🇨🇦 Kanadisches Englisch
+
+**Spanische Varianten:**
+- 🇪🇸 Kastilisches Spanisch
+- 🇲🇽 Mexikanisches Spanisch
+- 🇦🇷 Argentinisches Spanisch
+
+**Portugiesische Varianten:**
+- 🇵🇹 Europäisches Portugiesisch
+- 🇧🇷 Brasilianisches Portugiesisch
+
+#### Code-Beispiele in verschiedenen Sprachen
+
+**English:**
+```ssl
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    return fibonacci(n-1) + fibonacci(n-2)
+}
+```
+
+**Deutsch:**
+```ssl
+#!lang de
+funktion fibonacci(n: Ganzzahl) -> Ganzzahl {
+    wenn n <= 1 {
+        rückgabe n
+    }
+    rückgabe fibonacci(n-1) + fibonacci(n-2)
+}
+```
+
+**Français:**
+```ssl
+#!lang fr
+fonction fibonacci(n: Entier) -> Entier {
+    si n <= 1 {
+        retour n
+    }
+    retour fibonacci(n-1) + fibonacci(n-2)
+}
+```
+
+**Español:**
+```ssl
+#!lang es
+función fibonacci(n: Entero) -> Entero {
+    si n <= 1 {
+        retorno n
+    }
+    retorno fibonacci(n-1) + fibonacci(n-2)
+}
+```
+
+#### NLP-Features
+
+- **Schlüsselwort-Übersetzung**: Alle Sprach-Schlüsselwörter (`fn`, `if`, `while`, usw.) in der Muttersprache verfügbar
+- **Typ-Namen**: Basis-Typen übersetzt (`Int` → `Ganzzahl`, `String` → `Zeichenkette`)
+- **Eingebaute Funktionen**: Standardbibliothek in jeder Sprache (`print` → `ausgabe`, `println` → `出力`)
+- **Mehrsprachige Projekte**: Module in verschiedenen Sprachen kombinieren
+- **IDE-Unterstützung**: Autovervollständigung und Syntax-Highlighting für alle Sprachen
+- **Dokumentation**: Vollständige Anleitungen in jeder Sprache verfügbar
+
+**Mehr erfahren**: [NLP Guide](docs/NLP_GUIDE.md) | [NLP Leitfaden (DE)](docs/NLP_LEITFADEN_DE.md)
 
 ## 🏗️ Multi-Architektur-Unterstützung
 
