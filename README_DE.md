@@ -1,6 +1,6 @@
 <div align="center">
 
-![SSL v7 Logo](assets/ssl-v7-logo.svg)
+![SSL v7 Logo](assets/ssl-v7-logo.png)
 
 # ⚡ Sonner Studio Language (SSL) v7.0
 
