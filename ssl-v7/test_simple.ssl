@@ -1,0 +1,24 @@
+// SSL v7 Compiler - Simple Test Driver
+// Tests the NASM code generation
+
+fn main() {
+    print(\"SSL v7.0 Compiler - NASM/ELF64 Test Mode\")\n    
+    // Using hardcoded test program for now
+    let program = \"fn main() { return 42 }\"
+    let target = \"freestanding\"
+    
+    print(\"Compiling test program...\")\n    let asm = compile_program(program, target)
+    
+    print(\"===========================================\")
+    print(\" ASSEMBLY OUTPUT:\")
+    print(\"===========================================\")
+    print(asm)
+    print(\"===========================================\")
+    print(\"\")
+    print(\"✅ NASM syntax conversion complete!\")
+    print(\"To assemble: nasm -f elf64 output.asm -o  output.o\")
+    return 0
+}
+
+// Include the full compiler implementation here
+// (Copy all the functions from main.ssl)

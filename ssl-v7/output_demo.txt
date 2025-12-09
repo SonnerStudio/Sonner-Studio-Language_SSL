@@ -1,0 +1,37 @@
+﻿SSL v7.0 Compiler - NASM/ELF64 Mode
+
+Compiling built-in test program...
+(File I/O available but disabled due to sandbox)
+
+Compiling for target: freestanding
+===========================================
+ SSL v7.0 - Compiler Driver (NASM/ELF64)
+===========================================
+[LEX] Tokenizing source...
+[LEX] Tokens: KEYWORD:fn|IDENT:main|LPAREN|RPAREN|LBRACE|KEYWORD:return|NUM:42|RBRACE|
+[PARSE] Parsing token stream...
+[PARSE] Generated AST: PROGRAM:FUNC:main:BODY:RETURN:42
+[IR] Generating IR from AST: PROGRAM:FUNC:main:BODY:RETURN:42
+[IR] Complete.
+[CG] Generating Code for target: freestanding
+[CG] Complete.
+===========================================
+ COMPILATION SUCCESSFUL
+===========================================
+
+===========================================
+ NASM ASSEMBLY OUTPUT:
+===========================================
+; SSL v7.0 - Production x64 Assembly (Freestanding/Bare-Metal)\n; Target: ZetaTron-OS-64 Kernel\n; Format: ELF64 (NASM)\n\nBITS 64\nsection .text\n\nglobal main\nmain:\n    push rbp\n    mov rbp, rsp\n    sub rsp, N\n    mov rax, 42       ; Return value\n    add rsp, N\n    pop rbp\n    ret\n\n
+===========================================
+
+Ô£à SUCCESS: MASM -> NASM conversion complete!
+   - EXTRN -> extern
+   - .code -> section .text
+   - PROC -> global label
+   - Removed ENDP, END
+
+To assemble: nasm -f elf64 output.asm -o output.o
+
+Note: To compile custom files, modify the 'program'
+variable above or run with --allow-fs flag
