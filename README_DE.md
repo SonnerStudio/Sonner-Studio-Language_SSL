@@ -623,7 +623,7 @@ Wir freuen uns über Beiträge! Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für Ri
 
 ## 📄 Lizenz
 
-Copyright © 2024-2025 SonnerStudio GmbH
+Copyright © 2024-2025 SonnerStudio
 
 Lizenziert unter der Apache License, Version 2.0 (die "Lizenz");
 Sie dürfen diese Datei nur in Übereinstimmung mit der Lizenz verwenden.

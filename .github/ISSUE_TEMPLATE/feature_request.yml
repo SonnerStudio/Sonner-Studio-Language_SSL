@@ -1,0 +1,47 @@
+﻿name: Feature Request
+description: Suggest a new feature for SSL
+labels: [\"C-enhancement\"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! For language changes, consider opening an RFC instead.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: What problem does this solve?
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this work?
+      placeholder: |
+        Add a new built-in function \oo()\ that...
+        
+        Example:
+        \\\ssl
+        let result = foo(42)
+        \\\
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Other approaches you've thought about
+
+  - type: checkboxes
+    id: rfc
+    attributes:
+      label: RFC Needed?
+      description: Does this require an RFC? (language changes, breaking changes)
+      options:
+        - label: This is a simple feature request
+        - label: This needs an RFC (I will create one)

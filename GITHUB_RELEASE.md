@@ -176,7 +176,7 @@ Apache 2.0 - See LICENSE file
 ---
 
 **Released:** December 9, 2025  
-**By:** SonnerStudio GmbH
+**By:** SonnerStudio - Software and Art Studio
 
 🌟 **Star this repo** to support the project!
 ```

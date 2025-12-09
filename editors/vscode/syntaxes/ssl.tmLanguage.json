@@ -1,0 +1,56 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Sonner Studio Language",
+    "patterns": [
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#functions"
+        }
+    ],
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.ssl",
+                    "match": "\\b(if|else|for|while|return|fn|let|mut|use|natural)\\b"
+                }
+            ]
+        },
+        "strings": {
+            "name": "string.quoted.double.ssl",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.ssl",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.ssl",
+                    "match": "//.*$"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.ssl",
+                    "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\("
+                }
+            ]
+        }
+    },
+    "scopeName": "source.ssl"
+}

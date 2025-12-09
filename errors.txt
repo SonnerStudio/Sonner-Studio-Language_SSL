@@ -1,0 +1,85 @@
+﻿cargo :     Checking ssl_core v2.0.0 (C:\Dev\Rep
+os\SonnerStudio\Sonner-Studio-Language_SSL)
+In Zeile:1 Zeichen:1
++ cargo check --message-format=short 2>&1 | 
+Out-File -Encoding UTF8 err ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   
+     Checking ss...o-Language_SSL):String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+src\interpreter.rs:3:55: warning: unused 
+import: `Permission`
+src\interpreter.rs:9:15: warning: unused 
+import: `self`
+src\debugger\timeline.rs:1:24: warning: unused 
+import: `StateSnapshot`
+src\ai\reviewer.rs:1:5: warning: unused import: 
+`crate::ast::Statement`
+src\ai\testgen.rs:2:18: warning: unused 
+imports: `FunctionDecl` and `Statement`
+src\visual\dsl.rs:1:18: warning: unused 
+imports: `Expression` and `Statement`
+src\visual\dsl.rs:2:5: warning: unused import: 
+`crate::parser::Parser`
+src\stdlib\fs.rs:4:5: warning: unused import: 
+`std::io::Write`
+src\stdlib\collections.rs:5:5: warning: unused 
+import: `std::collections::HashMap`
+src\nil\intent.rs:3:18: warning: unused 
+imports: `Expression` and `Statement`
+src\nil\patterns.rs:3:5: warning: unused 
+import: `crate::nil::intent::*`
+src\aurora\jit.rs:6:39: warning: unused import: 
+`Metric`
+src\telemetry\metrics.rs:4:17: warning: unused 
+import: `Duration`
+src\interpreter.rs:336:13: warning: variable 
+does not need to be mutable
+src\interpreter.rs:369:17: warning: unused 
+variable: `last_value`: help: if this is 
+intentional, prefix it with an underscore: 
+`_last_value`
+src\interpreter.rs:369:13: warning: variable 
+does not need to be mutable
+src\interpreter.rs:868:46: warning: variable 
+does not need to be mutable
+src\interpreter.rs:1207:25: warning: variable 
+does not need to be mutable
+src\interpreter.rs:1376:41: error[E0382]: use 
+of moved value: `left`: value used here after 
+move
+src\interpreter.rs:1377:42: error[E0382]: use 
+of moved value: `right`: value used here after 
+move
+src\interpreter.rs:1388:41: error[E0382]: use 
+of moved value: `right`: value used here after 
+move
+src\interpreter.rs:1389:42: error[E0382]: use 
+of moved value: `left`: value used here after 
+move
+src\ai\provider.rs:111:24: warning: unused 
+variable: `prompt`: help: if this is 
+intentional, prefix it with an underscore: 
+`_prompt`
+src\ai\reviewer.rs:40:13: warning: unused 
+variable: `response`: help: if this is 
+intentional, prefix it with an underscore: 
+`_response`
+src\stdlib\http.rs:5:9: warning: unused 
+variable: `client`: help: if this is 
+intentional, prefix it with an underscore: 
+`_client`
+src\nil\matcher.rs:47:74: warning: unused 
+variable: `confidence`: help: if this is 
+intentional, prefix it with an underscore: 
+`_confidence`
+src\nil\normalizer.rs:148:41: warning: unused 
+variable: `operation`: help: if this is 
+intentional, prefix it with an underscore: 
+`_operation`
+warning: `ssl_core` (lib) generated 23 warnings
+error: could not compile `ssl_core` (lib) due 
+to 4 previous errors; 23 warnings emitted

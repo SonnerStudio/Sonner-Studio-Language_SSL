@@ -1,0 +1,903 @@
+﻿cargo : warning: unused import: `Permission`
+In Zeile:1 Zeichen:1
++ cargo check 2>&1 | Out-File -Encoding utf8 
+check_log.txt
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (wa 
+   rning: unused import: `Permission`:String)   
+  [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+ --> src\interpreter.rs:3:55
+  |
+3 | ...andboxPolicy, Permission};
+  |                  ^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of 
+`#[warn(unused)]`) on by default
+
+warning: unused import: `self`
+ --> src\interpreter.rs:9:15
+  |
+9 | use std::io::{self, Write};
+  |               ^^^^
+
+warning: unused import: `StateSnapshot`
+ --> src\debugger\timeline.rs:1:24
+  |
+1 | use super::snapshots::{StateSnapshot, Sna...
+  |                        ^^^^^^^^^^^^^
+
+warning: unused import: `crate::ast::Statement`
+ --> src\ai\reviewer.rs:1:5
+  |
+1 | use crate::ast::Statement;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `FunctionDecl` and 
+`Statement`
+ --> src\ai\testgen.rs:2:18
+  |
+2 | use crate::ast::{Statement, FunctionDecl};
+  |                  ^^^^^^^^^  ^^^^^^^^^^^^
+
+warning: unused imports: `Expression` and 
+`Statement`
+ --> src\visual\dsl.rs:1:18
+  |
+1 | use crate::ast::{Expression, Statement};
+  |                  ^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `crate::parser::Parser`
+ --> src\visual\dsl.rs:2:5
+  |
+2 | use crate::parser::Parser;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::io::Write`
+ --> src\stdlib\fs.rs:4:5
+  |
+4 | use std::io::Write;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: 
+`std::collections::HashMap`
+ --> src\stdlib\collections.rs:5:5
+  |
+5 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Expression` and 
+`Statement`
+ --> src\nil\intent.rs:3:18
+  |
+3 | use crate::ast::{Statement, Expression};
+  |                  ^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused import: `crate::nil::intent::*`
+ --> src\nil\patterns.rs:3:5
+  |
+3 | use crate::nil::intent::*;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Metric`
+ --> src\aurora\jit.rs:6:39
+  |
+6 | ...{FunctionStats, Metric};
+  |                    ^^^^^^
+
+warning: unused import: `Duration`
+ --> src\telemetry\metrics.rs:4:17
+  |
+4 | use std::time::{Duration, Instant};
+  |                 ^^^^^^^^
+
+warning: unused import: `crate::aurora::ir::*`
+ --> src\wasm\backend.rs:6:5
+  |
+6 | use crate::aurora::ir::*;
+  |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: 
+`crate::ast::TargetPlatform`
+  --> src\wasm\mod.rs:11:5
+   |
+11 | use crate::ast::TargetPlatform;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `MobilePermission`
+ --> src\mobile\ios\mod.rs:6:77
+  |
+6 | ...leAppInfo, MobilePermission};
+  |               ^^^^^^^^^^^^^^^^
+
+warning: unused import: `MobilePermission`
+ --> src\mobile\android\mod.rs:6:77
+  |
+6 | ...leAppInfo, MobilePermission};
+  |               ^^^^^^^^^^^^^^^^
+
+warning: unused import: 
+`std::collections::HashMap`
+  --> src\property_test\mod.rs:12:5
+   |
+12 | use std::collections::HashMap;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: if this is a test module, consider adding 
+a `#[cfg(test)]` to the containing module
+  --> src\lib.rs:23:1
+   |
+23 | pub mod property_test;  // Property-Base...
+   | ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Arc` and `Mutex`
+ --> src\reactive\stream.rs:3:17
+  |
+3 | use std::sync::{Arc, Mutex};
+  |                 ^^^  ^^^^^
+
+warning: unused import: `std::process::Command`
+ --> src\edge\deploy.rs:4:5
+  |
+4 | use std::process::Command;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: 
+`std::collections::HashMap`
+ --> src\edge\providers\cloudflare.rs:6:5
+  |
+6 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: 
+`std::collections::HashMap`
+ --> src\edge\providers\vercel.rs:6:5
+  |
+6 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Timestamp`
+ --> src\crdt\text.rs:3:21
+  |
+3 | use super::{NodeId, Timestamp, StateCrdt};
+  |                     ^^^^^^^^^
+
+warning: variable does not need to be mutable
+   --> src\interpreter.rs:360:13
+    |
+360 |         let mut env = Environment::new();
+    |             ----^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of 
+`#[warn(unused)]`) on by default
+
+warning: unused variable: `last_value`
+   --> src\interpreter.rs:393:17
+    |
+393 |         let mut last_value = Value::Nil;
+    |                 ^^^^^^^^^^ help: if this 
+is intentional, prefix it with an underscore: 
+`_last_value`
+    |
+    = note: `#[warn(unused_variables)]` (part 
+of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> src\interpreter.rs:393:13
+    |
+393 |         let mut last_value = Value::Nil;
+    |             ----^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: unreachable pattern
+   --> src\interpreter.rs:762:13
+    |
+456 | ...   Statement::IndexAssignment { 
+target, index, value } => {
+    |       ------------------------------------
+--------------- matches all the relevant values
+...
+762 | ...   Statement::IndexAssignment { 
+target, index, value } => {
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^ no value can reach this
+    |
+    = note: `#[warn(unreachable_patterns)]` 
+(part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> src\interpreter.rs:965:46
+    |
+965 | ...all(mut call) => {
+    |        ----^^^^
+    |        |
+    |        help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src\interpreter.rs:1318:25
+     |
+1318 | ...et mut new_env = self.env.clone();
+     |       ----^^^^^^^
+     |       |
+     |       help: remove this `mut`
+
+warning: unused variable: `prompt`
+   --> src\ai\provider.rs:111:24
+    |
+111 | ...ete(&self, prompt: &str) -> Result<S...
+    |               ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_prompt`
+
+warning: unused variable: `response`
+  --> src\ai\reviewer.rs:40:13
+   |
+40 |         let response = self.provider.com...
+   |             ^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_response`
+
+warning: unused variable: `client`
+ --> src\stdlib\http.rs:5:9
+  |
+5 |     let client = Client::new();
+  |         ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_client`
+
+warning: unused variable: `confidence`
+  --> src\nil\matcher.rs:47:74
+   |
+47 | ...[NLToken], confidence: f32) -> Result...
+   |               ^^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_confidence`
+
+warning: unused variable: `operation`
+   --> src\nil\normalizer.rs:149:41
+    |
+149 | ...ing(&self, operation: DataOp, source...
+    |               ^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_operation`
+
+warning: unused variable: `args`
+   --> src\aurora\optimizer.rs:241:9
+    |
+241 |         args: &[Operand],
+    |         ^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_args`
+
+warning: unused variable: `dest`
+   --> src\aurora\optimizer.rs:242:9
+    |
+242 |         dest: &Option<Reg>,
+    |         ^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_dest`
+
+warning: unused variable: `module`
+   --> src\aurora\native.rs:127:9
+    |
+127 |         module: &Module,
+    |         ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_module`
+
+warning: variable does not need to be mutable
+   --> src\package\mod.rs:354:13
+    |
+354 |         let mut vulnerabilities = 0;
+    |             ----^^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: unused variable: `name`
+   --> src\package\mod.rs:478:38
+    |
+478 | ...rsion(&self, name: &str) -> Result<S...
+    |                 ^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_name`
+
+warning: unused variable: `name`
+   --> src\package\mod.rs:484:34
+    |
+484 | ...xists(&self, name: &str, version: &s...
+    |                 ^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_name`
+
+warning: unused variable: `version`
+   --> src\package\mod.rs:484:46
+    |
+484 | ...ame: &str, version: &str) -> Result<...
+    |               ^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_version`
+
+warning: unused variable: `name`
+   --> src\package\mod.rs:533:28
+    |
+533 | ...nload(&self, name: &str, version: &s...
+    |                 ^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_name`
+
+warning: unused variable: `version`
+   --> src\package\mod.rs:533:40
+    |
+533 | ...ame: &str, version: &str) -> Result<...
+    |               ^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_version`
+
+warning: unused variable: `swift_bridge`
+   --> src\mobile\ios\mod.rs:109:13
+    |
+109 |         let swift_bridge = self.generat...
+    |             ^^^^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_swift_bridge`
+
+warning: unused variable: `info_plist`
+   --> src\mobile\ios\mod.rs:115:13
+    |
+115 |         let info_plist = self.generate_...
+    |             ^^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_info_plist`
+
+warning: unused variable: `app_swift`
+   --> src\mobile\ios\mod.rs:121:13
+    |
+121 |         let app_swift = self.generate_a...
+    |             ^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_app_swift`
+
+warning: unused variable: `jni_bridge`
+   --> src\mobile\android\mod.rs:121:13
+    |
+121 |         let jni_bridge = self.generate_...
+    |             ^^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_jni_bridge`
+
+warning: unused variable: `manifest`
+   --> src\mobile\android\mod.rs:127:13
+    |
+127 |         let manifest = self.generate_ma...
+    |             ^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_manifest`
+
+warning: unused variable: `main_activity`
+   --> src\mobile\android\mod.rs:133:13
+    |
+133 |         let main_activity = self.genera...
+    |             ^^^^^^^^^^^^^ help: if this 
+is intentional, prefix it with an underscore: 
+`_main_activity`
+
+warning: unused variable: `bundle`
+  --> src\edge\deploy.rs:51:13
+   |
+51 |         let bundle = self.generate_bundl...
+   |             ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_bundle`
+
+warning: unused variable: `config`
+   --> src\edge\config.rs:197:29
+    |
+197 | ...ercel_json(config: &VercelConfig, na...
+    |               ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_config`
+
+warning: unused variable: `script`
+  --> src\edge\providers\cloudflare.rs:92:13
+   |
+92 |         let script = self.create_worker_...
+   |             ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_script`
+
+warning: unused variable: `output_dir`
+  --> src\edge\providers\cloudflare.rs:86:47
+   |
+86 | ...eFunction, output_dir: &Path) -> Resu...
+   |               ^^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_output_dir`
+
+warning: unused variable: `deployment_id`
+   --> src\edge\providers\cloudflare.rs:113:22
+    |
+113 | ...s(&self, deployment_id: &str) -> Res...
+    |             ^^^^^^^^^^^^^ help: if this 
+is intentional, prefix it with an underscore: 
+`_deployment_id`
+
+warning: unused variable: `deployment_id`
+   --> src\edge\providers\cloudflare.rs:118:22
+    |
+118 | ...e(&self, deployment_id: &str) -> Res...
+    |             ^^^^^^^^^^^^^ help: if this 
+is intentional, prefix it with an underscore: 
+`_deployment_id`
+
+warning: unused variable: `script`
+  --> src\edge\providers\vercel.rs:92:13
+   |
+92 |         let script = self.create_edge_fu...
+   |             ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_script`
+
+warning: unused variable: `output_dir`
+  --> src\edge\providers\vercel.rs:86:47
+   |
+86 | ...eFunction, output_dir: &Path) -> Resu...
+   |               ^^^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_output_dir`
+
+warning: unused variable: `deployment_id`
+   --> src\edge\providers\vercel.rs:113:22
+    |
+113 | ...s(&self, deployment_id: &str) -> Res...
+    |             ^^^^^^^^^^^^^ help: if this 
+is intentional, prefix it with an underscore: 
+`_deployment_id`
+
+warning: unused variable: `deployment_id`
+   --> src\edge\providers\vercel.rs:117:22
+    |
+117 | ...e(&self, deployment_id: &str) -> Res...
+    |             ^^^^^^^^^^^^^ help: if this 
+is intentional, prefix it with an underscore: 
+`_deployment_id`
+
+warning: unused variable: `function`
+  --> src\edge\providers\mod.rs:52:22
+   |
+52 | ...loy(&self, function: &EdgeFunction, _...
+   |               ^^^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_function`
+
+warning: variable does not need to be mutable
+   --> src\crdt\map.rs:169:13
+    |
+169 | ...let mut version = self.clocks.clone();
+    |        ----^^^^^^^
+    |        |
+    |        help: remove this `mut`
+
+warning: method `value_to_string` is never used
+    --> src\interpreter.rs:1514:8
+     |
+ 354 | impl Interpreter {
+     | ---------------- method in this 
+implementation
+...
+1514 |     fn value_to_string(&self, value: &...
+     |        ^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of 
+`#[warn(unused)]`) on by default
+
+warning: field `full_snapshot_interval` is 
+never read
+  --> src\debugger\snapshots.rs:99:5
+   |
+94 | pub struct SnapshotManager {
+   |            --------------- field in this 
+struct
+...
+99 |     full_snapshot_interval: usize,
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `debounce_ms` is never read
+  --> src\hotreload\watcher.rs:11:5
+   |
+ 7 | pub struct FileWatcher {
+   |            ----------- field in this struct
+...
+11 |     debounce_ms: u64,
+   |     ^^^^^^^^^^^
+
+warning: fields `config` and `client` are never 
+read
+  --> src\ai\provider.rs:97:5
+   |
+96 | pub struct AnthropicProvider {
+   |            ----------------- fields in 
+this struct
+97 |     config: LLMConfig,
+   |     ^^^^^^
+98 |     client: Client,
+   |     ^^^^^^
+
+warning: field `target` is never read
+  --> src\wasm\backend.rs:12:5
+   |
+10 | pub struct WasmBackend {
+   |            ----------- field in this struct
+11 |     /// Target configuration
+12 |     target: WasmTarget,
+   |     ^^^^^^
+
+warning: field `cache` is never read
+   --> src\package\mod.rs:120:5
+    |
+119 | pub struct DependencyResolver {
+    |            ------------------ field in 
+this struct
+120 |     cache: PackageCache,
+    |     ^^^^^
+
+warning: field `base_url` is never read
+   --> src\package\mod.rs:460:5
+    |
+459 | pub struct RegistryClient {
+    |            -------------- field in this 
+struct
+460 |     base_url: String,
+    |     ^^^^^^^^
+
+warning: fields `api_token` and `api_base` are 
+never read
+  --> src\edge\providers\cloudflare.rs:10:5
+   |
+ 9 | pub struct CloudflareProvider {
+   |            ------------------ fields in 
+this struct
+10 |     api_token: Option<String>,
+   |     ^^^^^^^^^
+11 |     api_base: String,
+   |     ^^^^^^^^
+
+warning: fields `api_token` and `api_base` are 
+never read
+  --> src\edge\providers\vercel.rs:10:5
+   |
+ 9 | pub struct VercelProvider {
+   |            -------------- fields in this 
+struct
+10 |     api_token: Option<String>,
+   |     ^^^^^^^^^
+11 |     api_base: String,
+   |     ^^^^^^^^
+
+warning: field `pending_ops` is never read
+   --> src\crdt\mod.rs:134:5
+    |
+126 | pub struct Replica<T: StateCrdt> {
+    |            ------- field in this struct
+...
+134 |     pending_ops: Vec<CrdtOperation<Stri...
+    |     ^^^^^^^^^^^
+
+warning: `ssl` (lib) generated 71 warnings (run 
+`cargo fix --lib -p ssl` to apply 29 
+suggestions)
+    Checking ssl v5.0.0 (C:\Dev\Repos\SonnerStud
+io\Sonner-Studio-Language_SSL)
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\bin\ssld.rs:4:5
+  |
+4 | use ssl_core::interpreter::Interpreter;
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\bin\benchmark_jit.rs:5:5
+  |
+5 | use ssl_core::aurora::ir::*;
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\bin\ssld.rs:5:5
+  |
+5 | use ssl_core::ast::Statement;
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\bin\benchmark_jit.rs:6:5
+  |
+6 | use ssl_core::aurora::{NativeExecutor, 
+JitCompiler};
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\bin\benchmark_jit.rs:7:5
+  |
+7 | use ssl_core::interpreter::{Interpreter, 
+Value}; // Assuming Interpreter is public
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\bin\benchmark_jit.rs:8:5
+  |
+8 | use ssl_core::ast::*;
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0432]: unresolved imports 
+`ssl_core::aurora::ir::*`, 
+`ssl_core::aurora::NativeExecutor`, 
+`ssl_core::aurora::JitCompiler`, 
+`ssl_core::interpreter::Interpreter`, 
+`ssl_core::interpreter::Value`, 
+`ssl_core::ast::*`
+ --> src\bin\benchmark_jit.rs:5:5
+  |
+5 | use ssl_core::aurora::ir::*;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^
+6 | use ssl_core::aurora::{NativeExecutor, 
+JitCompiler};
+  |                        ^^^^^^^^^^^^^^  
+^^^^^^^^^^^
+7 | use ssl_core::interpreter::{Interpreter, 
+Value}; // Assuming Interpreter is public
+  |                             ^^^^^^^^^^^  
+^^^^^
+8 | use ssl_core::ast::*;
+  |     ^^^^^^^^^^^^^^^^
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\main.rs:2:5
+  |
+2 | use ssl_core::cli::{Cli, Commands, 
+BuildTarget, PkgCommands, TestCommands, 
+CrdtCommands, EdgeProvider};
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+ --> src\main.rs:3:5
+  |
+3 | use ssl_core::lexer::Token;
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0432]: unresolved import `ssl_core`
+ --> src\bin\ssld.rs:6:5
+  |
+6 | use ssl_core::stdlib;
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+   --> src\main.rs:114:25
+    |
+114 |                     use 
+ssl_core::package::cli;
+    |                         ^^^^^^^^ use of 
+unresolved module or unlinked crate `ssl_core`
+    |
+    = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+   --> src\main.rs:121:25
+    |
+121 |                     use 
+ssl_core::package::cli;
+    |                         ^^^^^^^^ use of 
+unresolved module or unlinked crate `ssl_core`
+    |
+    = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+  --> src\main.rs:18:25
+   |
+18 |                     use 
+ssl_core::hotreload::FileWatcher;
+   |                         ^^^^^^^^ use of 
+unresolved module or unlinked crate `ssl_core`
+   |
+   = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+   --> src\main.rs:239:9
+    |
+239 |     use ssl_core::wasm::{WasmTarget, 
+WasmOutput, backend::WasmBackend};
+    |         ^^^^^^^^ use of unresolved module 
+or unlinked crate `ssl_core`
+    |
+    = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of 
+unresolved module or unlinked crate `ssl_core`
+   --> src\main.rs:392:21
+    |
+392 |                 use 
+ssl_core::ai::{CodeReviewer, OpenAIProvider, 
+LLMConfig};
+    |                     ^^^^^^^^ use of 
+unresolved module or unlinked crate `ssl_core`
+    |
+    = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+error[E0432]: unresolved import `ssl_core`
+ --> src\main.rs:4:5
+  |
+4 | use ssl_core::{parser, interpreter, lsp, 
+stdlib};
+  |     ^^^^^^^^ use of unresolved module or 
+unlinked crate `ssl_core`
+  |
+  = help: if you wanted to use a crate named 
+`ssl_core`, use `cargo add ssl_core` to add it 
+to your `Cargo.toml`
+
+warning: unused import: `Write`
+ --> src\bin\ssld.rs:1:35
+  |
+1 | use std::io::{BufRead, BufReader, Write};
+  |                                   ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of 
+`#[warn(unused)]`) on by default
+
+warning: unused import: `logos::Logos`
+ --> src\main.rs:5:5
+  |
+5 | use logos::Logos;
+  |     ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of 
+`#[warn(unused)]`) on by default
+
+warning: unused import: `std::path::Path`
+ --> src\main.rs:7:5
+  |
+7 | use std::path::Path;
+  |     ^^^^^^^^^^^^^^^
+
+error[E0412]: cannot find type `Statement` in 
+this scope
+   --> src\bin\benchmark_jit.rs:112:34
+    |
+112 | fn create_factorial_ast() -> 
+Vec<Statement> {
+    |                                  
+^^^^^^^^^ not found in this scope
+    |
+help: consider importing this enum
+    |
+  4 + use ssl::ast::Statement;
+    |
+
+warning: unused import: `std::time::Instant`
+ --> src\bin\benchmark_jit.rs:4:5
+  |
+4 | use std::time::Instant;
+  |     ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of 
+`#[warn(unused)]`) on by default
+
+Some errors have detailed explanations: E0432, 
+E0433.
+For more information about an error, try `rustc 
+--explain E0432`.
+warning: `ssl` (bin "ssld") generated 1 warning
+error: could not compile `ssl` (bin "ssld") due 
+to 3 previous errors; 1 warning emitted
+warning: build failed, waiting for other jobs 
+to finish...
+Some errors have detailed explanations: E0412, 
+E0432, E0433.
+For more information about an error, try `rustc 
+--explain E0412`.
+warning: `ssl` (bin "benchmark_jit") generated 
+1 warning
+error: could not compile `ssl` (bin 
+"benchmark_jit") due to 6 previous errors; 1 
+warning emitted
+error[E0277]: the size for values of type `str` 
+cannot be known at compilation time
+  --> src\main.rs:14:20
+   |
+14 |             if let Some(path) = file {
+   |                    ^^^^^^^^^^ doesn't have 
+a size known at compile-time
+   |
+   = help: the trait `Sized` is not implemented 
+for `str`
+note: required by a bound in `Some`
+  --> /rustc/ed61e7d7e242494fb7057f2657300d9e77b
+b4fcb\library\core\src\option.rs:602:5
+
+warning: unused variable: `source`
+   --> src\main.rs:229:17
+    |
+229 | fn build_native(source: &str, release: 
+bool, output: &str) {
+    |                 ^^^^^^ help: if this is 
+intentional, prefix it with an underscore: 
+`_source`
+    |
+    = note: `#[warn(unused_variables)]` (part 
+of `#[warn(unused)]`) on by default
+
+Some errors have detailed explanations: E0277, 
+E0432, E0433.
+For more information about an error, try `rustc 
+--explain E0277`.
+warning: `ssl` (bin "ssl") generated 3 warnings
+error: could not compile `ssl` (bin "ssl") due 
+to 9 previous errors; 3 warnings emitted
