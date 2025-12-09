@@ -123,48 +123,25 @@ Quellcode → Lexer → Parser → IR Generator → Optimizer → Code Generator
 | **Non-Rectangular GUI** | v5.0 | Beliebige Fensterformen |
 | **Native Compilation** | v7.0 | Direkte x64 Assembly-Ausgabe |
 | **Multi-Architektur** | v7.0 | x86_64, ARM64, Apple Silicon |
-| **Natural Language Programming** | v7.0 | Code in 24+ Sprachen |
+| **Natural Language Programming** | v7.0 | Code in 9 Sprachen |
 
 ### 🗣️ Natural Language Programming (NLP)
 
-**Revolutionäres Feature:** Programmieren Sie in Ihrer Muttersprache! SSL v7.0 unterstützt Natural Language Programming mit vollständiger Schlüsselwort-Übersetzung und Bezeichner-Support in 24+ Sprachvarianten.
+**Revolutionäres Feature:** Programmieren Sie in Ihrer Muttersprache! SSL v7.0 unterstützt Natural Language Programming mit vollständiger Schlüsselwort-Übersetzung und Bezeichner-Support in 9 Hauptsprachen.
 
-#### Unterstützte Sprachen (9 Hauptsprachen + 15 Dialekte)
+#### Unterstützte Sprachen
 
 | Sprache | Code | Region | Schlüsselwörter | Beispiel |
 |---------|------|--------|-----------------|----------|
 | **Englisch** | `en` | 🇬🇧 🇺🇸 | ✅ Vollständig | `function`, `if`, `while` |
-| **Deutsch** | `de` | 🇩🇪 🇦🇹 🇨🇭 | ✅ Vollständig | `funktion`, `wenn`, `solange` |
+| **Deutsch** | `de` | 🇩🇪 | ✅ Vollständig | `funktion`, `wenn`, `solange` |
 | **Französisch** | `fr` | 🇫🇷 | ✅ Vollständig | `fonction`, `si`, `pendant` |
 | **Spanisch** | `es` | 🇪🇸 | ✅ Vollständig | `función`, `si`, `mientras` |
-| **Portugiesisch** | `pt` | 🇵🇹 🇧🇷 | ✅ Vollständig | `função`, `se`, `enquanto` |
+| **Portugiesisch** | `pt` | 🇵🇹 | ✅ Vollständig | `função`, `se`, `enquanto` |
 | **Hebräisch** | `he` | 🇮🇱 | ✅ Vollständig | `פונקציה`, `אם`, `כל עוד` |
 | **Japanisch** | `ja` | 🇯🇵 | ✅ Vollständig | `関数`, `もし`, `間` |
 | **Hindi** | `hi` | 🇮🇳 | ✅ Vollständig | `फ़ंक्शन`, `यदि`, `जबकि` |
 | **Bengali** | `bn` | 🇧🇩 | ✅ Vollständig | `ফাংশন`, `যদি`, `যখন` |
-
-#### Regionale Dialekte
-
-**Deutsche Varianten:**
-- 🇩🇪 Standarddeutsch (Hochdeutsch)
-- 🇦🇹 Österreichisches Deutsch
-- 🇨🇭 Schweizerdeutsch
-- Norddeutsch, Mitteldeutsch, Ostdeutsch, Westdeutsch, Süddeutsch
-
-**Englische Varianten:**
-- 🇺🇸 Amerikanisches Englisch
-- 🇬🇧 Britisches Englisch
-- 🇦🇺 Australisches Englisch
-- 🇨🇦 Kanadisches Englisch
-
-**Spanische Varianten:**
-- 🇪🇸 Kastilisches Spanisch
-- 🇲🇽 Mexikanisches Spanisch
-- 🇦🇷 Argentinisches Spanisch
-
-**Portugiesische Varianten:**
-- 🇵🇹 Europäisches Portugiesisch
-- 🇧🇷 Brasilianisches Portugiesisch
 
 #### Code-Beispiele in verschiedenen Sprachen
 
