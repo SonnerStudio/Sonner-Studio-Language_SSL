@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Goldener Gradient für Blitze -->
-    <linearGradient id="lightningGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#FFC000;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:0.9" />
-    </linearGradient>
-    
-    <linearGradient id="lightningGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#FFED4E;stop-opacity:1" />
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE57F;stop-opacity:1" />
       <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#FFC107;stop-opacity:1" />
     </linearGradient>
     
-    <!-- Glühen-Effekt -->
     <filter id="glow">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-    <!-- Intensives Glühen für Blitze -->
-    <filter id="lightningGlow">
-      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="coloredBlur"/>
@@ -34,91 +17,27 @@
     </filter>
   </defs>
   
-  <!-- Schwarzer Hintergrund -->
-  <rect width="800" height="800" fill="#000000"/>
+  <rect width="1024" height="1024" fill="#000000"/>
   
-  <!-- Hexagonaler Rahmen -->
-  <polygon points="400,80 650,220 650,580 400,720 150,580 150,220" 
-           fill="none" stroke="url(#lightningGradient1)" stroke-width="6" opacity="0.6"/>
-  
-  <!-- Innerer Hex-Rahmen -->
-  <polygon points="400,100 630,230 630,570 400,700 170,570 170,230" 
-           fill="none" stroke="#FFD700" stroke-width="3" opacity="0.4"/>
-  
-  <!-- Linker natürlicher Blitz - Realistisch verzweigt -->
-  <g filter="url(#lightningGlow)">
-    <!-- Hauptblitz links -->
-    <path d="M 280 180 L 265 240 L 285 245 L 255 320 L 275 325 L 240 420 L 265 425 L 220 550" 
-          stroke="url(#lightningGradient1)" stroke-width="8" fill="none" 
-          stroke-linecap="round" stroke-linejoin="miter"/>
-    
-    <!-- Verzweigungen links -->
-    <path d="M 265 240 L 240 250 L 230 280" 
-          stroke="url(#lightningGradient1)" stroke-width="4" fill="none" 
-          stroke-linecap="round" opacity="0.8"/>
-    <path d="M 255 320 L 230 340 L 215 370" 
-          stroke="url(#lightningGradient1)" stroke-width="3" fill="none" 
-          stroke-linecap="round" opacity="0.7"/>
-    <path d="M 275 325 L 295 345 L 310 380" 
-          stroke="url(#lightningGradient2)" stroke-width="3" fill="none" 
-          stroke-linecap="round" opacity="0.6"/>
-    <path d="M 240 420 L 215 440 L 200 470" 
-          stroke="url(#lightningGradient1)" stroke-width="2.5" fill="none" 
-          stroke-linecap="round" opacity="0.6"/>
-    <path d="M 265 425 L 285 450 L 290 485" 
-          stroke="url(#lightningGradient2)" stroke-width="2.5" fill="none" 
-          stroke-linecap="round" opacity="0.5"/>
+  <!-- Linker Blitz -->
+  <g filter="url(#glow)">
+    <path d="M 350 200 L 340 270 L 360 270 L 330 360 L 350 360 L 315 470 L 340 470 L 300 600 L 330 600 L 285 750" 
+          stroke="url(#gold)" stroke-width="20" fill="url(#gold)" 
+          stroke-linejoin="miter" stroke-linecap="square" opacity="0.95"/>
   </g>
   
-  <!-- Rechter natürlicher Blitz - Spiegelbildlich mit Variationen -->
-  <g filter="url(#lightningGlow)">
-    <!-- Hauptblitz rechts -->
-    <path d="M 520 180 L 535 240 L 515 245 L 545 320 L 525 325 L 560 420 L 535 425 L 580 550" 
-          stroke="url(#lightningGradient2)" stroke-width="8" fill="none" 
-          stroke-linecap="round" stroke-linejoin="miter"/>
-    
-    <!-- Verzweigungen rechts -->
-    <path d="M 535 240 L 560 250 L 570 280" 
-          stroke="url(#lightningGradient2)" stroke-width="4" fill="none" 
-          stroke-linecap="round" opacity="0.8"/>
-    <path d="M 545 320 L 570 340 L 585 370" 
-          stroke="url(#lightningGradient2)" stroke-width="3" fill="none" 
-          stroke-linecap="round" opacity="0.7"/>
-    <path d="M 525 325 L 505 345 L 490 380" 
-          stroke="url(#lightningGradient1)" stroke-width="3" fill="none" 
-          stroke-linecap="round" opacity="0.6"/>
-    <path d="M 560 420 L 585 440 L 600 470" 
-          stroke="url(#lightningGradient2)" stroke-width="2.5" fill="none" 
-          stroke-linecap="round" opacity="0.6"/>
-    <path d="M 535 425 L 515 450 L 510 485" 
-          stroke="url(#lightningGradient1)" stroke-width="2.5" fill="none" 
-          stroke-linecap="round" opacity="0.5"/>
+  <!-- Rechter Blitz -->
+  <g filter="url(#glow)">
+    <path d="M 674 200 L 684 270 L 664 270 L 694 360 L 674 360 L 709 470 L 684 470 L 724 600 L 694 600 L 739 750" 
+          stroke="url(#gold)" stroke-width="20" fill="url(#gold)" 
+          stroke-linejoin="miter" stroke-linecap="square" opacity="0.95"/>
   </g>
   
-  <!-- SSL Text mit Glühen -->
-  <text x="400" y="620" font-family="Arial, Helvetica, sans-serif" 
-        font-size="120" font-weight="bold" fill="url(#lightningGradient1)" 
-        text-anchor="middle" filter="url(#glow)">SSL</text>
+  <text x="512" y="850" font-family="Arial, Helvetica, sans-serif" 
+        font-size="140" font-weight="bold" fill="#FFFFFF" 
+        text-anchor="middle" letter-spacing="10">SSL v7</text>
   
-  <!-- v7.0 Version -->
-  <text x="400" y="680" font-family="Arial, Helvetica, sans-serif" 
-        font-size="48" font-weight="normal" fill="#FFFFFF" 
-        text-anchor="middle" opacity="0.9">v7.0</text>
-  
-  <!-- Native Compilation Edition -->
-  <text x="400" y="720" font-family="Arial, Helvetica, sans-serif" 
-        font-size="22" fill="#CCCCCC" text-anchor="middle" 
-        letter-spacing="2" opacity="0.8">NATIVE COMPILATION EDITION</text>
-  
-  <!-- Akzent-Linien oben -->
-  <line x1="180" y1="140" x2="300" y2="140" stroke="#FFD700" stroke-width="3" opacity="0.6"/>
-  <line x1="500" y1="140" x2="620" y2="140" stroke="#FFD700" stroke-width="3" opacity="0.6"/>
-  
-  <!-- Kleine funkelnde Punkte um die Blitze -->
-  <circle cx="250" cy="200" r="3" fill="#FFD700" opacity="0.8" filter="url(#glow)"/>
-  <circle cx="550" cy="200" r="3" fill="#FFD700" opacity="0.8" filter="url(#glow)"/>
-  <circle cx="220" cy="300" r="2" fill="#FFC000" opacity="0.7" filter="url(#glow)"/>
-  <circle cx="580" cy="300" r="2" fill="#FFC000" opacity="0.7" filter="url(#glow)"/>
-  <circle cx="190" cy="450" r="2.5" fill="#FFD700" opacity="0.6" filter="url(#glow)"/>
-  <circle cx="610" cy="450" r="2.5" fill="#FFD700" opacity="0.6" filter="url(#glow)"/>
+  <text x="512" y="920" font-family="Arial, Helvetica, sans-serif" 
+        font-size="32" fill="#AAAAAA" text-anchor="middle" 
+        letter-spacing="8">NATIVE COMPILATION</text>
 </svg>
