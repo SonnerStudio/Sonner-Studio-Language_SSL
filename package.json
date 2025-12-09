@@ -1,0 +1,43 @@
+{
+    "name": "@sonnerstudio/ssl",
+    "version": "7.0.0",
+    "description": "Sonner Studio Language - Native Compilation Edition with Natural Language Programming, Ollama Support and Freeform-Windows",
+    "keywords": [
+        "programming-language",
+        "compiler",
+        "native-compilation",
+        "nlp",
+        "natural-language-programming",
+        "ollama",
+        "ai",
+        "freeform-windows",
+        "multi-language",
+        "performance"
+    ],
+    "homepage": "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL",
+    "bugs": {
+        "url": "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/issues"
+    },
+    "license": "Apache-2.0",
+    "author": "SonnerStudio - Software and Art Studio",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "os": [
+        "win32",
+        "darwin",
+        "linux"
+    ],
+    "cpu": [
+        "x64",
+        "arm64"
+    ],
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com",
+        "@sonnerstudio:registry": "https://npm.pkg.github.com"
+    }
+}

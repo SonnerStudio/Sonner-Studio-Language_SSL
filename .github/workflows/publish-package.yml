@@ -1,0 +1,86 @@
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+      
+      - name: Build SSL Binary
+        run: |
+          python -m PyInstaller --onefile --name ssl ssl-v7\ssl.py
+      
+      - name: Create Package Structure
+        run: |
+          New-Item -ItemType Directory -Force pkg\ssl-windows-x64
+          Copy-Item dist\ssl.exe pkg\ssl-windows-x64\
+          Copy-Item ssl-v7\README.txt pkg\ssl-windows-x64\
+          Copy-Item LICENSE pkg\ssl-windows-x64\ -ErrorAction SilentlyContinue
+      
+      - name: Calculate SHA256
+        id: sha256
+        run: |
+          $hash = (Get-FileHash pkg\ssl-windows-x64\ssl.exe -Algorithm SHA256).Hash
+          echo "hash=$hash" >> $env:GITHUB_OUTPUT
+      
+      - name: Create Package Metadata
+        run: |
+          @"
+          {
+            "name": "ssl",
+            "version": "${{ github.ref_name }}",
+            "description": "Sonner Studio Language - Native Compilation Edition",
+            "platform": "windows-x64",
+            "sha256": "${{ steps.sha256.outputs.hash }}"
+          }
+          "@ | Out-File pkg\ssl-windows-x64\package.json -Encoding UTF8
+      
+      - name: Compress Package
+        run: |
+          Compress-Archive -Path pkg\ssl-windows-x64\* -DestinationPath ssl-${{ github.ref_name }}-windows-x64.zip
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Upload to GitHub Packages
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./ssl-${{ github.ref_name }}-windows-x64.zip
+          asset_name: ssl-${{ github.ref_name }}-windows-x64.zip
+          asset_content_type: application/zip
+      
+      - name: Publish Package Metadata
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          curl -X PUT `
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" `
+            -H "Accept: application/vnd.github.v3+json" `
+            -H "Content-Type: application/json" `
+            -d @package.json `
+            "https://api.github.com/repos/${{ github.repository }}/packages/generic/ssl/$version"
