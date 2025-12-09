@@ -1,21 +1,3 @@
-# SSL v7.0 Installation Guide
-
-## 📥 Binary Download (Recommended)
-
-SSL v7.0 is distributed as **pre-compiled binaries** for maximum security and performance.
-
-### Windows Installation
-
-**Step 1: Download**
-```powershell
-# Download latest release
-Invoke-WebRequest -Uri "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-windows-x64.zip" -OutFile "ssl.zip"
-
-# Extract
-Expand-Archive ssl.zip -DestinationPath "$env:LOCALAPPDATA\SSL"
-
-# Add to PATH
-$env:PATH += ";$env:LOCALAPPDATA\SSL"
 [Environment]::SetEnvironmentVariable("PATH", $env:PATH, "User")
 ```
 
