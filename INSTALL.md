@@ -1,227 +1,199 @@
-# SSL v7.0 Installation
+# SSL v7.0 Installation Guide
 
-## Quick Installation (Recommended)
+## 📥 Binary Download (Recommended)
 
-SSL v7.0 is distributed as a **binary-only release** to protect proprietary source code.
+SSL v7.0 is distributed as **pre-compiled binaries** for maximum security and performance.
 
-### Installation via Cargo
+### Windows Installation
 
+**Step 1: Download**
+```powershell
+# Download latest release
+Invoke-WebRequest -Uri "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-windows-x64.zip" -OutFile "ssl.zip"
+
+# Extract
+Expand-Archive ssl.zip -DestinationPath "$env:LOCALAPPDATA\SSL"
+
+# Add to PATH
+$env:PATH += ";$env:LOCALAPPDATA\SSL"
+[Environment]::SetEnvironmentVariable("PATH", $env:PATH, "User")
+```
+
+**Step 2: Verify**
+```powershell
+ssl --version
+# Output: SSL v7.0.0 - Native Compilation Edition
+```
+
+### Linux/macOS Installation
+
+**Step 1: Download**
 ```bash
-cargo install --git https://github.com/SonnerStudio/Sonner-Studio-Language_SSL
+# Linux x64
+curl -L "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-linux-x64.tar.gz" -o ssl.tar.gz
+
+# macOS (Intel)
+curl -L "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-macos-intel.tar.gz" -o ssl.tar.gz
+
+# macOS (Apple Silicon)
+curl -L "https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-macos-arm64.tar.gz" -o ssl.tar.gz
 ```
 
-This will install the `ssl` command globally.
-
-# Git (falls nicht vorhanden)
-winget install Git.Git
-```
-
-### Schritt 1: Repository klonen
-
+**Step 2: Install**
 ```bash
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
-cd Sonner-Studio-Language_SSL
+# Extract
+tar -xzf ssl.tar.gz
+
+# Move to /usr/local/bin
+sudo mv ssl /usr/local/bin/
+sudo chmod +x /usr/local/bin/ssl
 ```
 
-### Schritt 2: SSL v7 Compiler verwenden
+**Step 3: Verify**
+```bash
+ssl --version
+```
 
-SSL v7 ist ein **self-hosting compiler** - der Compiler ist in SSL selbst geschrieben!
+## 🚀 Quick Start
 
-**Dateien im `ssl-v7/src/` Verzeichnis:**
-- `main.ssl` - Compiler Entry Point
-- `lexer.ssl` - Lexikalische Analyse
-- `parser.ssl` - Syntaktische Analyse
-- `ir.ssl` - Intermediate Representation
-- `optimize.ssl` - Optimizer
-- `codegen.ssl` - x64 Code Generator
-- `codegen_nasm.ssl` - NASM Assembly Output
-- `types.ssl` - Type System
-- `error.ssl` - Error Handling
+### Your First Program
 
-### Schritt 3: Ersten SSL-Code kompilieren
-
-**Einfachstes Beispiel:**
+Create `hello.ssl`:
 ```ssl
 fn main() -> Int {
-    print("Hello, SSL v7!")
+    print("Hello, SSL v7.0!")
     return 0
 }
 ```
 
-Speichern als `hello.ssl` und kompilieren:
+### Compile and Run
 
 ```bash
-# Mit dem Kernel-Compiler (empfohlen)
-python ssl-v7/kernel_compiler.ssl hello.ssl
+# Compile
+ssl compile hello.ssl
 
-# Oder mit dem Haupt-Compiler
-python ssl-v7/src/main.ssl hello.ssl
+# Output: hello.exe (Windows) or hello (Linux/macOS)
+
+# Run
+./hello
+# Output: Hello, SSL v7.0!
 ```
 
-### Schritt 4: NASM Assembly generieren
+## 📦 Available Downloads
+
+### Current Release: v7.0.0
+
+| Platform | Architecture | Download Size | Link |
+|----------|--------------|---------------|------|
+| Windows | x64 | ~15 MB | [ssl-windows-x64.zip](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-windows-x64.zip) |
+| Linux | x64 | ~12 MB | [ssl-linux-x64.tar.gz](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-linux-x64.tar.gz) |
+| Linux | ARM64 | ~12 MB | [ssl-linux-arm64.tar.gz](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-linux-arm64.tar.gz) |
+| macOS | Intel | ~13 MB | [ssl-macos-intel.tar.gz](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-macos-intel.tar.gz) |
+| macOS | Apple Silicon | ~13 MB | [ssl-macos-arm64.tar.gz](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases/download/v7.0.0/ssl-macos-arm64.tar.gz) |
+
+## 🔧 System Requirements
+
+**Minimum:**
+- Windows 10/11, Linux (kernel 4.0+), macOS 10.15+
+- 4 GB RAM
+- 100 MB disk space
+
+**Recommended:**
+- 8 GB RAM
+- SSD storage
+- Multi-core CPU for parallel compilation
+
+## 🤖 Ollama Integration (Optional)
+
+For AI-assisted development:
 
 ```bash
-# Code wird zu NASM Assembly kompiliert
-python ssl-v7/src/codegen_nasm.ssl hello.ssl > hello.asm
+# Install Ollama
+winget install Ollama.Ollama  # Windows
+# or
+brew install ollama           # macOS
 
-# Assembly zu Object-File
-nasm -f win64 hello.asm -o hello.obj
+# Download AI models
+ollama pull codellama
+ollama pull mistral
 
-# Linken (Windows)
-link hello.obj /SUBSYSTEM:CONSOLE /ENTRY:main /OUT:hello.exe
-
-# Ausführen
-hello.exe
+# Use with SSL
+ssl compile --ai-assist mycode.ssl
 ```
 
-### Schnell-Installation (Ein-Befehls-Setup)
+## 📖 Documentation
 
-```bash
-# Klonen und testen
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
-cd Sonner-Studio-Language_SSL
-python ssl-v7/test_simple.ssl
-```
+After installation, access docs at:
+- Local: `ssl docs`
+- Online: [https://docs.ssl-lang.dev](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/tree/main/docs)
 
-## 🤖 Ollama Integration
+## 🆘 Troubleshooting
 
-### Installation
+### "ssl: command not found"
 
-1. **Ollama installieren:**
-   ```powershell
-   winget install Ollama.Ollama
-   ```
-
-2. **Modelle laden:**
-   ```bash
-   ollama pull codellama
-   ollama pull mistral
-   ```
-
-3. **SSL + Ollama Test:**
-   ```bash
-   python ssl_ollama_test.py
-   ```
-
-### Ollama-Features in SSL v7
-
-**Code-Generierung:**
-```python
-import requests
-
-def generate_ssl_code(prompt):
-    response = requests.post('http://localhost:11434/api/generate',
-        json={"model": "codellama", "prompt": prompt, "stream": False})
-    return response.json()['response']
-
-# Beispiel
-code = generate_ssl_code("Schreibe eine SSL v7 Fibonacci-Funktion")
-print(code)
-```
-
-**Code-Validierung:**
-```python
-def validate_code(ssl_code):
-    prompt = f"Prüfe diesen SSL-Code auf Fehler:\n{ssl_code}"
-    feedback = generate_ssl_code(prompt)
-    return feedback
-```
-
-### Ollama in SSL verwenden (geplant für v7.1)
-
-```ssl
-import Ollama from "ai"
-
-fn main() -> Int {
-    let model = Ollama.load("codellama")
-    
-    // Code generieren
-    let code = model.generate("Schreibe eine Fibonacci-Funktion")
-    print(code)
-    
-    // Code validieren
-    let validation = model.validate(code)
-    if validation.has_errors {
-        print("Fehler: " + validation.errors)
-    }
-    
-    return 0
-}
-```
-
-## 📁 Dateistruktur
-
-```
-Sonner-Studio-Language_SSL/
-├── ssl-v7/              # SSL v7 Compiler (in SSL geschrieben!)
-│   ├── src/
-│   │   ├── main.ssl
-│   │   ├── lexer.ssl
-│   │   ├── parser.ssl
-│   │   ├── ir.ssl
-│   │   ├── optimize.ssl
-│   │   ├── codegen.ssl
-│   │   └── codegen_nasm.ssl
-│   ├── kernel_compiler.ssl  # ZetaTron-OS Integration
-│   ├── test_simple.ssl
-│   └── RELEASE_NOTES_v7.0.md
-├── docs/
-│   ├── GETTING_STARTED.md
-│   ├── LANGUAGE_REFERENCE.md
-│   ├── COMPILER_GUIDE.md
-│   ├── NLP_GUIDE.md
-│   └── OLLAMA_INTEGRATION.md
-├── examples/
-├── README.md
-└── ssl_ollama_test.py   # Ollama Integration Test
-```
-
-## ✅ Verifikation
-
-```bash
-# 1. Repository klonen
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
-cd Sonner-Studio-Language_SSL
-
-# 2. Test ausführen
-python ssl-v7/test_simple.ssl
-
-# 3. Ollama testen (falls installiert)
-python ssl_ollama_test.py
-
-# Erwartete Ausgabe:
-# ✅ SSL v7 Compiler funktioniert
-# ✅ NASM Assembly wird generiert
-# ✅ Ollama-Integration funktioniert
-```
-
-## 🚨 Häufige Probleme
-
-### "Python nicht gefunden"
+**Windows:**
 ```powershell
-winget install Python.Python.3.11
-# Neustart der Shell
+# Check PATH
+echo $env:PATH
+
+# Re-add SSL directory
+$env:PATH += ";$env:LOCALAPPDATA\SSL"
 ```
 
-### "NASM nicht gefunden"
+**Linux/macOS:**
+```bash
+# Check PATH
+echo $PATH
+
+# Re-add if needed
+export PATH="/usr/local/bin:$PATH"
+```
+
+### Permission Denied (Linux/macOS)
+
+```bash
+sudo chmod +x /usr/local/bin/ssl
+```
+
+### Antivirus Blocking (Windows)
+
+Add SSL directory to Windows Defender exclusions:
 ```powershell
-winget install NASM.NASM
-# Path aktualisieren
+Add-MpPreference -ExclusionPath "$env:LOCALAPPDATA\SSL"
 ```
 
-### "Ollama nicht erreichbar"
+## 🔄 Updating
+
+```bash
+# Check current version
+ssl --version
+
+# Download latest release and repeat installation steps
+```
+
+## 🗑️ Uninstallation
+
+**Windows:**
 ```powershell
-# Ollama starten
-ollama serve
+Remove-Item -Recurse "$env:LOCALAPPDATA\SSL"
+# Remove from PATH manually via System Settings
 ```
 
-## 📖 Weitere Ressourcen
+**Linux/macOS:**
+```bash
+sudo rm /usr/local/bin/ssl
+```
 
-- [Getting Started](docs/GETTING_STARTED.md)
-- [NLP Guide](docs/NLP_GUIDE.md)
-- [Ollama Integration](docs/OLLAMA_INTEGRATION.md)
-- [Compiler Guide](docs/COMPILER_GUIDE.md)
+## 📜 License
+
+SSL v7.0 is released under the Apache 2.0 License.
+Binaries are provided as-is for evaluation and production use.
 
 ---
 
-**SSL v7.0 ist jetzt vollständig installierbar mit allen Source-Dateien! 🚀**
+**Need Help?** 
+- 📖 [Documentation](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/tree/main/docs)
+- 💬 [Discussions](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/discussions)
+- 🐛 [Issues](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/issues)
+
+**Welcome to SSL v7.0! 🚀**
