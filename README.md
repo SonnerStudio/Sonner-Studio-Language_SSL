@@ -297,7 +297,7 @@ fn main() -> i64 {
 
 - ✅ **Most Features**: 160+ implemented features
 - ✅ **Most Languages**: 16 NLP languages supported
-- ✅ **Most Innovative**: 12 world-first features
+- ✅ **Most Innovative**: 12 earthwide-first features
 - ✅ **Most Complete**: 100% coverage of all previous versions
 - ✅ **Most Powerful**: AAA-game-engine + enterprise + scientific
 
@@ -307,12 +307,12 @@ fn main() -> i64 {
 
 | Version | Released | Key Features |
 |---------|----------|--------------|
-| v1.0 | 2023 | Initial release |
-| v2.0 | 2024 | Time-Travel, AI, Visual Programming |
-| v3.0 | 2024 | LLVM Backend |
-| v4.0 | 2024 | 10 Advanced CS features |
-| v5.0 | 2024 | Self-hosting, Quantum, Non-rect Windows |
-| v7.0 | 2024 | Native compilation, NLP (9 langs) |
+| v1.0 | 2025 | Initial release |
+| v2.0 | 2025 | Time-Travel, AI, Visual Programming |
+| v3.0 | 2025 | LLVM Backend |
+| v4.0 | 2025 | 10 Advanced CS features |
+| v5.0 | 2025 | Self-hosting, Quantum, Non-rect Windows |
+| v7.0 | 2025 | Native compilation, NLP (9 langs) |
 | **v8.0** | **2025** | **All + 3D + Blockchain + 16 Languages** |
 
 ---
