@@ -1,6 +1,10 @@
 # SSL v8.0 - The Ultimate Programming Language
 
-![SSL v8 Logo](https://raw.githubusercontent.com/SonnerStudio/SSL-v8/main/assets/ssl-v8-logo.png)
+<div align="center">
+
+![SSL v8 Logo](assets/ssl-v8-logo.png)
+
+</div>
 
 ## ⚡ Production Ready • Native x64 • 160+ Features • 16 Languages
 
