@@ -43,7 +43,7 @@
 - 🌍 **16 natürliche Sprachen** - Programmieren in Deiner Muttersprache
 - ⚡ **Native Performance** - LLVM Backend, Zero-Cost Abstractions
 
-**200+ Features | 17 Erdweit Erste Innovationen | ~17.000 LOC**
+**200+ Features | 17 erdweit Erste Innovationen | ~17.000 LOC**
 
 ---
 
