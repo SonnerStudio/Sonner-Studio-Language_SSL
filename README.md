@@ -6,7 +6,7 @@
 
 ## ⚡ AAA Game Engine • VR/AR • 200+ Features • 16 Languages • Production Ready
 
-> **"The world's most comprehensive programming language - From Quantum Computing to VR/AR, from Blockchain to Brain Interfaces."**
+> **"The Earth's most comprehensive programming language - From Quantum Computing to VR/AR, from Blockchain to Brain Interfaces."**
 
 [![Release](https://img.shields.io/badge/release-v9.2_Aurora-blue.svg)](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
@@ -20,7 +20,7 @@
 
 ## 🏪 Microsoft Store
 
-**SSL v9.2 Aurora wird demnächst im Microsoft Store verfügbar sein!**
+**SSL v9.2 Aurora soon in Microsoft Store available!**
 
 📦 **Ein-Klick-Installation** | 🔄 **Automatische Updates** | ✅ **Verifiziert & Signiert** | 🎮 **Gaming-Ready**
 
@@ -32,7 +32,7 @@
 
 ## 🎯 What is SSL?
 
-**SSL (Sonner Studio Language) v9.2 "Aurora"** ist die **weltweit umfassendste Programmiersprache** mit:
+**SSL (Sonner Studio Language) v9.2 "Aurora"** ist die **the most comprehensive programming language at the earth** with:
 
 - 🎨 **AAA-Level 3D Engine** - Deferred Shading, Volumetrics, SSGI
 - 🥽 **Native VR/AR Support** - Hand Tracking, Stereoscopic Rendering
@@ -64,20 +64,6 @@
 | **v9.2 (Phase 11)** | **2026 Q1** | **Extended Reality** | **VR/AR**, **Hand Tracking**, **6DOF** | **~17,000** |
 
 ---
-
-## 🚀 Quick Start
-
-```bash
-# Clone Repository
-git clone https://github.com/SonnerStudio/Sonner-Studio-Language_SSL.git
-cd Sonner-Studio-Language_SSL/ssl-v9
-
-# Build
-cargo build --release
-
-# Run Example
-cargo run --example 3d_scene
-```
 
 ### Hello World (3D VR Edition!)
 
@@ -551,7 +537,7 @@ Brain-Computer Interfaces, AR/VR/MR, AI/ML, Multi-Modal Interaction
 
 🚀 Made with ❤️ by SonnerStudio 🥽
 
-**📦 Demnächst im Microsoft Store**
+**📦 Soon in Microsoft Store**
 
 [🇩🇪 Auf Deutsch lesen](README_DE.md)
 
