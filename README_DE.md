@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![SSL v9 Aurora](ssl-v9/SSL_v9_Hero.png)
+![SSL v9 Aurora](SSL_v9_Hero.png)
 
 ## ⚡ AAA Game Engine • VR/AR • 200+ Features • 16 Sprachen • Production Ready
 
@@ -558,6 +558,6 @@ Brain-Computer Interfaces, AR/VR/MR, AI/ML, Multi-Modale Interaktion
 ---
 
 *Stand: 20. Januar 2026*  
-*© 2024-2026 SonnerStudio GmbH. Alle Rechte vorbehalten.*
+*© 2024-2026 SonnerStudio Software- und Kunststudio. Alle Rechte vorbehalten.*
 
 </div>
