@@ -6,7 +6,7 @@
 
 ## ⚡ AAA Game Engine • VR/AR • 200+ Features • 16 Sprachen • Production Ready
 
-> **"Die weltweit umfassendste Programmiersprache - Von Quantum Computing bis VR/AR, von Blockchain bis Brain Interfaces."**
+> **"Die erdweit umfassendste Programmiersprache - Von Quantum Computing bis VR/AR, von Blockchain bis Brain Interfaces."**
 
 [![Release](https://img.shields.io/badge/release-v9.2_Aurora-blue.svg)](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/releases)
 [![Lizenz](https://img.shields.io/badge/lizenz-Apache%202.0-green.svg)](LICENSE)
@@ -32,7 +32,7 @@
 
 ## 🎯 Was ist SSL?
 
-**SSL (Sonner Studio Language) v9.2 "Aurora"** ist die **Erdweit umfassendste Programmiersprache** mit:
+**SSL (Sonner Studio Language) v9.2 "Aurora"** ist die **erdweit umfassendste Programmiersprache** mit:
 
 - 🎨 **AAA-Level 3D Engine** - Deferred Shading, Volumetrics, SSGI
 - 🥽 **Native VR/AR Unterstützung** - Hand Tracking, Stereoskopisches Rendering
