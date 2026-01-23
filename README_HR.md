@@ -1,0 +1,33 @@
+# SSL v9.3.2 Aurora - Ultimativni programski jezik 🚀
+
+<div align="center">
+
+![SSL v9 Aurora](https://github.com/SonnerStudio/Sonner-Studio-Language_SSL/raw/main/SSL_v9_Hero.png)
+
+## ⚡ AAA Game Engine • VR/AR • 200+ Značajki • 16 Jezika • Spremno za produkciju
+
+**🌐 Jezici:** [English](README.md) | [Deutsch](README_DE.md) | [Français](README_FR.md) | [Español](README_ES.md) | [Italiano](README_IT.md) | [Português](README_PT.md) | [中文](README_ZH.md) | [日本語](README_JA.md) | [العربية](README_AR.md) | [עברית](README_HE.md) | [Русский](README_RU.md) | [Hrvatski](README_HR.md) | [Magyar](README_HU.md) | [Čeština](README_CS.md) | [Slovenčina](README_SK.md) | [Polski](README_PL.md)
+
+---
+
+## 🚀 Instalacija u jednom retku (Preporučeno)
+
+### Windows (PowerShell)
+```powershell
+iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/setup.ps1 | iex
+```
+
+</div>
+
+---
+
+## 🎯 Što je SSL?
+**SSL (Sonner Studio Language) v9.3.2 "Aurora"** je najobuhvatniji programski jezik na svijetu.
+
+**200+ značajki | 17 svjetskih inovacija | ~17.200 linija koda**
+
+---
+
+<div align="center">
+🚀 Napravljeno s ❤️ od SonnerStudio 🥽
+</div>
