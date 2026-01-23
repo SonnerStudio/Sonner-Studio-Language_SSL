@@ -1,6 +1,0 @@
-// This is a comment
-// Another comment
-
-fn test(n: Int) -> Int {
-    return n
-}

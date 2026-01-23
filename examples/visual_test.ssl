@@ -1,8 +1,0 @@
-// Minimal Visual DSL Test
-visual {
-    input -> transform -> output
-}
-
-visual {
-    source -> process -> sink
-}

@@ -1,6 +1,0 @@
-// Test method call syntax
-fn test() {
-    let x = [1, 2, 3]
-    let len = x.length()
-    println("Length: " + len.to_string())
-}

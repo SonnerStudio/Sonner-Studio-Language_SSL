@@ -1,36 +1,25 @@
-# SSL v5.0 Repository
-# Installation via Cargo & Binary
+# Ignore EVERYTHING by default
+*
 
-# Ignore Build-Artefakte
-target/
-*.log
-*.txt
-release/
-ssl-v5.0.0-windows-x64.zip
+# Whitelist (Allow) these specific files/directories:
+!/.gitignore
+!/README*.md
+!/LICENSE*
+!/setup.ps1
 
-# SSL v5.0 Quellcode (intern, geschützt!)
-ssl-v5/
+# Binaries
+!/binaries/
+!/binaries/*
+!/release/
+!/release/*
 
-# Erlaubte Dateien (für Installation & Doku)
-!README.md
-!README_EN.md
-!RELEASE_NOTES.md
-!BENCHMARKS.md
-!INSTALLATION.md
-!ssl.toml
-!logo.png
-!LICENSE
-!LICENSE-MIT
-!LICENSE-APACHE
-!docs/
-!docs/FEATURE_REFERENCE.md
+# Assets referenced in README
+!*.png
+!*.jpg
+!*.svg
+!/assets/
+!/assets/*
 
-# Rust-Runtime (für cargo install benötigt)
-!src/
-!Cargo.toml
-!Cargo.lock
-
-# Development Artifacts
-.gemini/
-*.brain/
-*.artifact/
+# Github Workflows (Optional, but usually good to keep)
+!/.github/
+!/.github/*

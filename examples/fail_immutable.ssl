@@ -1,7 +1,0 @@
-// SSL 3.0 - Immutability Enforcement Test (should fail)
-
-// Test: Try to modify immutable variable
-let x = 10
-x = 20  // This should fail with immutability error
-
-return 0
