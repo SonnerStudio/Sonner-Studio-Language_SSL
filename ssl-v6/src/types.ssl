@@ -1,0 +1,187 @@
+// SSL v6.0 - Type System
+// Type Checking and Inference
+//
+// Simplified Hindley-Milner style type system
+
+// Type Definitions (using tagged representation)
+fn type_int() -> Any {
+    "Int"
+}
+
+fn type_float() -> Any {
+    "Float"
+}
+
+fn type_string() -> Any {
+    "String"
+}
+
+fn type_bool() -> Any {
+    "Bool"
+}
+
+fn type_any() -> Any {
+    "Any"
+}
+
+fn type_unit() -> Any {
+    "Unit"
+}
+
+fn type_var(id: Int) -> Any {
+    id  // Type variable represented as integer
+}
+
+// Type Environment
+fn make_type_env() -> Any {
+    empty_env()
+}
+
+fn env_lookup(env: Any, name: String) -> Any {
+    // Simplified: return Any type
+    type_any()
+}
+
+fn env_bind(env: Any, name: String, ty: Any) -> Any {
+    // Simplified: return same env
+    env
+}
+
+// Type Checking
+fn check_program(ast: Any) -> Any {
+    let env = make_type_env()
+    check_node(ast, env)
+}
+
+fn check_node(node: Any, env: Any) -> Any {
+    let tag = node_tag(node)
+    
+    if tag == "INT" {
+        type_int()
+    } else {
+        if tag == "FLOAT" {
+            type_float()
+        } else {
+            if tag == "STRING" {
+                type_string()
+            } else {
+                if tag == "BOOL" {
+                    type_bool()
+                } else {
+                    if tag == "IDENT" {
+                        check_ident(node, env)
+                    } else {
+                        if tag == "FUNCTION" {
+                            check_function(node, env)
+                        } else {
+                            type_any()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn check_ident(node: Any, env: Any) -> Any {
+    let name = node_value(node)
+    env_lookup(env, name)
+}
+
+fn check_function(node: Any, env: Any) -> Any {
+    // Simplified: functions have Any -> Any type
+    type_any()
+}
+
+// Type Inference (simplified)
+fn infer_type(node: Any, env: Any) -> Any {
+    check_node(node, env)
+}
+
+// Type Unification (simplified)
+fn unify(t1: Any, t2: Any) -> Int {
+    // Simplified: always succeeds
+    1
+}
+
+fn types_equal(t1: Any, t2: Any) -> Int {
+    if is_string_type(t1) > 0 {
+        if is_string_type(t2) > 0 {
+            string_eq(t1, t2)
+        } else {
+            0
+        }
+    } else {
+        // Integer type vars
+        if is_int_type(t1) > 0 {
+            if is_int_type(t2) > 0 {
+                t1 == t2
+            } else {
+                0
+            }
+        } else {
+            0
+        }
+    }
+}
+
+// Type Utilities
+fn type_to_string(ty: Any) -> String {
+    if is_string_type(ty) > 0 {
+        ty
+    } else {
+        "TVar"
+    }
+}
+
+fn is_primitive_type(ty: Any) -> Int {
+    if is_string_type(ty) > 0 {
+        let s = ty
+        if s == "Int" { 1 } else {
+        if s == "Float" { 1 } else {
+        if s == "String" { 1 } else {
+        if s == "Bool" { 1 } else {
+        if s == "Any" { 1 } else {
+        if s == "Unit" { 1 } else {
+            0
+        }}}}}}
+    } else {
+        0
+    }
+}
+
+// Node Helpers
+fn node_tag(node: Any) -> String {
+    "UNKNOWN"  // Simplified
+}
+
+fn node_value(node: Any) -> Any {
+    node
+}
+
+// Helpers
+fn empty_env() -> Any {
+    0  // Simplified environment
+}
+
+fn is_string_type(x: Any) -> Int {
+    0  // Builtin
+}
+
+fn is_int_type(x: Any) -> Int {
+    0  // Builtin
+}
+
+fn string_eq(a: String, b: String) -> Int {
+    if a == b { 1 } else { 0 }
+}
+
+// Public API
+fn type_check(ast: Any) -> Any {
+    check_program(ast)
+}
+
+fn type_infer(ast: Any) -> Any {
+    let env = make_type_env()
+    infer_type(ast, env)
+}

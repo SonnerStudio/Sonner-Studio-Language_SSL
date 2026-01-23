@@ -1,0 +1,68 @@
+[package]
+name = "ssl-v9"
+version = "9.3.1"
+edition = "2021"
+description = "Sonner Studio Language v9 - Hybrid Runtime (Native + Web)"
+authors = ["SonnerStudio GmbH"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+
+
+[dependencies]
+# GUI / Web Runtime
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+wgpu = "0.19"
+pollster = "0.3"
+bytemuck = { version = "1.14", features = ["derive"] }
+cgmath = "0.18"
+tobj = { version = "4.0", features = ["async"] }
+image = "0.24"
+gltf = "1.0"
+rapier3d = "0.17"
+rodio = "0.17"
+
+# SSL Core Dependencies
+logos = "0.13"
+log = "0.4"
+clap = { version = "4.4", features = ["derive"] }
+tokio = { version = "1.0", default-features = false, features = ["sync", "macros", "rt"] }
+thiserror = "1.0"
+anyhow = "1.0"
+toml = "0.8"
+uuid = { version = "1.0", features = ["v4", "js"] }
+num = "0.4"
+# rand needs js feature on wasm, but adding it generally is usually fine for native too (it's a no-op or ignored)
+# But strictly:
+rand = "0.8"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio = { version = "1.0", features = ["full"] }
+device_query = "2.0"
+wry = "0.35" 
+tao = { version = "0.25", features = ["rwh_05"] }
+# Network / Server / System
+tower-lsp = "0.20"
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+warp = "0.3"
+notify = "6.0"
+libloading = "0.8"
+inkwell = { version = "0.4", features = ["llvm17-0"], optional = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+console_log = "1.0"
+web-sys = { version = "0.3", features = [
+    "Document",
+    "Window",
+    "Element",
+    "HtmlCanvasElement"
+] }
+winit = "0.29"
+rand = { version = "0.8", features = ["getrandom"] }
+getrandom = { version = "0.2", features = ["js"] }
+getrandom3 = { package = "getrandom", version = "0.3", features = ["wasm_js"] } # Fix for crate pulling 0.3

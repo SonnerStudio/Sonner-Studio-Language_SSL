@@ -1,0 +1,168 @@
+// SSL v8 Blockchain - Wallet & Web3 Integration
+
+use core::{String, Vec, Option, Result};
+use net::tcp::HttpClient;
+use blockchain::contract::{Address, Hash, u256};
+
+// Crypto wallet
+pub struct Wallet {
+    private_key: [u8; 32],
+    public_key: [u8; 64],
+    address: Address,
+}
+
+impl Wallet {
+    pub fn generate() -> Wallet {
+        let (private_key, public_key) = unsafe {
+            platform_generate_keypair()
+        };
+        
+        let address = derive_address(&public_key);
+        
+        Wallet {
+            private_key,
+            public_key,
+            address,
+        }
+    }
+    
+    pub fn from_private_key(key: [u8; 32]) -> Result<Wallet, String> {
+        let public_key = unsafe {
+            platform_derive_public_key(key)
+        };
+        
+        let address = derive_address(&public_key);
+        
+        Result::Ok(Wallet {
+            private_key: key,
+            public_key,
+            address,
+        })
+    }
+    
+    pub fn get_address(&self) -> Address {
+        self.address
+    }
+    
+    pub fn sign_transaction(&self, tx: &Transaction) -> Signature {
+        let tx_hash = tx.hash();
+        
+        unsafe {
+            platform_sign(self.private_key, tx_hash)
+        }
+    }
+}
+
+pub struct Transaction {
+    pub from: Address,
+    pub to: Address,
+    pub value: u256,
+    pub data: Vec<u8>,
+    pub nonce: u64,
+    pub gas_price: u256,
+    pub gas_limit: u64,
+}
+
+impl Transaction {
+    pub fn new(from: Address, to: Address, value: u256) -> Transaction {
+        Transaction {
+            from,
+            to,
+            value,
+            data: Vec::new(),
+            nonce: 0,
+            gas_price: [1000000000, 0, 0, 0],  // 1 gwei
+            gas_limit: 21000,
+        }
+    }
+    
+    pub fn hash(&self) -> Hash {
+        unsafe {
+            platform_hash_transaction(
+                self.from,
+                self.to,
+                self.value,
+                self.nonce
+            )
+        }
+    }
+}
+
+pub type Signature = [u8; 65];
+
+// Web3 provider
+pub struct Web3Provider {
+    rpc_url: String,
+    http: HttpClient,
+    chain_id: u64,
+}
+
+impl Web3Provider {
+    pub fn new(rpc_url: String) -> Web3Provider {
+        Web3Provider {
+            rpc_url,
+            http: HttpClient::new(),
+            chain_id: 1,  // Ethereum mainnet
+        }
+    }
+    
+    pub fn ethereum() -> Web3Provider {
+        Web3Provider::new(String::from("https://eth.llamarpc.com"))
+    }
+    
+    pub fn polygon() -> Web3Provider {
+        Web3Provider::new(String::from("https://polygon-rpc.com"))
+    }
+    
+    pub fn get_balance(&self, address: &Address) -> Result<u256, String> {
+        let request = format!(
+            "{{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBalance\",\"params\":[\"{}\",\"latest\"],\"id\":1}}",
+            vec![address_to_string(address)]
+        );
+        
+        let response = self.http.post(self.rpc_url.clone(), request.as_bytes().to_vec())?;
+        
+        // Parse response and extract balance
+        Result::Ok([0, 0, 0, 0])  // Simplified
+    }
+    
+    pub fn send_transaction(&self, tx: &Transaction, signature: Signature) -> Result<Hash, String> {
+        let request = format(
+            "{{\"jsonrpc\":\"2.0\",\"method\":\"eth_sendRawTransaction\",\"params\":[...],\"id\":1}}",
+            vec![]
+        );
+        
+        let response = self.http.post(self.rpc_url.clone(), request.as_bytes().to_vec())?;
+        
+        Result::Ok([0; 32])  // Transaction hash
+    }
+    
+    pub fn call_contract(&self, contract: Address, data: Vec<u8>) -> Result<Vec<u8>, String> {
+        // eth_call
+        Result::Ok(Vec::new())
+    }
+}
+
+// Helper functions
+fn derive_address(public_key: &[u8; 64]) -> Address {
+    let hash = unsafe { platform_keccak256(public_key.as_ptr(), 64) };
+    let mut addr = [0u8; 20];
+    // Take last 20 bytes
+    for i in 0..20 {
+        addr[i] = hash[12 + i];
+    }
+    addr
+}
+
+fn address_to_string(addr: &Address) -> String {
+    String::from("0x...")  // Simplified
+}
+
+// Platform intrinsics
+extern "intrinsic" {
+    fn platform_generate_keypair() -> ([u8; 32], [u8; 64]);
+    fn platform_derive_public_key(private_key: [u8; 32]) -> [u8; 64];
+    fn platform_sign(private_key: [u8; 32], message: Hash) -> Signature;
+    fn platform_hash_transaction(from: Address, to: Address, value: u256, nonce: u64) -> Hash;
+    fn platform_keccak256(data: *const u8, len: usize) -> Hash;
+}

@@ -1,0 +1,6 @@
+// SSL 3.0 - Pipe Operator Demo
+
+// Simple pipe: value |> function
+let numbers = [1, 2, 3, 4, 5]
+let len = numbers |>  list_length
+return len

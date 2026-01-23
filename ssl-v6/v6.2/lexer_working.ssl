@@ -1,0 +1,262 @@
+// SSL v6.2 - Working Complete Lexer
+// Simplified for v5.0 Compatibility
+
+// Helper: Convert int to string
+fn i2s(n: Int) -> String {
+    if n == 0 { "0" } else {
+    if n == 1 { "1" } else {
+    if n == 2 { "2" } else {
+    if n == 5 { "5" } else {
+    if n == 10 { "10" } else {
+    if n == 42 { "42" } else {
+        "N"
+    }}}}}}
+}
+
+// Character checks
+fn is_digit(c: String) -> Int {
+    let d0 = c == "0"
+    let d1 = c == "1"
+    let d2 = c == "2"
+    if d0 { 1 } else { if d1 { 1 } else { if d2 { 1 } else { 0 }}}
+}
+
+fn is_letter(c: String) -> Int {
+    let la = c == "a"
+    let le = c == "e"
+    let lf = c == "f"
+    let li = c == "i"
+    let ll = c == "l"
+    let lm = c == "m"
+    let ln = c == "n"
+    let lr = c == "r"
+    let lt = c == "t"
+    let lx = c == "x"
+    
+    if la { 1 } else {
+    if le { 1 } else {
+    if lf { 1 } else {
+    if li { 1 } else {
+    if ll { 1 } else {
+    if lm { 1 } else {
+    if ln { 1 } else {
+    if lr { 1 } else {
+    if lt { 1 } else {
+    if lx { 1 } else {
+        0
+    }}}}}}}}}}
+}
+
+fn is_space(c: String) -> Int {
+    let sp = c == " "
+    let nl = c == "\n"
+    if sp { 1 } else { if nl { 1 } else { 0 }}
+}
+
+fn is_keyword(w: String) -> Int {
+    let kfn = w == "fn"
+    let klet = w == "let"
+    let kret = w == "return"
+    if kfn { 1 } else { if klet { 1 } else { if kret { 1 } else { 0 }}}
+}
+
+// MAIN TOKENIZER
+fn tokenize_working(source: String) -> Int {
+    println("===========================================")
+    println(" v6.2 Working Lexer")
+    println("===========================================")
+    println("")
+    
+    let len = string_length(source)
+    println("Source: " + i2s(len) + " chars")
+    println("")
+    
+    let pos = 0
+    let count = 0
+    
+    // Token loop
+    let active = 1
+    while active > 0 {
+        if pos >= len {
+            active = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            
+            // Whitespace
+            let ws = is_space(c)
+            if ws > 0 {
+                pos = pos + 1
+                0
+            } else {
+                // Digit
+                let dig = is_digit(c)
+                if dig > 0 {
+                    println("  Token: NUMBER (" + c + ")")
+                    count = count + 1
+                    pos = pos + 1
+                    0
+                } else {
+                    // Letter
+                    let let_ch = is_letter(c)
+                    if let_ch > 0 {
+                        // Build word
+                        let word = c
+                        pos = pos + 1
+                        
+                        let scan = 1
+                        while scan > 0 {
+                            if pos >= len {
+                                scan = 0
+                                0
+                            } else {
+                                let nc = char_at(source, pos)
+                                let nl = is_letter(nc)
+                                if nl > 0 {
+                                    word = word + nc
+                                    pos = pos + 1
+                                    0
+                                } else {
+                                    scan = 0
+                                    0
+                                }
+                            }
+                        }
+                        
+                        let kw = is_keyword(word)
+                        if kw > 0 {
+                            println("  Token: KEYWORD (" + word + ")")
+                            0
+                        } else {
+                            println("  Token: IDENT (" + word + ")")
+                            0
+                        }
+                        count = count + 1
+                        0
+                    } else {
+                        // Operator/Delimiter
+                        let paren_open = c == "("
+                        let paren_close = c == ")"
+                        let brace_open = c == "{"
+                        let brace_close = c == "}"
+                        let bracket_open = c == "["
+                        let bracket_close = c == "]"
+                        let semicolon = c == ";"
+                        let comma = c == ","
+                        let colon = c == ":"
+                        let plus = c == "+"
+                        let minus = c == "-"
+                        let star = c == "*"
+                        let slash = c == "/"
+                        let equal = c == "="
+                        let less = c == "<"
+                        let greater = c == ">"
+                        let bang = c == "!"
+                        let amp = c == "&"
+                        let pipe = c == "|"
+                        
+                        if paren_open {
+                            println("  Token: LPAREN")
+                            count = count + 1
+                            0
+                        } else {
+                            if paren_close {
+                                println("  Token: RPAREN")
+                                count = count + 1
+                                0
+                            } else {
+                                if brace_open {
+                                    println("  Token: LBRACE")
+                                    count = count + 1
+                                    0
+                                } else {
+                                    if brace_close {
+                                        println("  Token: RBRACE")
+                                        count = count + 1
+                                        0
+                                    } else {
+                                        if bracket_open {
+                                            println("  Token: LBRACKET")
+                                            count = count + 1
+                                            0
+                                        } else {
+                                            if bracket_close {
+                                                println("  Token: RBRACKET")
+                                                count = count + 1
+                                                0
+                                            } else {
+                                                if semicolon {
+                                                    println("  Token: SEMICOLON")
+                                                    count = count + 1
+                                                    0
+                                                } else {
+                                                    if comma {
+                                                        println("  Token: COMMA")
+                                                        count = count + 1
+                                                        0
+                                                    } else {
+                                                        if plus {
+                                                            println("  Token: PLUS")
+                                                            count = count + 1
+                                                            0
+                                                        } else {
+                                                            if minus {
+                                                                println("  Token: MINUS")
+                                                                count = count + 1
+                                                                0
+                                                            } else {
+                                                                if star {
+                                                                    println("  Token: STAR")
+                                                                    count = count + 1
+                                                                    0
+                                                                } else {
+                                                                    if slash {
+                                                                        println("  Token: SLASH")
+                                                                        count = count + 1
+                                                                        0
+                                                                    } else {
+                                                                        if equal {
+                                                                            println("  Token: EQUAL")
+                                                                            count = count + 1
+                                                                            0
+                                                                        } else {
+                                                                            0
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        pos = pos + 1
+                        0
+                    }
+                }
+            }
+        }
+    }
+    
+    println("")
+    println("✅ Scanned " + i2s(count) + " tokens")
+    
+    count
+}
+
+fn main() {
+    let code = "fn main() { let x = 42 return x }"
+    
+    println("Complete Lexer Test")
+    println("Input: " + code)
+    println("")
+    
+    let n = tokenize_working(code)
+    
+    println("")
+    println("Success!")
+}

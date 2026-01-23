@@ -1,0 +1,293 @@
+// SSL v8 Time-Travel Debugging System
+// World-first feature: Record execution and step backward/forward
+
+use core::{Option, Result, String, Vec};
+use collections::HashMap;
+
+// Execution snapshot - captures complete program state
+pub struct Snapshot {
+    timestamp: u64,
+    instruction_pointer: u64,
+    stack: Vec<u8>,
+    heap: HashMap<u64, Vec<u8>>,
+    registers: Registers,
+    variables: HashMap<String, VariableState>,
+    call_stack: Vec<StackFrame>,
+}
+
+pub struct Registers {
+    pub rax: u64,
+    pub rbx: u64,
+    pub rcx: u64,
+    pub rdx: u64,
+    pub rsi: u64,
+    pub rdi: u64,
+    pub rbp: u64,
+    pub rsp: u64,
+    pub rip: u64,
+}
+
+pub struct StackFrame {
+    pub function_name: String,
+    pub file: String,
+    pub line: u64,
+    pub local_variables: HashMap<String, VariableState>,
+}
+
+pub struct VariableState {
+    pub name: String,
+    pub value: Vec<u8>,
+    pub type_name: String,
+}
+
+// Time-Travel Debugger
+pub struct TimeTravelDebugger {
+    snapshots: Vec<Snapshot>,
+    current_index: usize,
+    recording: bool,
+    snapshot_interval_ms: u64,
+    max_snapshots: usize,
+}
+
+impl TimeTravelDebugger {
+    pub fn new() -> TimeTravelDebugger {
+        TimeTravelDebugger {
+            snapshots: Vec::new(),
+            current_index: 0,
+            recording: false,
+            snapshot_interval_ms: 100,  // Snapshot every 100ms
+            max_snapshots: 10000,
+        }
+    }
+    
+    // Start recording execution
+    pub fn start_recording(&mut self) {
+        self.recording = true;
+        self.snapshots.clear();
+        self.current_index = 0;
+        
+        unsafe {
+            platform_enable_recording();
+        }
+    }
+    
+    // Stop recording
+    pub fn stop_recording(&mut self) {
+        self.recording = false;
+        
+        unsafe {
+            platform_disable_recording();
+        }
+    }
+    
+    // Take a snapshot of current program state
+    pub fn capture_snapshot(&mut self) {
+        if !self.recording {
+            return;
+        }
+        
+        if self.snapshots.len() >= self.max_snapshots {
+            // Remove oldest snapshot
+            self.snapshots.remove(0);
+        }
+        
+        let snapshot = unsafe {
+            self.read_program_state()
+        };
+        
+        self.snapshots.push(snapshot);
+        self.current_index = self.snapshots.len() - 1;
+    }
+    
+    // Step backward in time
+    pub fn step_back(&mut self) -> Result<(), String> {
+        if self.current_index == 0 {
+            return Result::Err("Already at beginning of recording");
+        }
+        
+        self.current_index -= 1;
+        self.restore_snapshot(self.current_index)
+    }
+    
+    // Step forward in time
+    pub fn step_forward(&mut self) -> Result<(), String> {
+        if self.current_index >= self.snapshots.len() - 1 {
+            return Result::Err("Already at end of recording");
+        }
+        
+        self.current_index += 1;
+        self.restore_snapshot(self.current_index)
+    }
+    
+    // Jump to specific point in time
+    pub fn jump_to(&mut self, index: usize) -> Result<(), String> {
+        if index >= self.snapshots.len() {
+            return Result::Err("Index out of bounds");
+        }
+        
+        self.current_index = index;
+        self.restore_snapshot(index)
+    }
+    
+    // Jump to function call
+    pub fn jump_to_function(&mut self, function_name: &String) -> Result<(), String> {
+        for i in (0..self.snapshots.len()).rev() {
+            let snapshot = &self.snapshots[i];
+            for frame in &snapshot.call_stack {
+                if &frame.function_name == function_name {
+                    return self.jump_to(i);
+                }
+            }
+        }
+        
+        Result::Err("Function not found in recording")
+    }
+    
+    // Get current snapshot
+    pub fn get_current_snapshot(&self) -> Option<&Snapshot> {
+        if self.current_index < self.snapshots.len() {
+            Option::Some(&self.snapshots[self.current_index])
+        } else {
+            Option::None
+        }
+    }
+    
+    // Get variable value at current point
+    pub fn get_variable(&self, name: &String) -> Option<&VariableState> {
+        if let Option::Some(snapshot) = self.get_current_snapshot() {
+            snapshot.variables.get(name)
+        } else {
+            Option::None
+        }
+    }
+    
+    // Get call stack at current point
+    pub fn get_call_stack(&self) -> Option<&Vec<StackFrame>> {
+        if let Option::Some(snapshot) = self.get_current_snapshot() {
+            Option::Some(&snapshot.call_stack)
+        } else {
+            Option::None
+        }
+    }
+    
+    // Search for condition in recording
+    pub fn find_condition<F>(&self, predicate: F) -> Option<usize>
+    where
+        F: Fn(&Snapshot) -> bool
+    {
+        for i in 0..self.snapshots.len() {
+            if predicate(&self.snapshots[i]) {
+                return Option::Some(i);
+            }
+        }
+        Option::None
+    }
+    
+    // Restore program state from snapshot
+    fn restore_snapshot(&self, index: usize) -> Result<(), String> {
+        if index >= self.snapshots.len() {
+            return Result::Err("Invalid snapshot index");
+        }
+        
+        let snapshot = &self.snapshots[index];
+        
+        unsafe {
+            // Restore registers
+            platform_restore_registers(&snapshot.registers);
+            
+            // Restore stack
+            platform_restore_stack(
+                snapshot.stack.as_ptr(),
+                snapshot.stack.len()
+            );
+            
+            // Restore instruction pointer
+            platform_set_instruction_pointer(snapshot.instruction_pointer);
+        }
+        
+        Result::Ok(())
+    }
+    
+    // Read current program state
+    unsafe fn read_program_state(&self) -> Snapshot {
+        Snapshot {
+            timestamp: platform_get_timestamp(),
+            instruction_pointer: platform_get_instruction_pointer(),
+            stack: self.read_stack(),
+            heap: self.read_heap(),
+            registers: platform_get_registers(),
+            variables: self.read_variables(),
+            call_stack: self.read_call_stack(),
+        }
+    }
+    
+    unsafe fn read_stack(&self) -> Vec<u8> {
+        let size = platform_get_stack_size();
+        let mut stack = Vec::with_capacity(size);
+        
+        platform_read_stack(stack.as_mut_ptr(), size);
+        stack
+    }
+    
+    unsafe fn read_heap(&self) -> HashMap<u64, Vec<u8>> {
+        HashMap::new()  // Simplified
+    }
+    
+    unsafe fn read_variables(&self) -> HashMap<String, VariableState> {
+        HashMap::new()  // Simplified
+    }
+    
+    unsafe fn read_call_stack(&self) -> Vec<StackFrame> {
+        Vec::new()  // Simplified
+    }
+}
+
+// Visualization helper
+pub struct DebuggerUI {
+    debugger: TimeTravelDebugger,
+}
+
+impl DebuggerUI {
+    pub fn new() -> DebuggerUI {
+        DebuggerUI {
+            debugger: TimeTravelDebugger::new(),
+        }
+    }
+    
+    pub fn show(&self) {
+        println("=== Time-Travel Debugger ===");
+        
+        if let Option::Some(snapshot) = self.debugger.get_current_snapshot() {
+            println("Timestamp: {}", snapshot.timestamp);
+            println("RIP: 0x{:X}", snapshot.instruction_pointer);
+            
+            println("\nCall Stack:");
+            for frame in &snapshot.call_stack {
+                println("  {} ({}:{})", frame.function_name, frame.file, frame.line);
+            }
+            
+            println("\nVariables:");
+            for (name, var) in &snapshot.variables {
+                println("  {} = {:?}", name, var.value);
+            }
+        }
+        
+        println("\nControls:");
+        println("  [←] Step Back    [→] Step Forward");
+        println("  [R] Record       [S] Stop");
+    }
+}
+
+// Platform intrinsics
+extern "intrinsic" {
+    fn platform_enable_recording();
+    fn platform_disable_recording();
+    fn platform_get_timestamp() -> u64;
+    fn platform_get_instruction_pointer() -> u64;
+    fn platform_set_instruction_pointer(ip: u64);
+    fn platform_get_registers() -> Registers;
+    fn platform_restore_registers(regs: &Registers);
+    fn platform_get_stack_size() -> usize;
+    fn platform_read_stack(buffer: *mut u8, size: usize);
+    fn platform_restore_stack(data: *const u8, size: usize);
+}

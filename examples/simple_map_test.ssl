@@ -1,0 +1,11 @@
+// SSL 3.0 - Index Assignment Test
+// This was NOT possible in SSL 2.0!
+
+mut m = {"host": "localhost"}
+m["host"] = "0.0.0.0"
+m["port"] = "3000"
+
+let host = m["host"]
+let port = m["port"]
+
+return host

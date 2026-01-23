@@ -1,0 +1,11 @@
+fn test() {
+    let cmd = "build"
+    match cmd {
+        "build" => {
+            println("building")
+        }
+        "_" => {
+            println("other")
+        }
+    }
+}

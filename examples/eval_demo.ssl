@@ -1,0 +1,18 @@
+// eval() Demonstration
+// This shows how to use eval() for runtime code execution
+
+fn main() {
+    // 1. Define variable via eval
+    eval("let x = 42")
+    print("x from eval:", x)
+    
+    // 2. Define function via eval
+    eval("fn greet(name: String) { print(\"Hello,\", name) }")
+    greet("SSL")
+    
+    // 3. Dynamic code generation
+    let operation = "add"
+    let code = "fn " + operation + "(a: Int, b: Int) -> Int { return a + b }"
+    eval(code)
+    print("5 + 7 =", add(5, 7))
+}

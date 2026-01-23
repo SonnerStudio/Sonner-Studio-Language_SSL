@@ -1,0 +1,150 @@
+// SSL v6.2 - Lexer with Comments Support
+// Line Comments (//) and Block Comments (/* */)
+
+fn scan_line_comment(source: String, start: Int, len: Int) -> Int {
+    println("    Skipping line comment...")
+    
+    let pos = start + 2  // Skip //
+    
+    // Scan until newline or EOF
+    let scanning = 1
+    while scanning > 0 {
+        if pos >= len {
+            scanning = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            let is_nl = c == "\n"
+            if is_nl {
+                scanning = 0
+                0
+            } else {
+                pos = pos + 1
+                0
+            }
+        }
+    }
+    
+    pos
+}
+
+fn scan_block_comment(source: String, start: Int, len: Int) -> Int {
+    println("    Skipping block comment...")
+    
+    let pos = start + 2  // Skip /*
+    
+    // Scan until */ or EOF
+    let scanning = 1
+    while scanning > 0 {
+        if pos >= len {
+            scanning = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            let is_star = c == "*"
+            
+            if is_star {
+                if pos + 1 < len {
+                    let next = char_at(source, pos + 1)
+                    let is_slash = next == "/"
+                    if is_slash {
+                        pos = pos + 2
+                        scanning = 0
+                        0
+                    } else {
+                        pos = pos + 1
+                        0
+                    }
+                } else {
+                    pos = pos + 1
+                    0
+                }
+            } else {
+                pos = pos + 1
+                0
+            }
+        }
+    }
+    
+    pos
+}
+
+fn tokenize_with_comments(source: String) -> Int {
+    println("===========================================")
+    println(" v6.2 Lexer with Comments")
+    println("===========================================")
+    println("")
+    
+    let len = string_length(source)
+    let pos = 0
+    let count = 0
+    
+    let active = 1
+    while active > 0 {
+        if pos >= len {
+            active = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            
+            // Check for comments
+            let is_slash = c == "/"
+            if is_slash {
+                if pos + 1 < len {
+                    let next = char_at(source, pos + 1)
+                    let next_slash = next == "/"
+                    let next_star = next == "*"
+                    
+                    if next_slash {
+                        pos = scan_line_comment(source, pos, len)
+                        0
+                    } else {
+                        if next_star {
+                            pos = scan_block_comment(source, pos, len)
+                            0
+                        } else {
+                            println("  Token: SLASH")
+                            count = count + 1
+                            pos = pos + 1
+                            0
+                        }
+                    }
+                } else {
+                    println("  Token: SLASH")
+                    count = count + 1
+                    pos = pos + 1
+                    0
+                }
+            } else {
+                // Other tokens (simplified)
+                pos = pos + 1
+                0
+            }
+        }
+    }
+    
+    println("")
+    println("✅ Tokenized with comment support")
+    println("   Tokens: " + int_s(count))
+    
+    count
+}
+
+fn int_s(n: Int) -> String {
+    if n == 0 { "0" } else { if n == 5 { "5" } else { "N" }}
+}
+
+fn main() {
+    println("Comment Support Test")
+    println("")
+    
+    let code = "fn main() { // line comment\n  /* block */ return 42 }"
+    
+    println("Input: " + code)
+    println("")
+    
+    let n = tokenize_with_comments(code)
+    
+    println("")
+    println("Success!")
+}

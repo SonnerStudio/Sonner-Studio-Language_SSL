@@ -1,0 +1,74 @@
+// Test: HashMap and HashSet
+
+use collections::HashMap;
+use collections::HashSet;
+
+fn test_hashmap() {
+    println("Testing HashMap...");
+    
+    let mut map: HashMap<String, i64> = HashMap::new();
+    
+    map.insert("one", 1);
+    map.insert("two", 2);
+    map.insert("three", 3);
+    
+    if map.len() == 3 {
+        println("✓ HashMap insert works");
+    }
+    
+    if let Option::Some(val) = map.get("two") {
+        if *val == 2 {
+            println("✓ HashMap get works");
+        }
+    }
+    
+    if map.contains_key("three") {
+        println("✓ HashMap contains_key works");
+    }
+    
+    map.remove("two");
+    if map.len() == 2 {
+        println("✓ HashMap remove works");
+    }
+}
+
+fn test_hashset() {
+    println("Testing HashSet...");
+    
+    let mut set: HashSet<i64> = HashSet::new();
+    
+    if set.insert(10) {
+        println("✓ HashSet insert works");
+    }
+    
+    set.insert(20);
+    set.insert(30);
+    
+    if set.len() == 3 {
+        println("✓ HashSet size tracking works");
+    }
+    
+    if set.contains(&20) {
+        println("✓ HashSet contains works");
+    }
+    
+    set.remove(&20);
+    if !set.contains(&20) {
+        println("✓ HashSet remove works");
+    }
+}
+
+fn main() -> i64 {
+    println("=================================");
+    println("SSL v8 Collections Tests");
+    println("=================================");
+    
+    test_hashmap();
+    println("");
+    
+    test_hashset();
+    println("");
+    
+    println("All tests completed!");
+    return 0;
+}

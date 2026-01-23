@@ -1,0 +1,13 @@
+// Demo: Time-Travel Debugging
+// Run with: ssl run examples/debug_demo.ssl --debug
+
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+let result = fibonacci(5)
+print("Fibonacci(5) = ")
+print(result)

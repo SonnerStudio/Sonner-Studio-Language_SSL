@@ -1,0 +1,238 @@
+// SSL Standard Library - HashMap<K, V>
+// Hash table implementation
+
+use core::Option;
+use core::Result;
+use collections::Vec;
+
+const INITIAL_CAPACITY: usize = 16;
+const LOAD_FACTOR: f32 = 0.75;
+
+struct HashMapEntry<K, V> {
+    key: K,
+    value: V,
+    hash: u64,
+    occupied: bool,
+}
+
+pub struct HashMap<K, V> {
+    buckets: Vec<HashMapEntry<K, V>>,
+    size: usize,
+    capacity: usize,
+}
+
+impl<K, V> HashMap<K, V> where K: Hash + Eq {
+    pub fn new() -> HashMap<K, V> {
+        HashMap::with_capacity(INITIAL_CAPACITY)
+    }
+    
+    pub fn with_capacity(capacity: usize) -> HashMap<K, V> {
+        let mut buckets = Vec::with_capacity(capacity);
+        
+        for _ in 0..capacity {
+            buckets.push(HashMapEntry {
+                key: unsafe { uninitialized() },
+                value: unsafe { uninitialized() },
+                hash: 0,
+                occupied: false,
+            });
+        }
+        
+        HashMap {
+            buckets,
+            size: 0,
+            capacity,
+        }
+    }
+    
+    pub fn len(&self) -> usize {
+        self.size
+    }
+    
+    pub fn is_empty(&self) -> bool {
+        self.size == 0
+    }
+    
+    pub fn insert(&mut self, key: K, value: V) -> Option<V> {
+        if self.size as f32 >= self.capacity as f32 * LOAD_FACTOR {
+            self.resize(self.capacity * 2);
+        }
+        
+        let hash = key.hash();
+        let mut index = (hash % self.capacity as u64) as usize;
+        
+        // Linear probing
+        loop {
+            let entry = &mut self.buckets[index];
+            
+            if !entry.occupied {
+                entry.key = key;
+                entry.value = value;
+                entry.hash = hash;
+                entry.occupied = true;
+                self.size += 1;
+                return Option::None;
+            }
+            
+            if entry.hash == hash && entry.key.eq(&key) {
+                let old_value = entry.value;
+                entry.value = value;
+                return Option::Some(old_value);
+            }
+            
+            index = (index + 1) % self.capacity;
+        }
+    }
+    
+    pub fn get(&self, key: &K) -> Option<&V> {
+        let hash = key.hash();
+        let mut index = (hash % self.capacity as u64) as usize;
+        let start_index = index;
+        
+        loop {
+            let entry = &self.buckets[index];
+            
+            if !entry.occupied {
+                return Option::None;
+            }
+            
+            if entry.hash == hash && entry.key.eq(key) {
+                return Option::Some(&entry.value);
+            }
+            
+            index = (index + 1) % self.capacity;
+            
+            if index == start_index {
+                return Option::None;
+            }
+        }
+    }
+    
+    pub fn get_mut(&mut self, key: &K) -> Option<&mut V> {
+        let hash = key.hash();
+        let mut index = (hash % self.capacity as u64) as usize;
+        let start_index = index;
+        
+        loop {
+            let entry = &mut self.buckets[index];
+            
+            if !entry.occupied {
+                return Option::None;
+            }
+            
+            if entry.hash == hash && entry.key.eq(key) {
+                return Option::Some(&mut entry.value);
+            }
+            
+            index = (index + 1) % self.capacity;
+            
+            if index == start_index {
+                return Option::None;
+            }
+        }
+    }
+    
+    pub fn remove(&mut self, key: &K) -> Option<V> {
+        let hash = key.hash();
+        let mut index = (hash % self.capacity as u64) as usize;
+        let start_index = index;
+        
+        loop {
+            let entry = &mut self.buckets[index];
+            
+            if !entry.occupied {
+                return Option::None;
+            }
+            
+            if entry.hash == hash && entry.key.eq(key) {
+                entry.occupied = false;
+                self.size -= 1;
+                return Option::Some(entry.value);
+            }
+            
+            index = (index + 1) % self.capacity;
+            
+            if index == start_index {
+                return Option::None;
+            }
+        }
+    }
+    
+    pub fn contains_key(&self, key: &K) -> bool {
+        self.get(key).is_some()
+    }
+    
+    pub fn clear(&mut self) {
+        for entry in &mut self.buckets {
+            entry.occupied = false;
+        }
+        self.size = 0;
+    }
+    
+    fn resize(&mut self, new_capacity: usize) {
+        let mut new_map = HashMap::with_capacity(new_capacity);
+        
+        for entry in &self.buckets {
+            if entry.occupied {
+                new_map.insert(entry.key, entry.value);
+            }
+        }
+        
+        self.buckets = new_map.buckets;
+        self.capacity = new_capacity;
+    }
+}
+
+// Hash trait
+pub trait Hash {
+    fn hash(&self) -> u64;
+}
+
+// Eq trait (for key comparison)
+pub trait Eq {
+    fn eq(&self, other: &Self) -> bool;
+}
+
+// Hash implementations for primitive types
+impl Hash for i64 {
+    fn hash(&self) -> u64 {
+        *self as u64
+    }
+}
+
+impl Hash for String {
+    fn hash(&self) -> u64 {
+        let mut hash: u64 = 5381;
+        for byte in self.bytes() {
+            hash = ((hash << 5) + hash) + byte as u64;
+        }
+        hash
+    }
+}
+
+impl Eq for i64 {
+    fn eq(&self, other: &i64) -> bool {
+        *self == *other
+    }
+}
+
+impl Eq for String {
+    fn eq(&self, other: &String) -> bool {
+        if self.len() != other.len() {
+            return false;
+        }
+        
+        for i in 0..self.len() {
+            if self.bytes()[i] != other.bytes()[i] {
+                return false;
+            }
+        }
+        
+        true
+    }
+}
+
+// Intrinsics
+extern "intrinsic" {
+    fn uninitialized<T>() -> T;
+}

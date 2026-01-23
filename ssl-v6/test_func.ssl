@@ -1,0 +1,6 @@
+// Test function-style syntax
+fn test() {
+    let x = [1, 2, 3]
+    let len = length(x)
+    println("Length: " + to_string(len))
+}

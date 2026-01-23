@@ -1,0 +1,190 @@
+// SSL v6.2 Compiler - Standardized Structure
+// Following v6.0/v6.1 Patterns and Conventions
+
+// =============================================================================
+// MODULE: LEXER (Lexical Analysis)
+// =============================================================================
+// Purpose: Tokenize SSL source code into structured tokens
+// Input:   Raw source string
+// Output:  Token stream
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Constants and Configuration
+// -----------------------------------------------------------------------------
+
+fn TOKEN_INT() -> String { "INT" }
+fn TOKEN_STRING() -> String { "STRING" }
+fn TOKEN_IDENT() -> String { "IDENT" }
+fn TOKEN_KEYWORD() -> String { "KEYWORD" }
+
+// -----------------------------------------------------------------------------
+// Character Classification Utilities
+// -----------------------------------------------------------------------------
+
+fn is_digit(c: String) -> Int {
+    let matches = c == "0" || c == "1" || c == "2" || c == "3" || 
+                  c == "4" || c == "5" || c == "6" || c == "7" || 
+                  c == "8" || c == "9"
+    if matches { 1 } else { 0 }
+}
+
+fn is_alpha(c: String) -> Int {
+    // Simplified: check common ASCII letters
+    let is_lower = c == "a" || c == "e" || c == "i" || c == "n" || 
+                   c == "r" || c == "t" || c == "f" || c == "l" ||
+                   c == "m" || c == "w" || c == "h"
+    let is_other = c == "_"
+    
+    if is_lower { 1 } else { if is_other { 1 } else { 0 }}
+}
+
+fn is_whitespace(c: String) -> Int {
+    let matches = c == " " || c == "\t" || c == "\n" || c == "\r"
+    if matches { 1 } else { 0 }
+}
+
+// -----------------------------------------------------------------------------
+// Token Scanning Functions
+// -----------------------------------------------------------------------------
+
+fn scan_number(source: String, pos: Int, len: Int) -> Int {
+    // Scan consecutive digits
+    let new_pos = pos
+    
+    let scanning = 1
+    while scanning > 0 {
+        if new_pos >= len {
+            scanning = 0
+            0
+        } else {
+            let c = char_at(source, new_pos)
+            let is_d = is_digit(c)
+            
+            if is_d > 0 {
+                new_pos = new_pos + 1
+                0
+            } else {
+                scanning = 0
+                0
+            }
+        }
+    }
+    
+    new_pos
+}
+
+fn scan_identifier(source: String, pos: Int, len: Int) -> Int {
+    // Scan alphanumeric + underscore
+    let new_pos = pos
+    
+    let scanning = 1
+    while scanning > 0 {
+        if new_pos >= len {
+            scanning = 0
+            0
+        } else {
+            let c = char_at(source, new_pos)
+            let is_a = is_alpha(c)
+            let is_d = is_digit(c)
+            
+            if is_a > 0 {
+                new_pos = new_pos + 1
+                0
+            } else {
+                if is_d > 0 {
+                    new_pos = new_pos + 1
+                    0
+                } else {
+                    scanning = 0
+                    0
+                }
+            }
+        }
+    }
+    
+    new_pos
+}
+
+// -----------------------------------------------------------------------------
+// Main Lexer Entry Point
+// -----------------------------------------------------------------------------
+
+fn tokenize(source: String) -> Int {
+    println("=== LEXER: Tokenizing Source ===")
+    
+    let len = string_length(source)
+    let pos = 0
+    let token_count = 0
+    
+    let active = 1
+    while active > 0 {
+        if pos >= len {
+            active = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            
+            // Skip whitespace
+            let is_ws = is_whitespace(c)
+            if is_ws > 0 {
+                pos = pos + 1
+                0
+            } else {
+                // Scan tokens
+                let is_d = is_digit(c)
+                let is_a = is_alpha(c)
+                
+                if is_d > 0 {
+                    let new_pos = scan_number(source, pos, len)
+                    token_count = token_count + 1
+                    pos = new_pos
+                    0
+                } else {
+                    if is_a > 0 {
+                        let new_pos = scan_identifier(source, pos, len)
+                        token_count = token_count + 1
+                        pos = new_pos
+                        0
+                    } else {
+                        pos = pos + 1
+                        0
+                    }
+                }
+            }
+        }
+    }
+    
+    println("=== LEXER: Complete ===")
+    println("Tokens: " + int_to_string(token_count))
+    
+    token_count
+}
+
+// -----------------------------------------------------------------------------
+// Helper Utilities
+// -----------------------------------------------------------------------------
+
+fn int_to_string(n: Int) -> String {
+    if n == 0 { "0" } else {
+    if n == 1 { "1" } else {
+    if n == 5 { "5" } else {
+    if n == 10 { "10" } else {
+        "N"
+    }}}}
+}
+
+// -----------------------------------------------------------------------------
+// Module Main (Testing)
+// -----------------------------------------------------------------------------
+
+fn main() {
+    println("SSL v6.2 Lexer - Standardized")
+    println("")
+    
+    let code = "fn main() { return 42 }"
+    let tokens = tokenize(code)
+    
+    println("")
+    println("Success!")
+}

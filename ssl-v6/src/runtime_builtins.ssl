@@ -1,0 +1,212 @@
+// SSL v6.1 - Runtime Builtins
+// Interface zwischen SSL Code und Assembly Runtime
+
+// ============================================
+// Memory Operations
+// ============================================
+
+// Allocate memory (wraps ssl_malloc)
+// Returns pointer to allocated memory or 0 on failure
+fn malloc(size: Int) -> Any {
+    // NOTE: In real implementation, this would emit:
+    // mov rcx, <size>
+    // call ssl_malloc
+    // rax contains pointer
+    
+    // For now, placeholder
+    size  
+}
+
+// Free memory (wraps ssl_free)
+// Returns 1 on success, 0 on failure
+fn free(ptr: Any) -> Int {
+    // NOTE: Would emit:
+    // mov rcx, <ptr>
+    // call ssl_free
+    
+    0
+}
+
+// ============================================
+// String Operations  
+// ============================================
+
+// Get string length (wraps ssl_string_length)
+fn string_length(s: String) -> Int {
+    // NOTE: Would emit:
+    // lea rcx, [string_data]
+    // call ssl_string_length
+    // rax contains length
+    
+    0
+}
+
+// Concatenate strings (wraps ssl_string_concat)
+fn string_concat(a: String, b: String) -> String {
+    // NOTE: Would emit:
+    // lea rcx, [str1]
+    // lea rdx, [str2]
+    // call ssl_string_concat
+    // rax contains new string pointer
+    
+    a  // Placeholder
+}
+
+// Get character at index (wraps ssl_string_char_at)
+fn char_at(s: String, i: Int) -> String {
+    // NOTE: Would emit:
+    // lea rcx, [string]
+    // mov rdx, <index>
+    // call ssl_string_char_at
+    // al contains character
+    
+    s  // Placeholder
+}
+
+// Get substring (wraps ssl_string_substring)
+fn substring(s: String, start: Int, end: Int) -> String {
+    // NOTE: Would emit:
+    // lea rcx, [string]
+    // mov rdx, <start>
+    // mov r8, <end>
+    // call ssl_string_substring
+    // rax contains substring pointer
+    
+    s  // Placeholder
+}
+
+// ============================================
+// List Operations
+// ============================================
+
+// Create new list (wraps ssl_list_create)
+fn list_create(elem_size: Int, capacity: Int) -> Any {
+    0
+}
+
+// Append to list (wraps ssl_list_append)
+fn list_append(lst: Any, item: Any) -> Int {
+    0
+}
+
+// Get list element (wraps ssl_list_get)
+fn list_get(lst: Any, index: Int) -> Any {
+    0
+}
+
+// Get list length (wraps ssl_list_length)
+fn list_length(lst: Any) -> Int {
+    0
+}
+
+// ============================================
+// File I/O Operations
+// ============================================
+
+// Read file to string (wraps ssl_read_file)
+fn read_file(filename: String) -> String {
+    // NOTE: Would emit:
+    // lea rcx, [filename]
+    // call ssl_read_file
+    // rax contains file content, rdx contains size
+    
+    filename  // Placeholder
+}
+
+// Write string to file (wraps ssl_write_file)
+fn write_file(filename: String, content: String) -> Int {
+    // NOTE: Would emit:
+    // lea rcx, [filename]
+    // lea rdx, [content]
+    // mov r8, <content_length>
+    // call ssl_write_file
+    // rax contains bytes written
+    
+    0
+}
+
+// Check if file exists (wraps ssl_file_exists)
+fn file_exists(filename: String) -> Int {
+    // NOTE: Would emit:
+    // lea rcx, [filename]
+    // call ssl_file_exists
+    // rax = 1 if exists, 0 if not
+    
+    0
+}
+
+// ============================================
+// Type Conversions
+// ============================================
+
+// Convert integer to string (wraps ssl_int_to_string)
+fn int_to_string(n: Int) -> String {
+    // NOTE: Would emit:
+    // mov rcx, <integer>
+    // call ssl_int_to_string
+    // rax contains string pointer
+    
+    ""  // Placeholder
+}
+
+// Convert string to integer (wraps ssl_string_to_int)
+fn string_to_int(s: String) -> Int {
+    // NOTE: Would emit:
+    // lea rcx, [string]
+    // call ssl_string_to_int
+    // rax contains integer, rdx = success flag
+    
+    0
+}
+
+// Convert float to string (wraps ssl_float_to_string)
+fn float_to_string(f: Float) -> String {
+    // NOTE: Would emit:
+    // movsd xmm0, <float>
+    // call ssl_float_to_string
+    // rax contains string pointer
+    
+    ""  // Placeholder
+}
+
+// ============================================
+// Helper Functions (for codegen recognition)
+// ============================================
+
+// Check if function is a runtime builtin
+fn is_builtin(name: String) -> Int {
+    if name == "malloc" { 1 } else {
+    if name == "free" { 1 } else {
+    if name == "string_length" { 1 } else {
+    if name == "string_concat" { 1 } else {
+    if name == "char_at" { 1 } else {
+    if name == "substring" { 1 } else {
+    if name == "list_create" { 1 } else {
+    if name == "list_append" { 1 } else {
+    if name == "list_get" { 1 } else {
+    if name == "list_length" { 1 } else {
+    if name == "read_file" { 1 } else {
+    if name == "write_file" { 1 } else {
+    if name == "file_exists" { 1 } else {
+    if name == "int_to_string" { 1 } else {
+    if name == "string_to_int" { 1 } else {
+    if name == "float_to_string" { 1 } else {
+        0
+    }}}}}}}}}}}}}}}}
+}
+
+// Get runtime function name for builtin
+fn builtin_runtime_name(name: String) -> String {
+    if name == "malloc" { "ssl_malloc" } else {
+    if name == "free" { "ssl_free" } else {
+    if name == "string_length" { "ssl_string_length" } else {
+    if name == "string_concat" { "ssl_string_concat" } else {
+    if name == "char_at" { "ssl_string_char_at" } else {
+    if name == "substring" { "ssl_string_substring" } else {
+    if name == "list_create" { "ssl_list_create" } else {
+    if name == "list_append" { "ssl_list_append" } else {
+    if name == "list_get" { "ssl_list_get" } else {
+    if name == "list_length" { "ssl_list_length" } else {
+        "unknown"
+    }}}}}}}}}}
+}

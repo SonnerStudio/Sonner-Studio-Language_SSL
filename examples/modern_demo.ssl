@@ -1,0 +1,40 @@
+fn main() {
+    print("🚀 SSL Modern Capabilities Demo")
+    print("OS:", sys_os())
+    
+    // 1. File System
+    let filename = "test_data.txt"
+    print("\n[1] Writing to file:", filename)
+    fs_write(filename, "Hello from SSL File System!")
+    
+    if fs_exists(filename) {
+        let content = fs_read(filename)
+        print("    Read back:", content)
+    }
+    
+    // 2. HTTP & JSON
+    print("\n[2] Fetching JSON from API...")
+    // We use a public test API
+    try {
+        let response = http_get("https://jsonplaceholder.typicode.com/todos/1")
+        print("    Raw Response:", response)
+        
+        // In a real scenario we would parse this to a Map
+        // For now, let's just re-stringify it to test the module
+        // (Since our json_parse isn't fully mapped to Value::Map yet)
+        
+        // Let's create a manual JSON object
+        let data = {
+            "source": "SSL",
+            "status": "active",
+            "quantum_ready": true
+        }
+        let json_str = json_stringify(data)
+        print("    Generated JSON:", json_str)
+        
+    } recover (err) {
+        print("    HTTP Error:", err)
+    }
+    
+    print("\n✅ Demo completed successfully.")
+}

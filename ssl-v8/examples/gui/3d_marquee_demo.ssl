@@ -1,0 +1,32 @@
+// Example: 3D Marquee with Heart-Shaped Window
+
+use ui::Window;
+use ui::Marquee3D;
+use ui::Color;
+use ui::ScrollDirection;
+
+fn main() -> i64 {
+    // Create heart-shaped window
+    let window = Window::create_heart(400, 400, 100, 100).unwrap();
+    window.set_background_color(Color::rgb(255, 20, 50));
+    window.set_transparent(true);
+    window.show();
+    
+    // Create 3D scrolling text
+    let mut marquee = Marquee3D::new(&window, "❤️ I Love SSL v8! ❤️");
+    
+    marquee
+        .set_font_size(72)
+        .set_depth(15.0)
+        .set_speed(2.0)
+        .set_color(Color::rgb(255, 255, 255))
+        .apply_neon(0.8)  // Neon glow effect
+        .apply_wave(10.0, 0.5);  // Wave animation
+    
+    marquee.start(ScrollDirection::Horizontal);
+    
+    // Run for a while then update text
+    // (In real implementation, would have event loop)
+    
+    return 0;
+}

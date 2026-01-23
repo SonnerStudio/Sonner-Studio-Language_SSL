@@ -1,0 +1,4 @@
+// Test 1: Return Constant
+fn main() -> Int {
+    return 42
+}

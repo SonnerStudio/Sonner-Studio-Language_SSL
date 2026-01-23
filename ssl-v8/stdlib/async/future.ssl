@@ -1,0 +1,246 @@
+// SSL v8 Async Runtime - Future<T> and async/await
+
+use core::Option;
+use core::Result;
+
+// Future trait - represents a value that will be available in the future
+pub trait Future<T> {
+    fn poll(&mut self) -> Poll<T>;
+}
+
+// Poll result
+pub enum Poll<T> {
+    Ready(T),
+    Pending,
+}
+
+// Task - wrapper around a future with context
+pub struct Task<T> {
+    future: Box<dyn Future<T>>,
+    state: TaskState,
+}
+
+pub enum TaskState {
+    Pending,
+    Running,
+    Completed,
+}
+
+// Async executor - runs futures to completion
+pub struct Executor {
+    tasks: Vec<Task<()>>,
+    waker_queue: Vec<usize>,
+}
+
+impl Executor {
+    pub fn new() -> Executor {
+        Executor {
+            tasks: Vec::new(),
+            waker_queue: Vec::new(),
+        }
+    }
+    
+    // Spawn a new task
+    pub fn spawn<F>(&mut self, future: F)
+    where
+        F: Future<()> + 'static
+    {
+        self.tasks.push(Task {
+            future: Box::new(future),
+            state: TaskState::Pending,
+        });
+    }
+    
+    // Run all tasks to completion
+    pub fn run(&mut self) {
+        loop {
+            let mut all_done = true;
+            
+            for i in 0..self.tasks.len() {
+                let task = &mut self.tasks[i];
+                
+                match task.state {
+                    TaskState::Completed => continue,
+                    _ => {
+                        task.state = TaskState::Running;
+                        
+                        match task.future.poll() {
+                            Poll::Ready(_) => {
+                                task.state = TaskState::Completed;
+                            }
+                            Poll::Pending => {
+                                task.state = TaskState::Pending;
+                                all_done = false;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if all_done {
+                break;
+            }
+            
+            // Yield to OS
+            unsafe {
+                platform_yield();
+            }
+        }
+    }
+    
+    // Block on a future until completion
+    pub fn block_on<T, F>(&mut self, mut future: F) -> T
+    where
+        F: Future<T>
+    {
+        loop {
+            match future.poll() {
+                Poll::Ready(value) => return value,
+                Poll::Pending => {
+                    unsafe {
+                        platform_yield();
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Timer future - completes after a delay
+pub struct Timer {
+    deadline: u64,
+    started: bool,
+}
+
+impl Timer {
+    pub fn new(ms: u64) -> Timer {
+        Timer {
+            deadline: ms,
+            started: false,
+        }
+    }
+}
+
+impl Future<()> for Timer {
+    fn poll(&mut self) -> Poll<()> {
+        if !self.started {
+            self.started = true;
+            unsafe {
+                platform_start_timer(self.deadline);
+            }
+        }
+        
+        let elapsed = unsafe { platform_get_elapsed_time() };
+        
+        if elapsed >= self.deadline {
+            Poll::Ready(())
+        } else {
+            Poll::Pending
+        }
+    }
+}
+
+// Async I/O future
+pub struct AsyncRead {
+    handle: i64,
+    buffer: Vec<u8>,
+    bytes_read: usize,
+}
+
+impl AsyncRead {
+    pub fn new(handle: i64, size: usize) -> AsyncRead {
+        AsyncRead {
+            handle,
+            buffer: Vec::with_capacity(size),
+            bytes_read: 0,
+        }
+    }
+}
+
+impl Future<Vec<u8>> for AsyncRead {
+    fn poll(&mut self) -> Poll<Vec<u8>> {
+        let result = unsafe {
+            platform_async_read(
+                self.handle,
+                self.buffer.as_mut_ptr(),
+                self.buffer.capacity()
+            )
+        };
+        
+        if result < 0 {
+            // Would complete, return data read so far
+            Poll::Ready(self.buffer.clone())
+        } else if result == 0 {
+            // Not ready yet
+            Poll::Pending
+        } else {
+            // Data available
+            self.bytes_read += result as usize;
+            Poll::Ready(self.buffer.clone())
+        }
+    }
+}
+
+// Join combinator - wait for multiple futures
+pub struct Join<T1, T2> {
+    future1: Box<dyn Future<T1>>,
+    future2: Box<dyn Future<T2>>,
+    result1: Option<T1>,
+    result2: Option<T2>,
+}
+
+impl<T1, T2> Join<T1, T2> {
+    pub fn new<F1, F2>(f1: F1, f2: F2) -> Join<T1, T2>
+    where
+        F1: Future<T1> + 'static,
+        F2: Future<T2> + 'static
+    {
+        Join {
+            future1: Box::new(f1),
+            future2: Box::new(f2),
+            result1: Option::None,
+            result2: Option::None,
+        }
+    }
+}
+
+impl<T1, T2> Future<(T1, T2)> for Join<T1, T2> {
+    fn poll(&mut self) -> Poll<(T1, T2)> {
+        // Poll first future if not done
+        if self.result1.is_none() {
+            if let Poll::Ready(val) = self.future1.poll() {
+                self.result1 = Option::Some(val);
+            }
+        }
+        
+        // Poll second future if not done
+        if self.result2.is_none() {
+            if let Poll::Ready(val) = self.future2.poll() {
+                self.result2 = Option::Some(val);
+            }
+        }
+        
+        // Check if both done
+        match (&self.result1, &self.result2) {
+            (Option::Some(v1), Option::Some(v2)) => {
+                Poll::Ready((v1.clone(), v2.clone()))
+            }
+            _ => Poll::Pending
+        }
+    }
+}
+
+// Async syntax helpers (to be used with compiler support)
+// async fn example() -> i64 {
+//     let timer = Timer::new(1000);
+//     timer.await;  // Compiler transforms this into poll loop
+//     return 42;
+// }
+
+// Platform intrinsics
+extern "intrinsic" {
+    fn platform_yield();
+    fn platform_start_timer(ms: u64);
+    fn platform_get_elapsed_time() -> u64;
+    fn platform_async_read(handle: i64, buffer: *mut u8, size: usize) -> i64;
+}

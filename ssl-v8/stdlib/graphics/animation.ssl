@@ -1,0 +1,204 @@
+// SSL v8 Animation System - Keyframe & Skeletal Animation
+
+use core::{Vec, Option, String};
+use graphics::scene3d::{Vector3, Transform};
+
+// Keyframe Animation
+pub struct KeyframeAnimation {
+    keyframes: Vec<Keyframe>,
+    duration: f32,
+    current_time: f32,
+    looping: bool,
+}
+
+pub struct Keyframe {
+    pub time: f32,
+    pub position: Vector3,
+    pub rotation: Vector3,
+    pub scale: Vector3,
+}
+
+impl KeyframeAnimation {
+    pub fn new() -> KeyframeAnimation {
+        KeyframeAnimation {
+            keyframes: Vec::new(),
+            duration: 0.0,
+            current_time: 0.0,
+            looping: true,
+        }
+    }
+    
+    pub fn add_keyframe(&mut self, time: f32, transform: Transform) {
+        self.keyframes.push(Keyframe {
+            time,
+            position: transform.position,
+            rotation: transform.rotation,
+            scale: transform.scale,
+        });
+        
+        if time > self.duration {
+            self.duration = time;
+        }
+    }
+    
+    pub fn update(&mut self, delta_time: f32) -> Transform {
+        self.current_time += delta_time;
+        
+        if self.looping && self.current_time > self.duration {
+            self.current_time = 0.0;
+        }
+        
+        // Find surrounding keyframes
+        let mut before: Option<&Keyframe> = Option::None;
+        let mut after: Option<&Keyframe> = Option::None;
+        
+        for kf in &self.keyframes {
+            if kf.time <= self.current_time {
+                before = Option::Some(kf);
+            }
+            if kf.time >= self.current_time && after.is_none() {
+                after = Option::Some(kf);
+            }
+        }
+        
+        // Interpolate
+        match (before, after) {
+            (Option::Some(b), Option::Some(a)) => {
+                let t = (self.current_time - b.time) / (a.time - b.time);
+                self.interpolate(b, a, t)
+            }
+            _ => Transform {
+                position: Vector3::zero(),
+                rotation: Vector3::zero(),
+                scale: Vector3::new(1.0, 1.0, 1.0),
+            }
+        }
+    }
+    
+    fn interpolate(&self, from: &Keyframe, to: &Keyframe, t: f32) -> Transform {
+        Transform {
+            position: Vector3::new(
+                from.position.x + (to.position.x - from.position.x) * t,
+                from.position.y + (to.position.y - from.position.y) * t,
+                from.position.z + (to.position.z - from.position.z) * t
+            ),
+            rotation: Vector3::new(
+                from.rotation.x + (to.rotation.x - from.rotation.x) * t,
+                from.rotation.y + (to.rotation.y - from.rotation.y) * t,
+                from.rotation.z + (to.rotation.z - from.rotation.z) * t
+            ),
+            scale: Vector3::new(
+                from.scale.x + (to.scale.x - from.scale.x) * t,
+                from.scale.y + (to.scale.y - from.scale.y) * t,
+                from.scale.z + (to.scale.z - from.scale.z) * t
+            ),
+        }
+    }
+}
+
+// Skeletal Animation
+pub struct Skeleton {
+    bones: Vec<Bone>,
+    bind_pose: Vec<Transform>,
+}
+
+pub struct Bone {
+    pub name: String,
+    pub parent: Option<usize>,
+    pub offset_matrix: [[f32; 4]; 4],
+}
+
+impl Skeleton {
+    pub fn new() -> Skeleton {
+        Skeleton {
+            bones: Vec::new(),
+            bind_pose: Vec::new(),
+        }
+    }
+    
+    pub fn add_bone(&mut self, name: String, parent: Option<usize>) -> usize {
+        let bone = Bone {
+            name,
+            parent,
+            offset_matrix: [[0.0; 4]; 4],
+        };
+        
+        self.bones.push(bone);
+        self.bones.len() - 1
+    }
+}
+
+// Animation Clip
+pub struct AnimationClip {
+    pub name: String,
+    pub duration: f32,
+    pub bone_tracks: Vec<BoneTrack>,
+}
+
+pub struct BoneTrack {
+    pub bone_index: usize,
+    pub position_keys: Vec<PositionKey>,
+    pub rotation_keys: Vec<RotationKey>,
+    pub scale_keys: Vec<ScaleKey>,
+}
+
+pub struct PositionKey {
+    pub time: f32,
+    pub value: Vector3,
+}
+
+pub struct RotationKey {
+    pub time: f32,
+    pub value: Quaternion,
+}
+
+pub struct ScaleKey {
+    pub time: f32,
+    pub value: Vector3,
+}
+
+pub struct Quaternion {
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
+    pub w: f32,
+}
+
+// Tween/Easing Functions
+pub enum EasingType {
+    Linear,
+    EaseIn,
+    EaseOut,
+    EaseInOut,
+    Bounce,
+    Elastic,
+}
+
+pub fn ease(t: f32, easing: EasingType) -> f32 {
+    match easing {
+        EasingType::Linear => t,
+        EasingType::EaseIn => t * t,
+        EasingType::EaseOut => t * (2.0 - t),
+        EasingType::EaseInOut => {
+            if t < 0.5 {
+                2.0 * t * t
+            } else {
+                -1.0 + (4.0 - 2.0 * t) * t
+            }
+        }
+        EasingType::Bounce => {
+            if t < 0.36363636 {
+                7.5625 * t * t
+            } else if t < 0.72727273 {
+                7.5625 * (t - 0.54545455) * (t - 0.54545455) + 0.75
+            } else if t < 0.90909091 {
+                7.5625 * (t - 0.81818182) * (t - 0.81818182) + 0.9375
+            } else {
+                7.5625 * (t - 0.95454545) * (t - 0.95454545) + 0.984375
+            }
+        }
+        EasingType::Elastic => {
+            (2.0_f32).powf(-10.0 * t) * ((t - 0.075) * 2.0 * 3.14159 / 0.3).sin() + 1.0
+        }
+    }
+}

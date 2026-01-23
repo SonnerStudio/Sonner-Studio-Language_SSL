@@ -1,0 +1,161 @@
+// SSL v8 Shader Programming - GLSL/HLSL Support
+
+use core::{String, Vec, Option, Result};
+
+// Shader Program
+pub struct Shader {
+    handle: i64,
+    uniforms: Vec<String>,
+}
+
+impl Shader {
+    pub fn from_source(vertex: &String, fragment: &String) -> Result<Shader, String> {
+        let handle = unsafe {
+            platform_compile_shader(vertex.as_ptr(), fragment.as_ptr())
+        };
+        
+        if handle < 0 {
+            Result::Err("Shader compilation failed")
+        } else {
+            Result::Ok(Shader {
+                handle,
+                uniforms: Vec::new(),
+            })
+        }
+    }
+    
+    pub fn use_shader(&self) {
+        unsafe {
+            platform_use_shader(self.handle);
+        }
+    }
+    
+    pub fn set_float(&self, name: &String, value: f32) {
+        unsafe {
+            platform_shader_set_float(self.handle, name.as_ptr(), value);
+        }
+    }
+    
+    pub fn set_vec3(&self, name: &String, x: f32, y: f32, z: f32) {
+        unsafe {
+            platform_shader_set_vec3(self.handle, name.as_ptr(), x, y, z);
+        }
+    }
+    
+    pub fn set_mat4(&self, name: &String, matrix: &[[f32; 4]; 4]) {
+        unsafe {
+            platform_shader_set_mat4(self.handle, name.as_ptr(), matrix as *const [[f32; 4]; 4]);
+        }
+    }
+}
+
+// Preset Shaders
+pub fn phong_shader() -> Result<Shader, String> {
+    let vertex = String::from("
+        #version 330 core
+        layout (location = 0) in vec3 aPos;
+        layout (location = 1) in vec3 aNormal;
+        
+        uniform mat4 model;
+        uniform mat4 view;
+        uniform mat4 projection;
+        
+        out vec3 FragPos;
+        out vec3 Normal;
+        
+        void main() {
+            FragPos = vec3(model * vec4(aPos, 1.0));
+            Normal = mat3(transpose(inverse(model))) * aNormal;
+            gl_Position = projection * view * vec4(FragPos, 1.0);
+        }
+    ");
+    
+    let fragment = String::from("
+        #version 330 core
+        out vec4 FragColor;
+        
+        in vec3 FragPos;
+        in vec3 Normal;
+        
+        uniform vec3 lightPos;
+        uniform vec3 viewPos;
+        uniform vec3 lightColor;
+        uniform vec3 objectColor;
+        
+        void main() {
+            // Ambient
+            float ambientStrength = 0.1;
+            vec3 ambient = ambientStrength * lightColor;
+            
+            // Diffuse
+            vec3 norm = normalize(Normal);
+            vec3 lightDir = normalize(lightPos - FragPos);
+            float diff = max(dot(norm, lightDir), 0.0);
+            vec3 diffuse = diff * lightColor;
+            
+            // Specular
+            float specularStrength = 0.5;
+            vec3 viewDir = normalize(viewPos - FragPos);
+            vec3 reflectDir = reflect(-lightDir, norm);
+            float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+            vec3 specular = specularStrength * spec * lightColor;
+            
+            vec3 result = (ambient + diffuse + specular) * objectColor;
+            FragColor = vec4(result, 1.0);
+        }
+    ");
+    
+    Shader::from_source(&vertex, &fragment)
+}
+
+pub fn toon_shader() -> Result<Shader, String> {
+    let vertex = String::from("
+        #version 330 core
+        layout (location = 0) in vec3 aPos;
+        layout (location = 1) in vec3 aNormal;
+        
+        uniform mat4 mvp;
+        
+        out vec3 Normal;
+        
+        void main() {
+            Normal = aNormal;
+            gl_Position = mvp * vec4(aPos, 1.0);
+        }
+    ");
+    
+    let fragment = String::from("
+        #version 330 core
+        out vec4 FragColor;
+        
+        in vec3 Normal;
+        uniform vec3 lightDir;
+        
+        void main() {
+            float intensity = dot(normalize(Normal), normalize(lightDir));
+            vec3 color;
+            
+            if (intensity > 0.95)
+                color = vec3(1.0, 1.0, 1.0);
+            else if (intensity > 0.5)
+                color = vec3(0.7, 0.7, 0.7);
+            else if (intensity > 0.25)
+                color = vec3(0.5, 0.5, 0.5);
+            else
+                color = vec3(0.3, 0.3, 0.3);
+            
+            FragColor = vec4(color, 1.0);
+        }
+    ");
+    
+    Shader::from_source(&vertex, &fragment)
+}
+
+// Platform intrinsics
+extern "intrinsic" {
+    fn platform_compile_shader(vertex: *const u8, fragment: *const u8) -> i64;
+    fn platform_use_shader(handle: i64);
+    fn platform_shader_set_float(handle: i64, name: *const u8, value: f32);
+    fn platform_shader_set_vec3(handle: i64, name: *const u8, x: f32, y: f32, z: f32);
+    fn platform_shader_set_mat4(handle: i64, name: *const u8, matrix: *const [[f32; 4]; 4]);
+}

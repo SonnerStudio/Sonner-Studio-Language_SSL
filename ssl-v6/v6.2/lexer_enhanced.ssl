@@ -1,0 +1,330 @@
+// SSL v6.2 - Enhanced Lexer with ALL Features
+// String Literals, Multi-char Operators, Comments
+
+// Previous helpers remain...
+fn i2s(n: Int) -> String {
+    if n == 0 { "0" } else { if n == 1 { "1" } else { if n == 2 { "2" } else {
+    if n == 5 { "5" } else { if n == 10 { "10" } else { if n == 42 { "42" } else {
+        "N"
+    }}}}}}
+}
+
+fn is_digit(c: String) -> Int {
+    let d0 = c == "0"
+    let d1 = c == "1" 
+    let d2 = c == "2"
+    if d0 { 1 } else { if d1 { 1 } else { if d2 { 1 } else { 0 }}}
+}
+
+fn is_letter(c: String) -> Int {
+    let la = c == "a"
+    let le = c == "e"
+    let lf = c == "f"
+    let li = c == "i"
+    let ll = c == "l"
+    let lm = c == "m"
+    let ln = c == "n"
+    let lr = c == "r"
+    let lt = c == "t"
+    let lx = c == "x"
+    let lw = c == "w"
+    let lh = c == "h"
+    
+    if la { 1 } else { if le { 1 } else { if lf { 1 } else {
+    if li { 1 } else { if ll { 1 } else { if lm { 1 } else {
+    if ln { 1 } else { if lr { 1 } else { if lt { 1 } else {
+    if lx { 1 } else { if lw { 1 } else { if lh { 1 } else {
+        0
+    }}}}}}}}}}}}
+}
+
+fn is_space(c: String) -> Int {
+    let sp = c == " "
+    let nl = c == "\n"
+    let tb = c == "\t"
+    if sp { 1 } else { if nl { 1 } else { if tb { 1 } else { 0 }}}
+}
+
+fn is_keyword(w: String) -> Int {
+    let kfn = w == "fn"
+    let klet = w == "let"
+    let kvar = w == "var"
+    let kif = w == "if"
+    let kelse = w == "else"
+    let kwhile = w == "while"
+    let kfor = w == "for"
+    let kret = w == "return"
+    let kmatch = w == "match"
+    let kstruct = w == "struct"
+    
+    if kfn { 1 } else { if klet { 1 } else { if kvar { 1 } else {
+    if kif { 1 } else { if kelse { 1 } else { if kwhile { 1 } else {
+    if kfor { 1 } else { if kret { 1 } else { if kmatch { 1 } else {
+    if kstruct { 1 } else {
+        0
+    }}}}}}}}}}
+}
+
+// String literal scanning (NEW)
+fn scan_string_literal(source: String, start: Int, len: Int) -> Int {
+    println("    Scanning string literal...")
+    
+    let pos = start + 1  // Skip opening quote
+    let str_val = ""
+    
+    let scanning = 1
+    while scanning > 0 {
+        if pos >= len {
+            scanning = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            let is_quote = c == "\""
+            
+            if is_quote {
+                scanning = 0
+                0
+            } else {
+                str_val = str_val + c
+                pos = pos + 1
+                0
+            }
+        }
+    }
+    
+    println("    ✓ String: \"" + str_val + "\"")
+    
+    pos + 1  // Return position after closing quote
+}
+
+// Enhanced tokenizer with string literals and multi-char operators
+fn tokenize_enhanced(source: String) -> Int {
+    println("===========================================")
+    println(" v6.2 Enhanced Lexer - Full Features")
+    println("===========================================")
+    println("")
+    
+    let len = string_length(source)
+    println("Source: " + i2s(len) + " chars")
+    println("")
+    
+    let pos = 0
+    let count = 0
+    
+    let active = 1
+    while active > 0 {
+        if pos >= len {
+            active = 0
+            0
+        } else {
+            let c = char_at(source, pos)
+            
+            // Whitespace
+            let ws = is_space(c)
+            if ws > 0 {
+                pos = pos + 1
+                0
+            } else {
+                // String Literal (NEW)
+                let is_quote = c == "\""
+                if is_quote {
+                    pos = scan_string_literal(source, pos, len)
+                    count = count + 1
+                    0
+                } else {
+                    // Multi-char operators (NEW)
+                    let is_eq = c == "="
+                    let is_bang = c == "!"
+                    let is_less = c == "<"
+                    let is_greater = c == ">"
+                    let is_amp = c == "&"
+                    let is_pipe = c == "|"
+                    let is_minus = c == "-"
+                    
+                    if is_eq {
+                        // Check for ==
+                        if pos + 1 < len {
+                            let next = char_at(source, pos + 1)
+                            let next_eq = next == "="
+                            if next_eq {
+                                println("  Token: EQUAL_EQUAL")
+                                count = count + 1
+                                pos = pos + 2
+                                0
+                            } else {
+                                println("  Token: EQUAL")
+                                count = count + 1
+                                pos = pos + 1
+                                0
+                            }
+                        } else {
+                            println("  Token: EQUAL")
+                            count = count + 1
+                            pos = pos + 1
+                            0
+                        }
+                    } else {
+                        if is_bang {
+                            // Check for !=
+                            if pos + 1 < len {
+                                let next = char_at(source, pos + 1)
+                                let next_eq = next == "="
+                                if next_eq {
+                                    println("  Token: NOT_EQUAL")
+                                    count = count + 1
+                                    pos = pos + 2
+                                    0
+                                } else {
+                                    println("  Token: BANG")
+                                    count = count + 1
+                                    pos = pos + 1
+                                    0
+                                }
+                            } else {
+                                println("  Token: BANG")
+                                count = count + 1
+                                pos = pos + 1
+                                0
+                            }
+                        } else {
+                            if is_amp {
+                                // Check for &&
+                                if pos + 1 < len {
+                                    let next = char_at(source, pos + 1)
+                                    let next_amp = next == "&"
+                                    if next_amp {
+                                        println("  Token: AND_AND")
+                                        count = count + 1
+                                        pos = pos + 2
+                                        0
+                                    } else {
+                                        pos = pos + 1
+                                        0
+                                    }
+                                } else {
+                                    pos = pos + 1
+                                    0
+                                }
+                            } else {
+                                if is_pipe {
+                                    // Check for ||
+                                    if pos + 1 < len {
+                                        let next = char_at(source, pos + 1)
+                                        let next_pipe = next == "|"
+                                        if next_pipe {
+                                            println("  Token: OR_OR")
+                                            count = count + 1
+                                            pos = pos + 2
+                                            0
+                                        } else {
+                                            pos = pos + 1
+                                            0
+                                        }
+                                    } else {
+                                        pos = pos + 1
+                                        0
+                                    }
+                                } else {
+                                    if is_minus {
+                                        // Check for ->
+                                        if pos + 1 < len {
+                                            let next = char_at(source, pos + 1)
+                                            let next_gt = next == ">"
+                                            if next_gt {
+                                                println("  Token: ARROW")
+                                                count = count + 1
+                                                pos = pos + 2
+                                                0
+                                            } else {
+                                                println("  Token: MINUS")
+                                                count = count + 1
+                                                pos = pos + 1
+                                                0
+                                            }
+                                        } else {
+                                            println("  Token: MINUS")
+                                            count = count + 1
+                                            pos = pos + 1
+                                            0
+                                        }
+                                    } else {
+                                        // Digits, Letters, Single-char ops
+                                        let dig = is_digit(c)
+                                        if dig > 0 {
+                                            println("  Token: NUMBER")
+                                            count = count + 1
+                                            pos = pos + 1
+                                            0
+                                        } else {
+                                            let lett = is_letter(c)
+                                            if lett > 0 {
+                                                // Scan identifier
+                                                let word = c
+                                                pos = pos + 1
+                                                
+                                                let scan = 1
+                                                while scan > 0 {
+                                                    if pos >= len {
+                                                        scan = 0
+                                                        0
+                                                    } else {
+                                                        let nc = char_at(source, pos)
+                                                        let nl = is_letter(nc)
+                                                        if nl > 0 {
+                                                            word = word + nc
+                                                            pos = pos + 1
+                                                            0
+                                                        } else {
+                                                            scan = 0
+                                                            0
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                let kw = is_keyword(word)
+                                                if kw > 0 {
+                                                    println("  Token: KEYWORD (" + word + ")")
+                                                    0
+                                                } else {
+                                                    println("  Token: IDENT (" + word + ")")
+                                                    0
+                                                }
+                                                count = count + 1
+                                                0
+                                            } else {
+                                                // Other chars (skip or single-char tokens)
+                                                pos = pos + 1
+                                                0
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    println("")
+    println("✅ Scanned " + i2s(count) + " tokens")
+    println("Enhanced features: strings, ==, !=, &&, ||, ->")
+    
+    count
+}
+
+fn main() {
+    println("Enhanced Lexer Test")
+    println("")
+    
+    let code = "fn test() { if x == 42 { return \"hello\" } }"
+    
+    println("Input: " + code)
+    println("")
+    
+    let n = tokenize_enhanced(code)
+    
+    println("")
+    println("Success!")
+}

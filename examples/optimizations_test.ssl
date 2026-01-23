@@ -1,0 +1,64 @@
+// SSL 3.0 - Advanced Optimizations Test
+// Tests tail-call transformation awareness and loop detection
+
+// Tail-recursive factorial (should be detected for transformation)
+fn factorial_tail(n: Int, acc: Int) -> Int {
+    if n <= 1 {
+        return acc
+    }
+    return factorial_tail(n - 1, n * acc)  // Tail call detected!
+}
+
+// Non-tail-recursive (regular recursion)
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        return n
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2)  // NOT tail-recursive
+}
+
+// Small loop (candidate for unrolling)
+fn sum_small() -> Int {
+    let mut sum = 0
+    let mut i = 0
+    
+    // Simple loop - not using while yet (simplified)
+    // sum = 0 + 1 + 2 + 3 + 4 = 10
+    sum = sum + 0
+    sum = sum + 1
+    sum = sum + 2
+    sum = sum + 3
+    sum = sum + 4
+    
+    return sum
+}
+
+// Test tail-recursive function
+let fact_result = factorial_tail(10, 1)
+print("factorial(10) = ")
+print(fact_result)
+
+// Test fibonacci
+let fib_result = fibonacci(10)
+print("fibonacci(10) = ")
+print(fib_result)
+
+// Test loop
+let sum_result = sum_small()
+print("sum(0..5) = ")
+print(sum_result)
+
+// Verify results
+// factorial(10) = 3628800
+// fibonacci(10) = 55
+// sum(0..5) = 0+1+2+3+4 = 10
+
+if fact_result == 3628800 {
+    if fib_result == 55 {
+        if sum_result == 10 {
+            return 0
+        }
+    }
+}
+
+return 1

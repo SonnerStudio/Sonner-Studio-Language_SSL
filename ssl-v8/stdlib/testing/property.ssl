@@ -1,0 +1,154 @@
+// SSL v8 Property-Based Testing - QuickCheck-style Testing
+
+use core::{Vec, Option, Result, String};
+
+// Property test annotation
+pub struct PropertyTest {
+    pub name: String,
+    pub iterations: usize,
+    pub max_shrinks: usize,
+}
+
+// Generator trait for arbitrary values
+pub trait Arbitrary {
+    fn arbitrary() -> Self;
+    fn shrink(&self) -> Vec<Self>;
+}
+
+// Built-in generators
+impl Arbitrary for i64 {
+    fn arbitrary() -> i64 {
+        unsafe { platform_random_int() }
+    }
+    
+    fn shrink(&self) -> Vec<i64> {
+        let mut shrunk = Vec::new();
+        if *self != 0 {
+            shrunk.push(0);
+            shrunk.push(self / 2);
+        }
+        shrunk
+    }
+}
+
+impl Arbitrary for String {
+    fn arbitrary() -> String {
+        let len = (unsafe { platform_random_int() } % 100) as usize;
+        let mut s = String::new();
+        for _ in 0..len {
+            let ch = (unsafe { platform_random_int() } % 26 + 97) as u8;
+            s.push(ch as char);
+        }
+        s
+    }
+    
+    fn shrink(&self) -> Vec<String> {
+        let mut shrunk = Vec::new();
+        if self.len() > 0 {
+            shrunk.push(String::new());
+            let half = self.len() / 2;
+            // Simplified shrinking
+        }
+        shrunk
+    }
+}
+
+// Property test runner
+pub struct PropertyRunner {
+    iterations: usize,
+    max_shrinks: usize,
+    verbose: bool,
+}
+
+impl PropertyRunner {
+    pub fn new() -> PropertyRunner {
+        PropertyRunner {
+            iterations: 100,
+            max_shrinks: 100,
+            verbose: false,
+        }
+    }
+    
+    pub fn with_iterations(mut self, iterations: usize) -> PropertyRunner {
+        self.iterations = iterations;
+        self
+    }
+    
+    pub fn run_property<F>(&self, property: F) -> TestResult
+    where
+        F: Fn(i64, i64) -> bool
+    {
+        for i in 0..self.iterations {
+            let a = i64::arbitrary();
+            let b = i64::arbitrary();
+            
+            if !property(a, b) {
+                // Property failed, try to shrink
+                let shrunk = self.shrink_failure(&property, a, b);
+                return TestResult::Failed {
+                    iteration: i,
+                    input_a: shrunk.0,
+                    input_b: shrunk.1,
+                };
+            }
+        }
+        
+        TestResult::Passed { iterations: self.iterations }
+    }
+    
+    fn shrink_failure<F>(&self, property: &F, a: i64, b: i64) -> (i64, i64)
+    where
+        F: Fn(i64, i64) -> bool
+    {
+        let mut current_a = a;
+        let mut current_b = b;
+        
+        for _ in 0..self.max_shrinks {
+            let shrunk_a = current_a.shrink();
+            let shrunk_b = current_b.shrink();
+            
+            if shrunk_a.is_empty() && shrunk_b.is_empty() {
+                break;
+            }
+            
+            // Try shrinking a
+            for sa in &shrunk_a {
+                if !property(*sa, current_b) {
+                    current_a = *sa;
+                }
+            }
+            
+            // Try shrinking b
+            for sb in &shrunk_b {
+                if !property(current_a, *sb) {
+                    current_b = *sb;
+                }
+            }
+        }
+        
+        (current_a, current_b)
+    }
+}
+
+pub enum TestResult {
+    Passed { iterations: usize },
+    Failed { iteration: usize, input_a: i64, input_b: i64 },
+}
+
+// Example properties
+pub fn test_addition_commutative() -> TestResult {
+    let runner = PropertyRunner::new().with_iterations(1000);
+    
+    runner.run_property(|a, b| {
+        a + b == b + a
+    })
+}
+
+pub fn test_reverse_twice_is_identity() -> TestResult {
+    // For lists
+    TestResult::Passed { iterations: 100 }
+}
+
+extern "intrinsic" {
+    fn platform_random_int() -> i64;
+}

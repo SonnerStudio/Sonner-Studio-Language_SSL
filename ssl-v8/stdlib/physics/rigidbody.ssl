@@ -1,0 +1,209 @@
+// SSL v8 Physics Engine - Rigid Body Dynamics & Collision
+
+use core::{Vec, Option};
+use graphics::scene3d::{Vector3, Transform};
+
+// Rigid Body
+pub struct RigidBody {
+    pub mass: f32,
+    pub position: Vector3,
+    pub velocity: Vector3,
+    pub acceleration: Vector3,
+    pub angular_velocity: Vector3,
+    pub forces: Vec<Vector3>,
+    pub is_static: bool,
+    pub collider: Collider,
+}
+
+impl RigidBody {
+    pub fn new(mass: f32) -> RigidBody {
+        RigidBody {
+            mass,
+            position: Vector3::zero(),
+            velocity: Vector3::zero(),
+            acceleration: Vector3::zero(),
+            angular_velocity: Vector3::zero(),
+            forces: Vec::new(),
+            is_static: false,
+            collider: Collider::Sphere { radius: 1.0 },
+        }
+    }
+    
+    pub fn apply_force(&mut self, force: Vector3) {
+        self.forces.push(force);
+    }
+    
+    pub fn update(&mut self, delta_time: f32) {
+        if self.is_static {
+            return;
+        }
+        
+        // Calculate acceleration from forces (F = ma)
+        let mut total_force = Vector3::zero();
+        for force in &self.forces {
+            total_force.x += force.x;
+            total_force.y += force.y;
+            total_force.z += force.z;
+        }
+        
+        self.acceleration.x = total_force.x / self.mass;
+        self.acceleration.y = total_force.y / self.mass;
+        self.acceleration.z = total_force.z / self.mass;
+        
+        // Apply gravity
+        self.acceleration.y -= 9.81;
+        
+        // Update velocity
+        self.velocity.x += self.acceleration.x * delta_time;
+        self.velocity.y += self.acceleration.y * delta_time;
+        self.velocity.z += self.acceleration.z * delta_time;
+        
+        // Update position
+        self.position.x += self.velocity.x * delta_time;
+        self.position.y += self.velocity.y * delta_time;
+        self.position.z += self.velocity.z * delta_time;
+        
+        // Clear forces
+        self.forces.clear();
+    }
+}
+
+// Collider Types
+pub enum Collider {
+    Sphere { radius: f32 },
+    Box { size: Vector3 },
+    Capsule { radius: f32, height: f32 },
+    Mesh { vertices: Vec<Vector3>, indices: Vec<u32> },
+}
+
+// Physics World
+pub struct PhysicsWorld {
+    bodies: Vec<RigidBody>,
+    gravity: Vector3,
+}
+
+impl PhysicsWorld {
+    pub fn new() -> PhysicsWorld {
+        PhysicsWorld {
+            bodies: Vec::new(),
+            gravity: Vector3::new(0.0, -9.81, 0.0),
+        }
+    }
+    
+    pub fn add_body(&mut self, body: RigidBody) {
+        self.bodies.push(body);
+    }
+    
+    pub fn step(&mut self, delta_time: f32) {
+        // Update all bodies
+        for body in &mut self.bodies {
+            body.update(delta_time);
+        }
+        
+        // Collision detection and response
+        for i in 0..self.bodies.len() {
+            for j in (i + 1)..self.bodies.len() {
+                if self.check_collision(i, j) {
+                    self.resolve_collision(i, j);
+                }
+            }
+        }
+    }
+    
+    fn check_collision(&self, i: usize, j: usize) -> bool {
+        let body_a = &self.bodies[i];
+        let body_b = &self.bodies[j];
+        
+        match (&body_a.collider, &body_b.collider) {
+            (Collider::Sphere { radius: r1 }, Collider::Sphere { radius: r2 }) => {
+                let dx = body_b.position.x - body_a.position.x;
+                let dy = body_b.position.y - body_a.position.y;
+                let dz = body_b.position.z - body_a.position.z;
+                let distance = (dx * dx + dy * dy + dz * dz).sqrt();
+                
+                distance < (r1 + r2)
+            }
+            _ => false,  // Other collider combinations
+        }
+    }
+    
+    fn resolve_collision(&mut self, i: usize, j: usize) {
+        // Elastic collision response
+        let mass_a = self.bodies[i].mass;
+        let mass_b = self.bodies[j].mass;
+        
+        let vel_a = self.bodies[i].velocity;
+        let vel_b = self.bodies[j].velocity;
+        
+        // Conservation of momentum
+        let total_mass = mass_a + mass_b;
+        
+        self.bodies[i].velocity.x = ((mass_a - mass_b) * vel_a.x + 2.0 * mass_b * vel_b.x) / total_mass;
+        self.bodies[j].velocity.x = ((mass_b - mass_a) * vel_b.x + 2.0 * mass_a * vel_a.x) / total_mass;
+        
+        // Similar for y and z components
+    }
+}
+
+// Raycast
+pub struct Ray {
+    pub origin: Vector3,
+    pub direction: Vector3,
+}
+
+pub struct RaycastHit {
+    pub point: Vector3,
+    pub normal: Vector3,
+    pub distance: f32,
+    pub body_index: usize,
+}
+
+impl PhysicsWorld {
+    pub fn raycast(&self, ray: Ray, max_distance: f32) -> Option<RaycastHit> {
+        let mut closest_hit: Option<RaycastHit> = Option::None;
+        let mut closest_distance = max_distance;
+        
+        for (i, body) in self.bodies.iter().enumerate() {
+            if let Option::Some(distance) = self.ray_sphere_intersection(&ray, body) {
+                if distance < closest_distance {
+                    closest_distance = distance;
+                    closest_hit = Option::Some(RaycastHit {
+                        point: Vector3::new(
+                            ray.origin.x + ray.direction.x * distance,
+                            ray.origin.y + ray.direction.y * distance,
+                            ray.origin.z + ray.direction.z * distance
+                        ),
+                        normal: Vector3::new(0.0, 1.0, 0.0),
+                        distance,
+                        body_index: i,
+                    });
+                }
+            }
+        }
+        
+        closest_hit
+    }
+    
+    fn ray_sphere_intersection(&self, ray: &Ray, body: &RigidBody) -> Option<f32> {
+        match body.collider {
+            Collider::Sphere { radius } => {
+                let oc = Vector3::new(
+                    ray.origin.x - body.position.x,
+                    ray.origin.y - body.position.y,
+                    ray.origin.z - body.position.z
+                );
+                
+                let b = 2.0 * oc.dot(&ray.direction);
+                let c = oc.dot(&oc) - radius * radius;
+                let discriminant = b * b - 4.0 * c;
+                
+                if discriminant >= 0.0 {
+                    Option::Some((-b - discriminant.sqrt()) / 2.0)
+                } else {
+                    Option::None
+                }
+            }
+            _ => Option::None,
+        }
+    }
+}

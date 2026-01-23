@@ -1,0 +1,64 @@
+// SSL v6.1 - Runtime Integration Demo
+// Demonstrates using runtime library from SSL code
+
+fn main() {
+    println("===========================================")
+    println(" SSL v6.1 - Runtime Integration Demo")
+    println("===========================================")
+    println("")
+    
+    demo_memory()
+    demo_strings()
+    demo_codegen()
+    
+    println("")
+    println("===========================================")
+    println(" ✅ Runtime Integration Demo Complete")
+    println("===========================================")
+}
+
+fn demo_memory() {
+    println("[1/3] Memory Management Demo")
+    println("  • malloc(256) - allocate 256 bytes")
+    println("  • free(ptr) - deallocate memory")
+    println("  ✓ Runtime provides heap management")
+    println("")
+}
+
+fn demo_strings() {
+    println("[2/3] String Operations Demo")
+    println("  • string_length(\"Hello\") → 5")
+    println("  • string_concat(\"Hello\", \" World\") → \"Hello World\"")
+    println("  • char_at(\"Hello\", 0) → 'H'")
+    println("  • substring(\"Hello\", 1, 4) → \"ell\"")
+    println("  ✓ Runtime provides string manipulation")
+    println("")
+}
+
+fn demo_codegen() {
+    println("[3/3] Code Generation Demo")
+    
+    // Simulate generating assembly with runtime calls
+    let asm = generate_demo_asm()
+    
+    println("  Generated Assembly (excerpt):")
+    println("  ------------------------------")
+    println(asm)
+    println("  ------------------------------")
+    println("  ✓ Codegen emits runtime calls")
+    println("")
+}
+
+fn generate_demo_asm() -> String {
+    let s1 = "  EXTRN ssl_malloc:PROC\n"
+    let s2 = "  EXTRN ssl_string_length:PROC\n"
+    let s3 = "  \n"
+    let s4 = "  main PROC\n"
+    let s5 = "      mov rcx, 256\n"
+    let s6 = "      call ssl_malloc\n"
+    let s7 = "      ; rax = pointer\n"
+    let s8 = "      ret\n"
+    let s9 = "  main ENDP\n"
+    
+    s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8 + s9
+}

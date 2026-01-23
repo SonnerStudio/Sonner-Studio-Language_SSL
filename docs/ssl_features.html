@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSL v9.2 Aurora – Umfassende Feature-Übersicht</title>
+    <style>
+        /* Scoped Styles for SSL Feature Page */
+        .ssl-wrapper {
+            --ssl-primary: #FFD700;
+            --ssl-dark: #222;
+            --ssl-light: #f9f9f9;
+            --ssl-text: #333;
+            --ssl-code-bg: #2d2d2d;
+            --ssl-accent: #007ACC;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--ssl-text);
+            line-height: 1.6;
+            background-color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Reset within wrapper to avoid inheriting bad styles */
+        .ssl-wrapper *,
+        .ssl-wrapper *::before,
+        .ssl-wrapper *::after {
+            box-sizing: border-box;
+        }
+
+        .ssl-header {
+            background: var(--ssl-dark);
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .ssl-header h1 {
+            font-size: 3rem;
+            color: var(--ssl-primary);
+            margin: 0;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .ssl-subtitle {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-top: 1rem;
+            font-weight: 300;
+            display: block;
+        }
+
+        .ssl-section {
+            margin-bottom: 4rem;
+        }
+
+        .ssl-wrapper h2 {
+            font-size: 2.2rem;
+            color: var(--ssl-dark);
+            border-bottom: 3px solid var(--ssl-primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            margin-top: 0;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .ssl-wrapper h3 {
+            font-size: 1.6rem;
+            color: #444;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .ssl-wrapper p {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Cards */
+        .ssl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .ssl-card {
+            background: var(--ssl-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+            height: 100%;
+            /* Ensure equal height in grid */
+        }
+
+        .ssl-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--ssl-primary);
+        }
+
+        .ssl-card h4 {
+            margin: 0 0 1rem 0;
+            color: var(--ssl-dark);
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* Badges */
+        .ssl-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .ssl-badge-new {
+            background: #E6F4EA;
+            color: #1E8E3E;
+            border: 1px solid #1E8E3E;
+        }
+
+        .ssl-badge-phase10 {
+            background: #E8F0FE;
+            color: #1967D2;
+            border: 1px solid #1967D2;
+        }
+
+        .ssl-badge-phase11 {
+            background: #FCE8E6;
+            color: #C5221F;
+            border: 1px solid #C5221F;
+        }
+
+        /* Code Blocks */
+        .ssl-pre {
+            background: var(--ssl-code-bg);
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--ssl-primary);
+            margin: 1.5rem 0;
+            white-space: pre;
+        }
+
+        .ssl-pre code {
+            font-family: inherit;
+        }
+
+        .ssl-keyword {
+            color: #569CD6;
+        }
+
+        .ssl-string {
+            color: #CE9178;
+        }
+
+        .ssl-comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+
+        .ssl-number {
+            color: #B5CEA8;
+        }
+
+        /* Highlight Section */
+        .ssl-highlight-section {
+            background: var(--ssl-dark);
+            color: #fff;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 4rem;
+        }
+
+        .ssl-highlight-section h2 {
+            color: var(--ssl-primary) !important;
+            border-bottom-color: #fff !important;
+        }
+
+        .ssl-highlight-section p {
+            color: #ccc;
+        }
+
+        .ssl-highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ssl-highlight-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--ssl-primary);
+        }
+
+        .ssl-highlight-item strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        .ssl-footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 4rem;
+            border-radius: 12px;
+        }
+
+        .ssl-footer a {
+            color: var(--ssl-primary);
+            text-decoration: none;
+        }
+
+        /* Lists */
+        ul.ssl-feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.ssl-feature-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            /* Align top for multi-line text */
+            text-align: left;
+        }
+
+        ul.ssl-feature-list li::before {
+            content: '✓';
+            color: var(--ssl-primary);
+            font-weight: bold;
+            margin-right: 0.8rem;
+            flex-shrink: 0;
+            /* Prevent checkmark from shrinking */
+            margin-top: 3px;
+            /* Align with text */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ssl-header h1 {
+                font-size: 2rem;
+            }
+
+            .ssl-wrapper h2 {
+                font-size: 1.8rem;
+            }
+
+            .ssl-grid,
+            .ssl-highlight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ssl-wrapper">
+
+        <div class="ssl-header">
+            <h1>SSL v9.2 Aurora</h1>
+            <span class="ssl-subtitle">Die Sprache einer neuen Ära in der Softwareentwicklung</span>
+            <p style="color: #ccc; max-width: 800px; margin: 1.5rem auto 0 auto;">
+                Quantum Edge Edition • Phase 10 (Physics & AI) & Phase 11 (Extended Reality) Completed
+            </p>
+        </div>
+
+        <!-- INTRO -->
+        <div class="ssl-section">
+            <p style="font-size: 1.2rem; text-align: center; max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                Die <strong>Sonner-Studio-Language (SSL)</strong> in der Version 9.2 Aurora ist weit mehr als nur eine
+                Programmiersprache.
+                Sie ist ein komplettes Ökosystem, das <strong>menschliche Sprache, modernste 3D-Grafik, Quantencomputing
+                    und KI</strong> nativ vereint.
+                Mit über <strong>200 Features</strong> und <strong>17 weltweiten Innovationen</strong> definiert SSL
+                neu, was technisch möglich ist.
+            </p>
+        </div>
+
+        <!-- WORLD FIRSTS -->
+        <div class="ssl-section ssl-highlight-section">
+            <h2>🏆 17 Weltweite Innovationen</h2>
+            <p>Features, die es nativ in keiner anderen Sprache gibt:</p>
+            <div class="ssl-highlight-grid">
+                <div class="ssl-highlight-item">
+                    <strong>Time-Travel Debugging (v2.0)</strong>
+                    Omniscient Debugging: Spule deinen Code vor und zurück wie einen Film.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Non-Rectangular Windows (v5.0)</strong>
+                    Erstelle Fenster in Herz-, Stern- oder freier Vektorform.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>16-Language NLP (v7.0)</strong>
+                    Programmiere in 16 natürlichen Sprachen (DE, EN, FR, ES, etc.) ohne Übersetzung.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Brain-Computer Interface (v5.0)</strong>
+                    Steuere Programme direkt mit Gedanken (EEG-Integration).
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Quantum ML (v5.0)</strong>
+                    Führe neuronale Netze auf Quanten-Simulationen aus.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Nativ integrierte 3D Engine (v8.0)</strong>
+                    Keine externe Engine nötig – volle 3D-Power direkt im Code.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Blockchain Native (v8.0)</strong>
+                    Smart Contracts und Web3-Transaktionen als Sprach-Primitiven.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Zero-Knowledge Proofs (v8.0)</strong>
+                    Eingebaute Privacy-Computing-Funktionen.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Homomorphic Encryption (v8.0)</strong>
+                    Rechne mit verschlüsselten Daten, ohne sie zu entschlüsseln.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Hybrid Runtime (v9.0)</strong>
+                    Verschmelzung von WebView (UI) und WGPU (3D) in einem Fenster.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>N64 Authentic Rendering (v9.0)</strong>
+                    Bitgenaue Emulation der Nintendo 64 Grafik-Hardware (RDP).
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Skeletal Animation DSL (Phase 10)</strong>
+                    Deklarative Animation von 3D-Charakteren.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>Volumetric God Rays (Phase 10)</strong>
+                    Physikalisch korrekte Lichtstrahlen mittels Raymarching.
+                </div>
+                <div class="ssl-highlight-item">
+                    <strong>XR Hand Tracking (Phase 11)</strong>
+                    Native Erkennung von 26 Hand-Gelenken für VR/AR.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3D ENGINE -->
+        <div class="ssl-section">
+            <h2>☄️ 3D Rendering Engine (Aurora) <span class="ssl-badge ssl-badge-new">v9.2</span></h2>
+            <p>
+                SSL v9.2 enthält eine voll funktionsfähige High-End 3D-Engine. Sie müssen keine Unity oder Unreal Engine
+                installieren –
+                schreiben Sie einfach Code.
+            </p>
+
+            <div class="ssl-grid">
+                <div class="ssl-card">
+                    <h4>Phase 8: AAA-Graphics</h4>
+                    <ul class="ssl-feature-list">
+                        <li>Bloom / HDR Glow</li>
+                        <li>Screen Space Ambient Occlusion (SSAO)</li>
+                        <li>Depth of Field (Bokeh)</li>
+                        <li>PBR Material System</li>
+                        <li>Deferred Shading Pipeline</li>
+                        <li>Real-time Raytracing (Hybrid)</li>
+                    </ul>
+                </div>
+                <div class="ssl-card">
+                    <h4>Phase 9: Physics & Particles</h4>
+                    <ul class="ssl-feature-list">
+                        <li>Rapier3D Physics Integration</li>
+                        <li>GPU Particle Systems (1M+ Particles)</li>
+                        <li>3D Spatial Audio (Rodio)</li>
+                        <li>N64 Retro-Mode (Dithering, Fog)</li>
+                        <li>WebAssembly (WASM) Export</li>
+                    </ul>
+                </div>
+                <div class="ssl-card" style="border-color: #1967D2; border-width: 2px;">
+                    <h4>Phase 10: Advanced Tech <span class="ssl-badge ssl-badge-phase10">Neu</span></h4>
+                    <ul class="ssl-feature-list">
+                        <li><strong>Skeletal Animation:</strong> GLTF/GLB Support, Skinning, Blending</li>
+                        <li><strong>Volumetric Lighting:</strong> God Rays, Procedural Fog (FBM Noise)</li>
+                        <li><strong>Global Illumination:</strong> SSGI (Screen Space GI)</li>
+                        <li><strong>Motion Blur:</strong> Per-Pixel Velocity</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Code-Beispiel: Volumetrics & Animation</h3>
+            <pre class="ssl-pre"><code><span class="ssl-keyword">import</span> graphics.volumetrics
+<span class="ssl-keyword">import</span> graphics.animation
+
+<span class="ssl-comment">// Volumetrisches Licht aktivieren (Phase 10)</span>
+state.volumetrics_enabled = <span class="ssl-keyword">true</span>
+state.volumetric_samples = <span class="ssl-number">32</span>
+state.scattering = <span class="ssl-number">0.1</span>
+
+<span class="ssl-comment">// 3D-Charakter laden und animieren</span>
+<span class="ssl-keyword">let</span> model = Model.load_gltf(<span class="ssl-string">"hero.glb"</span>)
+<span class="ssl-keyword">let</span> anim = AnimationState.new(model.skeleton)
+anim.play(<span class="ssl-string">"run"</span>, loop: <span class="ssl-keyword">true</span>)</code></pre>
+        </div>
+
+        <!-- XR / VR / AR -->
+        <div class="ssl-section">
+            <h2>🥽 Extended Reality (XR) <span class="ssl-badge ssl-badge-phase11">Phase 11</span></h2>
+            <p>
+                Mit Phase 11 betritt SSL die virtuelle Realität. Entwickeln Sie für Meta Quest, HTC Vive oder HoloLens
+                direkt in SSL.
+            </p>
+
+            <div class="ssl-grid">
+                <div class="ssl-card">
+                    <h4>Stereoscopic Rendering</h4>
+                    <p>Dual-Eye Rendering Pipeline mit konfigurierbarem IPD (Pupillendistanz) für echtes 3D-Sehen.</p>
+                </div>
+                <div class="ssl-card">
+                    <h4>6DOF Tracking</h4>
+                    <p>Vollständiges Tracking von Position und Rotation für Headset und Controller im Raum.</p>
+                </div>
+                <div class="ssl-card">
+                    <h4>Hand Tracking & Gesten</h4>
+                    <p>Erkennung von 26 Gelenkpunkten pro Hand. Native Gesten wie "Pinch", "Grab" oder "Point" ohne
+                        extra Code.</p>
+                </div>
+            </div>
+
+            <pre class="ssl-pre"><code><span class="ssl-keyword">import</span> xr.tracking
+
+<span class="ssl-keyword">let</span> hand = HandTracking.new(Hand.Left)
+
+<span class="ssl-keyword">if</span> hand.is_active {
+    <span class="ssl-keyword">let</span> thumb = hand.get_joint(JointType.ThumbTip)
+    <span class="ssl-keyword">let</span> index = hand.get_joint(JointType.IndexTip)
+    
+    <span class="ssl-comment">// Erkenne "Pinch"-Geste für Interaktion</span>
+    <span class="ssl-keyword">if</span> (thumb.pos - index.pos).length() < <span class="ssl-number">0.02</span> {
+        ui.click()
+    }
+}</code></pre>
+        </div>
+
+        <!-- KERNSPRACHE -->
+        <div class="ssl-section">
+            <h2>🧬 Kernsprache & Syntax</h2>
+            <div class="ssl-grid">
+                <div class="ssl-card">
+                    <h4>Modern & Sicher</h4>
+                    <ul class="ssl-feature-list">
+                        <li><strong>Immutability by Default:</strong> Daten sind unveränderlich, außer man erlaubt es.
+                        </li>
+                        <li><strong>Type Inference:</strong> Strenge Typisierung, ohne ständig Typen schreiben zu
+                            müssen.</li>
+                        <li><strong>Null-Safety:</strong> Keine NullPointerExceptions dank <code>Option&lt;T&gt;</code>.
+                        </li>
+                    </ul>
+                </div>
+                <div class="ssl-card">
+                    <h4>Funktional & Ausdrucksstark</h4>
+                    <ul class="ssl-feature-list">
+                        <li><strong>Pipe Operator:</strong> <code>data |> filter |> map</code> für klaren Fluss.</li>
+                        <li><strong>Pattern Matching:</strong> Mächtige <code>match</code>-Ausdrücke für komplexe Logik.
+                        </li>
+                        <li><strong>Linear Types:</strong> Ressourcen müssen garantiert geschlossen werden.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI & QUANTUM -->
+        <div class="ssl-section">
+            <h2>🧠 AI & Quantum Computing</h2>
+            <div class="ssl-grid">
+                <div class="ssl-card">
+                    <h4>Künstliche Intelligenz</h4>
+                    <p>Trainiere neuronale Netze direkt in SSL. Nutze den eingebauten <strong>AI Reviewer</strong>, der
+                        deinen Code während des Tippens optimiert und Fehler erklärt.</p>
+                </div>
+                <div class="ssl-card">
+                    <h4>Natural Language Programming</h4>
+                    <p>Der Compiler versteht 16 menschliche Sprachen. Du kannst Code mischen: Englisch für Logik,
+                        Deutsch für Kommentare/Variablen – SSL versteht den Kontext.</p>
+                </div>
+                <div class="ssl-card">
+                    <h4>Quantum Computing</h4>
+                    <p>Simuliere Qubits, erstelle Quantenschaltungen (Hadamard, CNOT) und führe Quanten-Algorithmen
+                        (Grover, Shor) aus.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEB3 & SECURITY -->
+        <div class="ssl-section">
+            <h2>🔒 Security & Blockchain</h2>
+            <p>Entwickle die sichersten Anwendungen der Welt mit eingebauten kryptographischen Primitiven.</p>
+            <div class="ssl-grid">
+                <div class="ssl-card">
+                    <h4>Smart Contracts</h4>
+                    <p>Schreibe native Verträge für Ethereum-kompatible Blockchains. ERC-20 und ERC-721 (NFT) Templates
+                        integriert.</p>
+                </div>
+                <div class="ssl-card">
+                    <h4>Zero-Knowledge Proofs</h4>
+                    <p>Beweise, dass du ein Geheimnis kennst, ohne es zu verraten. Revolutionär für
+                        Datenschutz-Anwendungen.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="ssl-section" style="text-align: center; margin-top: 6rem;">
+            <h2>Bereit für die Zukunft?</h2>
+            <p>SSL v9.2 Aurora ist exklusiv für <strong>Windows 10 & 11</strong> verfügbar.</p>
+
+            <div style="margin-top: 2rem;">
+                <!-- Simulated Microsoft Store Badge Style -->
+                <span
+                    style="background: #333; color: #fff; padding: 0.8rem 2rem; border-radius: 8px; font-family: 'Segoe UI', sans-serif; font-weight: 600; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.8rem; border: 1px solid #555; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.4 0H0V11.4H11.4V0Z" fill="#F25022" />
+                        <path d="M24 0H12.6V11.4H24V0Z" fill="#7FBA00" />
+                        <path d="M11.4 12.6H0V24H11.4V12.6Z" fill="#00A4EF" />
+                        <path d="M24 12.6H12.6V24H24V12.6Z" fill="#FFB900" />
+                    </svg>
+                    Erhältlich im Microsoft Store
+                </span>
+            </div>
+
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #888;">
+                Enthält Compiler, IDE, 3D Engine und alle Module.
+            </p>
+        </div>
+
+        <div class="ssl-footer">
+            <p>&copy; 2026 SonnerStudio GmbH. Alle Rechte vorbehalten.</p>
+            <p>Entwickelt mit Leidenschaft in Österreich und der Welt.</p>
+            <p>
+                <a href="/impressum.html">Impressum</a> |
+                <a href="/datenschutz.html">Datenschutz</a> |
+                <a href="/kontakt.html">Kontakt</a>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

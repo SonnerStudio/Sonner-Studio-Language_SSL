@@ -1,0 +1,107 @@
+// SSL v8 Visual Reactive Programming
+// Dataflow visualization with live variable watching
+
+use core::{String, Vec, HashMap, Option};
+use ui::Window;
+
+// Visual node in dataflow graph
+pub struct VisualNode {
+    pub id: i64,
+    pub name: String,
+    pub node_type: NodeType,
+    pub x: f32,
+    pub y: f32,
+    pub inputs: Vec<Port>,
+    pub outputs: Vec<Port>,
+    pub value: Option<Vec<u8>>,
+}
+
+pub enum NodeType {
+    Variable,
+    Function,
+    Operator,
+    Constant,
+}
+
+pub struct Port {
+    pub name: String,
+    pub port_type: String,
+    pub connected_to: Option<i64>,
+}
+
+// Dataflow graph
+pub struct DataflowGraph {
+    nodes: HashMap<i64, VisualNode>,
+    edges: Vec<Edge>,
+    next_id: i64,
+}
+
+pub struct Edge {
+    from_node: i64,
+    from_port: usize,
+    to_node: i64,
+    to_port: usize,
+}
+
+impl DataflowGraph {
+    pub fn new() -> DataflowGraph {
+        DataflowGraph {
+            nodes: HashMap::new(),
+            edges: Vec::new(),
+            next_id: 0,
+        }
+    }
+    
+    pub fn add_node(&mut self, name: String, node_type: NodeType) -> i64 {
+        let id = self.next_id;
+        self.next_id += 1;
+        
+        let node = VisualNode {
+            id,
+            name,
+            node_type,
+            x: 0.0,
+            y: 0.0,
+            inputs: Vec::new(),
+            outputs: Vec::new(),
+            value: Option::None,
+        };
+        
+        self.nodes.insert(id, node);
+        id
+    }
+    
+    pub fn connect(&mut self, from: i64, to: i64) {
+        self.edges.push(Edge {
+            from_node: from,
+            from_port: 0,
+            to_node: to,
+            to_port: 0,
+        });
+    }
+    
+    pub fn visualize(&self, window: &Window) {
+        for (id, node) in &self.nodes {
+            unsafe {
+                platform_render_node(
+                    window.handle,
+                    *id,
+                    node.x, node.y,
+                    node.name.as_ptr(),
+                    node.node_type as i64
+                );
+            }
+        }
+        
+        for edge in &self.edges {
+            unsafe {
+                platform_render_edge(window.handle, edge.from_node, edge.to_node);
+            }
+        }
+    }
+}
+
+extern "intrinsic" {
+    fn platform_render_node(window: i64, id: i64, x: f32, y: f32, name: *const u8, node_type: i64);
+    fn platform_render_edge(window: i64, from: i64, to: i64);
+}

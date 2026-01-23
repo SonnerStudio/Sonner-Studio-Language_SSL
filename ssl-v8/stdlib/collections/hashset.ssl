@@ -1,0 +1,47 @@
+// SSL Standard Library - HashSet<T>
+// Hash set implementation (wrapper around HashMap)
+
+use core::Option;
+use collections::HashMap;
+
+pub struct HashSet<T> {
+    map: HashMap<T, bool>,
+}
+
+impl<T> HashSet<T> where T: Hash + Eq {
+    pub fn new() -> HashSet<T> {
+        HashSet {
+            map: HashMap::new(),
+        }
+    }
+    
+    pub fn with_capacity(capacity: usize) -> HashSet<T> {
+        HashSet {
+            map: HashMap::with_capacity(capacity),
+        }
+    }
+    
+    pub fn len(&self) -> usize {
+        self.map.len()
+    }
+    
+    pub fn is_empty(&self) -> bool {
+        self.map.is_empty()
+    }
+    
+    pub fn insert(&mut self, value: T) -> bool {
+        self.map.insert(value, true).is_none()
+    }
+    
+    pub fn remove(&mut self, value: &T) -> bool {
+        self.map.remove(value).is_some()
+    }
+    
+    pub fn contains(&self, value: &T) -> bool {
+        self.map.contains_key(value)
+    }
+    
+    pub fn clear(&mut self) {
+        self.map.clear();
+    }
+}

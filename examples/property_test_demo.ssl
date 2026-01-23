@@ -1,0 +1,55 @@
+// SSL 4.0 - Property-Based Testing Example
+// Run with: ssl test property examples/property_test_demo.ssl
+
+// Define properties that should always hold
+
+@property(iterations: 1000)
+fn addition_is_commutative(a: Int, b: Int) -> Bool {
+    a + b == b + a
+}
+
+@property(iterations: 500)
+fn reverse_is_involution(list: List<Int>) -> Bool {
+    list.reverse().reverse() == list
+}
+
+@property(iterations: 200)
+fn sort_is_idempotent(list: List<Int>) -> Bool {
+    list.sort() == list.sort().sort()
+}
+
+@property
+fn length_preserved_by_map(list: List<Int>) -> Bool {
+    list.map(|x| x * 2).length() == list.length()
+}
+
+@property
+fn filter_subset(list: List<Int>) -> Bool {
+    list.filter(|x| x > 0).length() <= list.length()
+}
+
+// Custom generator for specific value ranges
+@generator
+fn small_positive() -> Int {
+    random_int(1, 100)
+}
+
+@property(generator: small_positive)
+fn sqrt_positive(n: Int) -> Bool {
+    sqrt(n) >= 0
+}
+
+// Test with shrinking
+@property(shrink: true)
+fn division_by_nonzero(a: Int, b: Int) -> Bool {
+    if b == 0 {
+        true  // Skip division by zero
+    } else {
+        (a / b) * b + (a % b) == a
+    }
+}
+
+fn main() {
+    print("🧪 SSL Property-Based Testing Demo")
+    print("Run: ssl test property examples/property_test_demo.ssl")
+}

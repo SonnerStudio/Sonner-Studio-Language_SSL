@@ -1,0 +1,4 @@
+fn main() {
+    print("Hi from Clean")
+}
+main()

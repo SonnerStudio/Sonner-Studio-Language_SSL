@@ -1,0 +1,14 @@
+// Distributed Computing Demo
+// Requires 'ssld' running on localhost:8080
+
+fn main() {
+    print("Local: Starting distributed task...")
+    
+    spawn on "127.0.0.1:8080" {
+        print("Remote (ssld): Hello from the other side!")
+        let x = 10 + 32
+        print("Remote: Calculation result =", x)
+    }
+    
+    print("Local: Task spawned. Exiting.")
+}

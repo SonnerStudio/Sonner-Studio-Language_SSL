@@ -1,0 +1,36 @@
+// SSL 3.0 - Functional Composition Test
+// Tests >> and << operators
+
+fn double(x: Int) -> Int {
+    return x * 2
+}
+
+fn add_one(x: Int) -> Int {
+    return x + 1
+}
+
+fn square(x: Int) -> Int {
+    return x * x
+}
+
+// Test 1: Basic composition with >>
+// double >> add_one means: first double, then add_one
+// So 5 -> double -> 10 -> add_one -> 11
+let composed = double >> add_one
+let result1 = 5 |> composed
+
+// Test 2: Reverse composition with <<
+// add_one << double means: add_one(double(x))
+// Same as double >> add_one
+let composed2 = add_one << double
+let result2 = 5 |> composed2
+
+// Test 3: Triple composition
+// 3 -> double -> 6 -> square -> 36 -> add_one -> 37
+let triple = double >> square >> add_one
+let result3 = 3 |> triple
+
+// All tests should produce expected values
+// result1 = 11, result2 = 11, result3 = 37
+// Return sum for verification: 11 + 11 + 37 = 59
+return result1 + result2 + result3

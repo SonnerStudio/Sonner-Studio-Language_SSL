@@ -1,0 +1,111 @@
+// SSL 4.0 Mobile App Demo
+// Build: ssl build examples/mobile_demo.ssl --target ios -o ios_app/
+// Build: ssl build examples/mobile_demo.ssl --target android -o android_app/
+
+// App configuration
+@mobile(ios, android)
+@bundle_id("org.sslang.demo")
+module MobileDemo
+
+// State
+let mut counter: Int = 0
+let mut username: String = ""
+
+// Main app entry
+fn main() {
+    print("Mobile Demo App Started!")
+    render_ui()
+}
+
+// Define the app UI
+fn app_ui() {
+    // VStack layout
+    ui.vstack(
+        spacing: 20,
+        children: [
+            // Header
+            ui.text("SSL Mobile Demo", style: TextStyle.largeTitle),
+            ui.text("Built with SSL 4.0", style: TextStyle.caption),
+            
+            ui.spacer(),
+            
+            // Counter section
+            ui.hstack(
+                spacing: 16,
+                children: [
+                    ui.button("-", action: decrement),
+                    ui.text(counter.to_string(), style: TextStyle.title),
+                    ui.button("+", action: increment)
+                ]
+            ),
+            
+            ui.spacer(),
+            
+            // Input section
+            ui.textfield(
+                placeholder: "Enter your name",
+                binding: username
+            ),
+            
+            ui.button("Greet", action: greet),
+            
+            ui.spacer()
+        ]
+    )
+}
+
+// Counter functions
+fn increment() {
+    counter = counter + 1
+    render_ui()
+}
+
+fn decrement() {
+    if counter > 0 {
+        counter = counter - 1
+    }
+    render_ui()
+}
+
+// Greeting function
+fn greet() {
+    if username != "" {
+        print("Hello, " + username + "!")
+    } else {
+        print("Please enter your name!")
+    }
+}
+
+// Render UI (called on state changes)
+fn render_ui() {
+    ui.render(app_ui())
+}
+
+// Platform-specific features
+platform ios {
+    fn show_ios_alert(message: String) {
+        // iOS native alert
+        native { """
+            let alert = UIAlertController(
+                title: "SSL Alert",
+                message: message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        """ }
+    }
+}
+
+platform android {
+    fn show_android_toast(message: String) {
+        // Android native toast
+        native { """
+            Toast.makeText(
+                this,
+                message,
+                Toast.LENGTH_SHORT
+            ).show()
+        """ }
+    }
+}

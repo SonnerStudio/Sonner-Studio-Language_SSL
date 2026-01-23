@@ -1,0 +1,15 @@
+// Demo: Visual Reactive Programming
+// Run with: ssl run examples/visual_demo.ssl
+
+// Example 1: Simple dataflow visualization
+visual {
+    data = [1, 2, 3, 4, 5]
+    data -> map(x => x * 2) -> filter(x => x > 5) -> output
+}
+
+print("Visual dataflow executed!")
+
+// Example 2: Live reactive graph
+visual {
+    input -> transform -> validate -> output
+}

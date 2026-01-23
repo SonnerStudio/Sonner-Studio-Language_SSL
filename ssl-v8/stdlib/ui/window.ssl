@@ -1,0 +1,308 @@
+//  SSL v8 GUI Library - Non-Rectangular Windows & 3D Marquee
+// Native window creation with custom shapes
+
+use core::Option;
+use core::Result;
+
+// Window shape definitions
+pub enum WindowShape {
+    Circle { radius: i64 },
+    Heart { width: i64, height: i64 },
+    Star { points: i64, radius: i64 },
+    Polygon { vertices: Vec<Point> },
+    Custom { svg_path: String },
+}
+
+pub struct Point {
+    pub x: i64,
+    pub y: i64,
+}
+
+pub struct Color {
+    pub r: u8,
+    pub g: u8,
+    pub b: u8,
+    pub a: u8,
+}
+
+impl Color {
+    pub fn rgb(r: u8, g: u8, b: u8) -> Color {
+        Color { r, g, b, a: 255 }
+    }
+    
+    pub fn rgba(r: u8, g: u8, b: u8, a: u8) -> Color {
+        Color { r, g, b, a }
+    }
+}
+
+// Non-rectangular window
+pub struct Window {
+    handle: i64,          // OS window handle
+    shape: WindowShape,
+    x: i64,
+    y: i64,
+    transparent: bool,
+}
+
+impl Window {
+    // Create circular window
+    pub fn create_circle(radius: i64, x: i64, y: i64) -> Result<Window, String> {
+        let handle = unsafe { platform_create_window(x, y, radius * 2, radius * 2) };
+        
+        if handle < 0 {
+            return Result::Err("Failed to create window");
+        }
+        
+        let window = Window {
+            handle,
+            shape: WindowShape::Circle { radius },
+            x,
+            y,
+            transparent: false,
+        };
+        
+        // Apply circular mask
+        unsafe {
+            platform_apply_circle_mask(handle, radius);
+        }
+        
+        Result::Ok(window)
+    }
+    
+    // Create heart-shaped window
+    pub fn create_heart(width: i64, height: i64, x: i64, y: i64) -> Result<Window, String> {
+        let handle = unsafe { platform_create_window(x, y, width, height) };
+        
+        if handle < 0 {
+            return Result::Err("Failed to create window");
+        }
+        
+        let window = Window {
+            handle,
+            shape: WindowShape::Heart { width, height },
+            x,
+            y,
+            transparent: false,
+        };
+        
+        // Apply heart mask
+        unsafe {
+            platform_apply_heart_mask(handle, width, height);
+        }
+        
+        Result::Ok(window)
+    }
+    
+    // Create star-shaped window
+    pub fn create_star(points: i64, radius: i64, x: i64, y: i64) -> Result<Window, String> {
+        let handle = unsafe { platform_create_window(x, y, radius * 2, radius * 2) };
+        
+        if handle < 0 {
+            return Result::Err("Failed to create window");
+        }
+        
+        let window = Window {
+            handle,
+            shape: WindowShape::Star { points, radius },
+            x,
+            y,
+            transparent: false,
+        };
+        
+        // Apply star mask
+        unsafe {
+            platform_apply_star_mask(handle, points, radius);
+        }
+        
+        Result::Ok(window)
+    }
+    
+    // Show window
+    pub fn show(&self) {
+        unsafe {
+            platform_show_window(self.handle);
+        }
+    }
+    
+    // Set background color
+    pub fn set_background_color(&mut self, color: Color) {
+        unsafe {
+            platform_set_bg_color(self.handle, color.r, color.g, color.b, color.a);
+        }
+    }
+    
+    // Enable transparency
+    pub fn set_transparent(&mut self, transparent: bool) {
+        self.transparent = transparent;
+        unsafe {
+            platform_set_transparent(self.handle, if transparent { 1 } else { 0 });
+        }
+    }
+}
+
+// 3D Marquee/Scrolling Text System
+pub struct Marquee3D {
+    window_handle: i64,
+    text: String,
+    font_size: i64,
+    depth: f32,           // 3D depth effect
+    scroll_speed: f32,
+    position: f32,
+    color: Color,
+    effect: TextEffect,
+}
+
+pub enum TextEffect {
+    None,
+    Wave { amplitude: f32, frequency: f32 },
+    Bounce { height: f32 },
+    Rotate { angle: f32, axis: RotationAxis },
+    Neon { glow_intensity: f32 },
+    LED { pixelated: bool },
+}
+
+pub enum RotationAxis {
+    X,
+    Y,
+    Z,
+}
+
+pub enum ScrollDirection {
+    Horizontal,
+    Vertical,
+    Diagonal,
+    Circular { radius: f32 },
+}
+
+impl Marquee3D {
+    pub fn new(window: &Window, text: String) -> Marquee3D {
+        Marquee3D {
+            window_handle: window.handle,
+            text,
+            font_size: 48,
+            depth: 10.0,
+            scroll_speed: 1.0,
+            position: 0.0,
+            color: Color::rgb(255, 255, 255),
+            effect: TextEffect::None,
+        }
+    }
+    
+    // Set font size
+    pub fn set_font_size(&mut self, size: i64) -> &mut Marquee3D {
+        self.font_size = size;
+        self
+    }
+    
+    // Set 3D depth
+    pub fn set_depth(&mut self, depth: f32) -> &mut Marquee3D {
+        self.depth = depth;
+        self
+    }
+    
+    // Set scroll speed
+    pub fn set_speed(&mut self, speed: f32) -> &mut Marquee3D {
+        self.scroll_speed = speed;
+        self
+    }
+    
+    // Set text color
+    pub fn set_color(&mut self, color: Color) -> &mut Marquee3D {
+        self.color = color;
+        self
+    }
+    
+    // Apply wave effect
+    pub fn apply_wave(&mut self, amplitude: f32, frequency: f32) -> &mut Marquee3D {
+        self.effect = TextEffect::Wave { amplitude, frequency };
+        self
+    }
+    
+    // Apply neon effect
+    pub fn apply_neon(&mut self, glow_intensity: f32) -> &mut Marquee3D {
+        self.effect = TextEffect::Neon { glow_intensity };
+        self
+    }
+    
+    // Apply LED effect
+    pub fn apply_led(&mut self, pixelated: bool) -> &mut Marquee3D {
+        self.effect = TextEffect::LED { pixelated };
+        self
+    }
+    
+    // Start scrolling
+    pub fn start(&mut self, direction: ScrollDirection) {
+        unsafe {
+            marquee_initialize(
+                self.window_handle,
+                self.text.as_ptr(),
+                self.text.len(),
+                self.font_size,
+                self.depth,
+                self.scroll_speed
+            );
+            
+            // Apply effects
+            match self.effect {
+                TextEffect::Wave { amplitude, frequency } => {
+                    marquee_apply_wave(self.window_handle, amplitude, frequency);
+                }
+                TextEffect::Neon { glow_intensity } => {
+                    marquee_apply_neon(self.window_handle, glow_intensity);
+                }
+                TextEffect::LED { pixelated } => {
+                    marquee_apply_led(self.window_handle, if pixelated { 1 } else { 0 });
+                }
+                _ => {}
+            }
+            
+            marquee_start(self.window_handle);
+        }
+    }
+    
+    // Update text in real-time
+    pub fn update_text(&mut self, new_text: String) {
+        self.text = new_text;
+        unsafe {
+            marquee_update_text(
+                self.window_handle,
+                self.text.as_ptr(),
+                self.text.len()
+            );
+        }
+    }
+    
+    // Stop scrolling
+    pub fn stop(&self) {
+        unsafe {
+            marquee_stop(self.window_handle);
+        }
+    }
+}
+
+// Platform-specific window operations (implemented in runtime)
+extern "intrinsic" {
+    fn platform_create_window(x: i64, y: i64, width: i64, height: i64) -> i64;
+    fn platform_apply_circle_mask(handle: i64, radius: i64);
+    fn platform_apply_heart_mask(handle: i64, width: i64, height: i64);
+    fn platform_apply_star_mask(handle: i64, points: i64, radius: i64);
+    fn platform_show_window(handle: i64);
+    fn platform_set_bg_color(handle: i64, r: u8, g: u8, b: u8, a: u8);
+    fn platform_set_transparent(handle: i64, transparent: i32);
+    
+    // 3D Marquee operations
+    fn marquee_initialize(
+        handle: i64,
+        text: *const u8,
+        text_len: usize,
+        font_size: i64,
+        depth: f32,
+        speed: f32
+    );
+    fn marquee_apply_wave(handle: i64, amplitude: f32, frequency: f32);
+    fn marquee_apply_neon(handle: i64, glow_intensity: f32);
+    fn marquee_apply_led(handle: i64, pixelated: i32);
+    fn marquee_start(handle: i64);
+    fn marquee_update_text(handle: i64, text: *const u8, text_len: usize);
+    fn marquee_stop(handle: i64);
+}

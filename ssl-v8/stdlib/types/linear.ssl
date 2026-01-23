@@ -1,0 +1,119 @@
+// SSL v8 Linear Types - Rust-inspired Ownership & Borrowing
+
+use core::{Option, Result};
+
+// Linear type annotation (compile-time enforcement)
+pub trait Linear {
+    fn consume(self);
+}
+
+// Example: File handle must be closed
+pub struct File {
+    handle: i64,
+    path: String,
+}
+
+impl Linear for File {
+    fn consume(self) {
+        // File must be explicitly closed
+        self.close();
+    }
+}
+
+impl File {
+    pub fn open(path: String) -> Result<File, String> {
+        let handle = unsafe { platform_file_open(path.as_ptr()) };
+        
+        if handle < 0 {
+            Result::Err("Failed to open file")
+        } else {
+            Result::Ok(File { handle, path })
+        }
+    }
+    
+    pub fn close(self) {
+        unsafe {
+            platform_file_close(self.handle);
+        }
+        // self is consumed here, cannot be used again
+    }
+    
+    pub fn read(&self) -> Vec<u8> {
+        Vec::new()
+    }
+}
+
+// Affine type (can be used at most once)
+pub trait Affine {
+    fn use_once(self);
+}
+
+// Example: One-time token
+pub struct AuthToken {
+    token: String,
+}
+
+impl Affine for AuthToken {
+    fn use_once(self) {
+        // Token can only be used once
+    }
+}
+
+impl AuthToken {
+    pub fn verify(self) -> bool {
+        // Consuming the token
+        true
+    }
+}
+
+// Borr ow checker (compile-time)
+pub struct Borrow<'a, T> {
+    reference: &'a T,
+}
+
+impl<'a, T> Borrow<'a, T> {
+    pub fn new(reference: &'a T) -> Borrow<'a, T> {
+        Borrow { reference }
+    }
+    
+    pub fn get(&self) -> &T {
+        self.reference
+    }
+}
+
+// Mutable borrow
+pub struct BorrowMut<'a, T> {
+    reference: &'a mut T,
+}
+
+// Linear example usage
+pub fn linear_file_example() -> Result<(), String> {
+    let file = File::open(String::from("test.txt"))?;
+    
+    let data = file.read();
+    
+    file.close();  // REQUIRED! Compile error if forgotten
+    // file.read();  // ERROR: file was moved/consumed
+    
+    Result::Ok(())
+}
+
+// Lifetime annotations
+pub struct Container<'a> {
+    data: &'a String,
+}
+
+impl<'a> Container<'a> {
+    pub fn new(data: &'a String) -> Container<'a> {
+        Container { data }
+    }
+    
+    pub fn get_data(&self) -> &String {
+        self.data
+    }
+}
+
+extern "intrinsic" {
+    fn platform_file_open(path: *const u8) -> i64;
+    fn platform_file_close(handle: i64);
+}

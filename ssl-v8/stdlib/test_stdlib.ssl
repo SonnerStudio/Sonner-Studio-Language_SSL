@@ -1,0 +1,155 @@
+// Test: Standard Library Foundation
+// Tests Option, Result, Vec, and File I/O
+
+use core::Option;
+use core::Result;
+use collections::Vec;
+use io::File;
+
+fn test_option() {
+    print("Testing Option<T>...");
+    
+    let some_value: Option<i64> = Option::Some(42);
+    let none_value: Option<i64> = Option::None;
+    
+    if some_value.is_some() {
+        println("✓ Option::Some works");
+    }
+    
+    if none_value.is_none() {
+        println("✓ Option::None works");
+    }
+    
+    let unwrapped = some_value.unwrap();
+    if unwrapped == 42 {
+        println("✓ unwrap works");
+    }
+    
+    let with_default = none_value.unwrap_or(0);
+    if with_default == 0 {
+        println("✓ unwrap_or works");
+    }
+    
+    let mapped = some_value.map(|x| x * 2);
+    if mapped.unwrap() == 84 {
+        println("✓ map works");
+    }
+}
+
+fn test_result() {
+    println("Testing Result<T, E>...");
+    
+    let ok_value: Result<i64, String> = Result::Ok(42);
+    let err_value: Result<i64, String> = Result::Err("error");
+    
+    if ok_value.is_ok() {
+        println("✓ Result::Ok works");
+    }
+    
+    if err_value.is_err() {
+        println("✓ Result::Err works");
+    }
+    
+    let unwrapped = ok_value.unwrap();
+    if unwrapped == 42 {
+        println("✓ unwrap works");
+    }
+    
+    let with_default = err_value.unwrap_or(0);
+    if with_default == 0 {
+        println("✓ unwrap_or works");
+    }
+}
+
+fn test_vec() {
+    println("Testing Vec<T>...");
+    
+    let mut vec: Vec<i64> = Vec::new();
+    
+    if vec.is_empty() {
+        println("✓ new Vec is empty");
+    }
+    
+    vec.push(1);
+    vec.push(2);
+    vec.push(3);
+    
+    if vec.len() == 3 {
+        println("✓ push works");
+    }
+    
+    if vec[0] == 1 && vec[1] == 2 && vec[2] == 3 {
+        println("✓ indexing works");
+    }
+    
+    let popped = vec.pop();
+    if popped.unwrap() == 3 && vec.len() == 2 {
+        println("✓ pop works");
+    }
+    
+    vec.insert(1, 42);
+    if vec[1] == 42 {
+        println("✓ insert works");
+    }
+    
+    vec.reverse();
+    if vec[0] == 2 && vec[2] == 1 {
+        println("✓ reverse works");
+    }
+}
+
+fn test_file_io() {
+    println("Testing File I/O...");
+    
+    // Create and write file
+    let mut file = File::create("test.txt");
+    match file {
+        Result::Ok(mut f) => {
+            match f.write("Hello, SSL v8!") {
+                Result::Ok(_) => println("✓ File write works"),
+                Result::Err(e) => println("✗ File write failed: {}", e)
+            }
+        },
+        Result::Err(e) => println("✗ File create failed: {}", e)
+    }
+    
+    // Read file
+    let file = File::open("test.txt");
+    match file {
+        Result::Ok(f) => {
+            match f.read_to_string() {
+                Result::Ok(content) => {
+                    if content == "Hello, SSL v8!" {
+                        println("✓ File read works");
+                    }
+                },
+                Result::Err(e) => println("✗ File read failed: {}", e)
+            }
+        },
+        Result::Err(e) => println("✗ File open failed: {}", e)
+    }
+}
+
+fn main() -> i64 {
+    println("=================================");
+    println("SSL v8 Standard Library Tests");
+    println("=================================");
+    
+    test_option();
+    println("");
+    
+    test_result();
+    println("");
+    
+    test_vec();
+    println("");
+    
+    test_file_io();
+    println("");
+    
+    println("=================================");
+    println("All tests completed!");
+    println("=================================");
+    
+    return 0;
+}

@@ -1,0 +1,171 @@
+// SSL v6.0 - x64 Backend
+// Native x86_64 Assembly Generation
+
+// x64 Registers
+fn reg_rax() -> String {
+    "rax"
+}
+
+fn reg_rbx() -> String {
+    "rbx"
+}
+
+fn reg_rcx() -> String {
+    "rcx"
+}
+
+fn reg_rdx() -> String {
+    "rdx"
+}
+
+fn reg_rsi() -> String {
+    "rsi"
+}
+
+fn reg_rdi() -> String {
+    "rdi"
+}
+
+fn reg_rsp() -> String {
+    "rsp"  // Stack pointer
+}
+
+fn reg_rbp() -> String {
+    "rbp"  // Base pointer
+}
+
+// Assembly Instructions
+fn emit_mov(dest: String, src: String) -> String {
+    "    mov " + dest + ", " + src
+}
+
+fn emit_add(dest: String, src: String) -> String {
+    "    add " + dest + ", " + src
+}
+
+fn emit_sub(dest: String, src: String) -> String {
+    "    sub " + dest + ", " + src
+}
+
+fn emit_mul(src: String) -> String {
+    "    imul " + src
+}
+
+fn emit_push(reg: String) -> String {
+    "    push " + reg
+}
+
+fn emit_pop(reg: String) -> String {
+    "    pop " + reg
+}
+
+fn emit_call(func: String) -> String {
+    "    call " + func
+}
+
+fn emit_ret() -> String {
+    "    ret"
+}
+
+fn emit_label(name: String) -> String {
+    name + ":"
+}
+
+// Code Generation
+fn generate_x64(ir: Any) -> String {
+    println("x64 Backend: Generating assembly")
+    
+    let header = generate_header()
+    let body = generate_body(ir)
+    let footer = generate_footer()
+    
+    header + body + footer
+}
+
+fn generate_header() -> String {
+    println("  - Generating header")
+    
+    let s1 = "; SSL v6.0 Compiled Output\n"
+    let s2 = "; Target: x86_64 Windows\n"
+    let s3 = "\n"
+    let s4 = ".code\n"
+    let s5 = "\n"
+    
+    s1 + s2 + s3 + s4 + s5
+}
+
+fn generate_body(ir: Any) -> String {
+    println("  - Generating function bodies")
+    
+    // Main function
+    let main = generate_main()
+    
+    main
+}
+
+fn generate_main() -> String {
+    let l1 = emit_label("main")
+    let l2 = "\n"
+    let l3 = emit_push(reg_rbp())
+    let l4 = "\n"
+    let l5 = emit_mov(reg_rbp(), reg_rsp())
+    let l6 = "\n"
+    let l7 = "    ; Function body\n"
+    let l8 = emit_mov(reg_rax(), "0")
+    let l9 = "\n"
+    let l10 = emit_pop(reg_rbp())
+    let l11 = "\n"
+    let l12 = emit_ret()
+    let l13 = "\n"
+    
+    l1 + l2 + l3 + l4 + l5 + l6 + l7 + l8 + l9 + l10 + l11 + l12 + l13
+}
+
+fn generate_footer() -> String {
+    println("  - Generating footer")
+    
+    "\nEND\n"
+}
+
+// Instruction Selection
+fn select_instructions(ir: Any) -> Any {
+    println("  - Selecting x64 instructions")
+    
+    // Map IR ops to x64 instructions
+    // Optimize instruction selection
+    
+    0
+}
+
+// Register Allocation
+fn allocate_registers(ir: Any) -> Any {
+    println("  - Allocating registers")
+    println("  - Using linear scan algorithm")
+    
+    // Liveness analysis
+    // Register allocation
+    // Spilling if needed
+    
+    0
+}
+
+// Peephole Optimization
+fn peephole_optimize(asm: String) -> String {
+    println("  - Peephole optimization")
+    
+    // Local optimizations on assembly
+    // Remove redundant moves
+    // Combine instructions
+    
+    asm
+}
+
+// Public API
+fn codegen_x64(ir: Any) -> String {
+    let selected = select_instructions(ir)
+    let allocated = allocate_registers(selected)
+    let asm = generate_x64(allocated)
+    let optimized = peephole_optimize(asm)
+    
+    optimized
+}

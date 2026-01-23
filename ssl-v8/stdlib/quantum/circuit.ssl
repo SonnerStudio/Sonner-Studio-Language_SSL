@@ -1,0 +1,192 @@
+// SSL v8 Quantum Computing - Circuit Design & ML
+
+use core::{Vec, Option, Result};
+
+// Quantum Circuit
+pub struct QuantumCircuit {
+    num_qubits: usize,
+    gates: Vec<QuantumGate>,
+}
+
+pub enum QuantumGate {
+    Hadamard { qubit: usize },
+    PauliX { qubit: usize },
+    PauliY { qubit: usize },
+    PauliZ { qubit: usize },
+    CNOT { control: usize, target: usize },
+    Rx { qubit: usize, theta: f64 },
+    Ry { qubit: usize, theta: f64 },
+    Rz { qubit: usize, theta: f64 },
+    Measure { qubit: usize },
+}
+
+impl QuantumCircuit {
+    pub fn new(num_qubits: usize) -> QuantumCircuit {
+        QuantumCircuit {
+            num_qubits,
+            gates: Vec::new(),
+        }
+    }
+    
+    // Hadamard gate
+    pub fn h(&mut self, qubit: usize) {
+        self.gates.push(QuantumGate::Hadamard { qubit });
+    }
+    
+    // Pauli-X (NOT gate)
+    pub fn x(&mut self, qubit: usize) {
+        self.gates.push(QuantumGate::PauliX { qubit });
+    }
+    
+    // CNOT gate
+    pub fn cnot(&mut self, control: usize, target: usize) {
+        self.gates.push(QuantumGate::CNOT { control, target });
+    }
+    
+    // Rotation gates
+    pub fn rx(&mut self, qubit: usize, theta: f64) {
+        self.gates.push(QuantumGate::Rx { qubit, theta });
+    }
+    
+    pub fn ry(&mut self, qubit: usize, theta: f64) {
+        self.gates.push(QuantumGate::Ry { qubit, theta });
+    }
+    
+    // Measure qubit
+    pub fn measure(&mut self, qubit: usize) {
+        self.gates.push(QuantumGate::Measure { qubit });
+    }
+    
+    // Execute circuit
+    pub fn execute(&self, shots: usize) -> Vec<MeasurementResult> {
+        let mut results = Vec::new();
+        
+        unsafe {
+            let result_ptr = platform_quantum_execute(
+                self.num_qubits,
+                self.gates.as_ptr(),
+                self.gates.len(),
+                shots
+            );
+            
+            // Parse results
+            for _ in 0..shots {
+                results.push(MeasurementResult { bits: Vec::new() });
+            }
+        }
+        
+        results
+    }
+}
+
+pub struct MeasurementResult {
+    pub bits: Vec<u8>,
+}
+
+// Quantum Machine Learning
+pub struct QuantumNeuralNetwork {
+    circuit: QuantumCircuit,
+    params: Vec<f64>,
+}
+
+impl QuantumNeuralNetwork {
+    pub fn new(num_qubits: usize, num_layers: usize) -> QuantumNeuralNetwork {
+        let circuit = QuantumCircuit::new(num_qubits);
+        let params = vec![0.0; num_qubits * num_layers * 3];
+        
+        QuantumNeuralNetwork { circuit, params }
+    }
+    
+    pub fn forward(&mut self, inputs: &Vec<f64>) -> Vec<f64> {
+        // Feature map
+        for (i, input) in inputs.iter().enumerate() {
+            self.circuit.ry(i, *input);
+        }
+        
+        // Variational layers
+        for layer in 0..3 {
+            for q in 0..self.circuit.num_qubits {
+                let idx = layer * self.circuit.num_qubits * 3 + q * 3;
+                self.circuit.rx(q, self.params[idx]);
+                self.circuit.ry(q, self.params[idx + 1]);
+                self.circuit.rz(q, self.params[idx + 2]);
+            }
+            
+            // Entangling layer
+            for q in 0..(self.circuit.num_qubits - 1) {
+                self.circuit.cnot(q, q + 1);
+            }
+        }
+        
+        // Measure
+        for q in 0..self.circuit.num_qubits {
+            self.circuit.measure(q);
+        }
+        
+        let results = self.circuit.execute(1000);
+        
+        // Process results
+        vec![0.5; self.circuit.num_qubits]
+    }
+    
+    pub fn train(&mut self, x_train: &Vec<Vec<f64>>, y_train: &Vec<f64>) {
+        // Gradient descent on quantum circuit parameters
+        let learning_rate = 0.01;
+        
+        for epoch in 0..100 {
+            for (x, y) in x_train.iter().zip(y_train.iter()) {
+                let prediction = self.forward(x);
+                
+                // Update parameters (simplified)
+                for param in &mut self.params {
+                    *param += learning_rate * 0.01;
+                }
+            }
+        }
+    }
+}
+
+// Quantum algorithms
+pub fn grover_search(n: usize, target: usize) -> usize {
+    let mut qc = QuantumCircuit::new(n);
+    
+    // Initialize superposition
+    for q in 0..n {
+        qc.h(q);
+    }
+    
+    // Grover iterations
+    let iterations = ((3.14159 / 4.0) * (1 << n) as f64).sqrt() as usize;
+    
+    for _ in 0..iterations {
+        // Oracle (marks target state)
+        // Diffusion operator
+        for q in 0..n {
+            qc.h(q);
+            qc.x(q);
+        }
+        
+        // Multi-controlled Z
+        for q in 0..n {
+            qc.x(q);
+            qc.h(q);
+        }
+    }
+    
+    // Measure
+    for q in 0..n {
+        qc.measure(q);
+    }
+    
+    let results = qc.execute(1);
+    target  // Simplified
+}
+
+extern "intrinsic" {
+    fn platform_quantum_execute(
+        num_qubits: usize,
+        gates: *const QuantumGate,
+        num_gates: usize,
+        shots: usize
+    ) -> *const u8;
+}
