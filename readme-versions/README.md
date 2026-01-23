@@ -34,7 +34,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 ## 🎯 What is SSL?
 
-**SSL (Sonner Studio Language) v9.3.2 "Aurora"** is the **world's most comprehensive programming language** designed for high-performance hybrid applications. It fuses a ultra-fast Rust-based runtime with the flexibility of modern UI tech.
+**SSL (Sonner Studio Language) v9.4 "Aurora"** is the **world's most comprehensive programming language** designed for high-performance hybrid applications. It fuses a ultra-fast Rust-based runtime with the flexibility of modern UI tech.
 
 ### Why SSL?
 - 🎨 **AAA-Level 3D Engine** - Native Deferred Shading, Volumetrics, and SSGI built-in.
@@ -62,7 +62,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 | v9.0 | 2026 Q1 | AAA Graphics | **Deferred Shading**, Raytracing, N64 Mode | ~15,000 |
 | v9.2 | 2026 Q1 | XR & State of the Art | **Animation**, **Volumetrics**, **SSGI**, **VR/AR**, **Hand Tracking** | ~17,000 |
 | v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18,000 |
-| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit Deep Framebuffering** | **~18,500** |
+| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18,500** |
 
 ---
 
@@ -129,18 +129,13 @@ To protect our revolutionary **Aurora Compiler Pipeline** and proprietary algori
 - ✅ **Normal Mapping**, **SSR** (Screen Space Reflections), and **SSAO**
 - ✅ **Skeletal Animation**: GLTF/GLB loader, GPU skinning (256 bones max)
 - ✅ **Post-FX**: Bloom, Vignette, Film Grain, Chromatic Aberration, Depth of Field
-- ✅ **Retro Mode**: N64 & **GC/Wii Mode** (TEV+ 16-stage blending, hardware-authentic)
-- ✅ **Background Services**: **BackgroundConnect** (Connect24-inspired)
-- ✅ **SGI Deep Framebuffering**: 128-bit Floating Point Pipeline (v9.4 Preview)
+- ✅ **Retro Mode**: N64 Mode (3-point filtering, dithering, hardware-authentic)
 
 ---
 
 ### 6. Extended Reality (Phase 11) 🥽
 - ✅ **Stereoscopic Rendering** (Dual eye buffers, IPD adjustment)
 - ✅ **Head Tracking (6DOF)** & **Pose prediction**
-- ✅ **Motion Tracking**: **6DOF Controller**, **IR-pointing**, **Battery Monitoring** (Wii-inspired)
-- ✅ **Social & Spectator**: **SSL Social API** & **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Advanced LED & On-Screen Binding (v9.4 Preview)
 - ✅ **Controller Tracking** (6DOF per controller, Buttons, Thumbsticks)
 - ✅ **Hand Tracking** (26 joints per hand, real-time)
 - ✅ **Gesture Recognition**: Point, Grab, Pinch, Thumbs Up
@@ -187,8 +182,7 @@ To protect our revolutionary **Aurora Compiler Pipeline** and proprietary algori
 
 ### 12. GUI & Windows (v5.0+)
 - ✅ **Non-Rectangular Windows** (12+ Shapes: Circle, Triangle, Heart, Star, custom Bezier)
-- ✅ **SSL Channels**: Modular grid UI framework (Wii-inspired)
-- ✅ **Glassmorphismus** & **Neumorphismus** & **3D Marquee Text**
+- ✅ **Glassmorphism** & **Neumorphism** & **3D Marquee Text**
 - ✅ **GPU-accelerated Layouts** & Animations (FadeIn, Slide, Scale)
 
 ---
@@ -257,5 +251,5 @@ To protect our revolutionary **Aurora Compiler Pipeline** and proprietary algori
 
 ---
 
-*Last Updated: January 24, 2026*  
+*Last Updated: January 23, 2026*  
 *© 2024-2026 SonnerStudio Software- und Kunststudio. All rights reserved.*

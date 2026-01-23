@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Języków Naturalnych** - Programuj w swoim ojczystym języku (Niemiecki, Angielski, Francuski, Chiński, itp.).
 - ⚡ **Natywna Wydajność** - Backend LLVM, abstrakcje zerowym koszcie.
 
-**200+ Funkcji | 17 Światowych Innowacji | ~18 500 Linii Kodu**
+**200+ Funkcji | 17 Światowych Innowacji | ~17 500 Linii Kodu**
 
 ---
 
@@ -61,8 +61,8 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 | v8.0 | 2024 Q4 | Ekosystem | **Silnik 3D**, **Fizyka**, **Blockchain**, 37 Modułów | ~10 000 |
 | v9.0 | 2026 Q1 | Grafika AAA | **Deferred Shading**, Raytracing, Tryb N64 | ~15 000 |
 | v9.2 | 2026 Q1 | XR & State of the Art | **Animacja**, **Wolumetria**, **SSGI**, **VR/AR**, **Hand Tracking** | ~17 000 |
-| v9.3.2 | 2026 Q1 | Integracja GC/Wii | TEV+, 6DOF Motion, SSL Channels | ~18 000 |
-| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18,500** |
+| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18.000 |
+| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18.500** |
 
 ---
 
@@ -129,18 +129,13 @@ Aby chronić nasz rewolucyjny **Potok Kompilatora Aurora** i autorskie algorytmy
 - ✅ **Normal Mapping**, **SSR** (Odbicia w Przestrzeni Ekranu) i **SSAO**
 - ✅ **Animacja Szkieletowa**: Loader GLTF/GLB, Skinning GPU (maks. 256 kości)
 - ✅ **Post-FX**: Bloom, Winieta, Ziarno Filmu, Aberracja Chromatyczna, Głębia Ostrości
-- ✅ **Tryb Retro**: N64 & **Tryb GC/Wii** (blending TEV+ 16 etapów, autentyczny sprzętowo)
-- ✅ **Usługi w tle**: **BackgroundConnect** (inspirowane Connect24)
-- ✅ **SGI Deep Framebuffering**: potok zmiennoprzecinkowy 128 bitów (v9.4 Preview)
+- ✅ **Tryb Retro**: Tryb N64 (Filtrowanie 3-punktowe, autentyczny dithering)
 
 ---
 
 ### 6. Rozszerzona Rzeczywistość (Faza 11) 🥽
 - ✅ **Renderowanie Stereoskopowe** (Podwójne bufory oczu, regulacja IPD)
 - ✅ **Śledzenie Głowy 6DOF** & **Predykcja Pozy**
-- ✅ **Śledzenie Ruchu**: **Kontroler 6DOF**, **Wskazywanie IR**, **Monitorowanie Baterii** (inspirowane Wii)
-- ✅ **Social & Spectator**: **SSL Social API** i **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Zaawansowane diody LED i powiązania ekranowe (v9.4 Preview)
 - ✅ **Śledzenie Kontrolerów** (6DOF na kontroler, Przyciski, Gałki)
 - ✅ **Śledzenie Dłoni** (26 stawów na rękę, czas rzeczywisty)
 - ✅ **Rozpoznawanie Gestów**: Wskazywanie, Chwytanie, Szczypanie, Kciuk w górę
@@ -187,7 +182,6 @@ Aby chronić nasz rewolucyjny **Potok Kompilatora Aurora** i autorskie algorytmy
 
 ### 12. GUI & Okna (v5.0+)
 - ✅ **Okna Nieprostokątne** (12+ Kształtów: Koło, Serce, Gwiazda, Bézier)
-- ✅ **Kanały SSL**: Modułowy framework GUI oparty na siatce (inspirowany Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **Tekst Marquee 3D**
 - ✅ **Układy akcelerowane przez GPU** & Animacje (FadeIn, Slide, Scale)
 

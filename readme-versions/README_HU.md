@@ -43,7 +43,7 @@ Az **SSL (Sonner Studio Language) v9.3.2 "Aurora"** a **világ legátfogóbb pro
 - 🌍 **16 Természetes Nyelv** - Programozzon az anyanyelvén (Német, Angol, Francia, Kínai, stb.).
 - ⚡ **Natív Teljesítmény** - LLVM backend, költségmentes absztrakciók.
 
-**200+ Funkció | 17 Világelső Innováció | ~18 500 Kódsor**
+**200+ Funkció | 17 Világelső Innováció | ~17 500 Kódsor**
 
 ---
 
@@ -61,8 +61,8 @@ Az **SSL (Sonner Studio Language) v9.3.2 "Aurora"** a **világ legátfogóbb pro
 | v8.0 | 2024 Q4 | Ökoszisztéma | **3D Motor**, **Fizika**, **Blokklánc**, 37 Modul | ~10 000 |
 | v9.0 | 2026 Q1 | AAA Grafika | **Deferred Shading**, Sugárkövetés, N64 Mód | ~15 000 |
 | v9.2 | 2026 Q1 | XR & State of the Art | **Animáció**, **Volumetria**, **SSGI**, **VR/AR**, **Kézkövetés** | ~17 000 |
-| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18 000 |
-| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18 500** |
+| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18.000 |
+| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18.500** |
 
 ---
 
@@ -129,18 +129,13 @@ Forradalmi **Aurora Compiler Pipeline**-unk és szabadalmaztatott algoritmusaink
 - ✅ **Normal Mapping**, **SSR** (Képernyőtér Tükröződések) és **SSAO**
 - ✅ **Csontváz Animáció**: GLTF/GLB betöltő, GPU Skinning (max 256 csont)
 - ✅ **Post-FX**: Bloom, Vignetta, Filmszemcse, Kromatikus Aberráció, Mélységélesség
-- ✅ **Retro Mód**: N64 & **GC/Wii Mód** (TEV+ 16-szakaszos blending, hardverhű)
-- ✅ **Háttérszolgáltatások**: **BackgroundConnect** (Connect24 ihlette)
-- ✅ **SGI Deep Framebuffering**: 128-bites lebegőpontos csővezeték (v9.4 Preview)
+- ✅ **Retro Mód**: N64 Mód (3-pontos szűrés, hiteles dithering)
 
 ---
 
 ### 6. Kiterjesztett Valóság (11. Fázis) 🥽
 - ✅ **Sztereoszkópikus Renderelés** (Dupla szempuffer, IPD beállítás)
 - ✅ **6DOF Fejkövetés** & **Póz Előrejelzés**
-- ✅ **Mozgáskövetés**: **6DOF Vezérlő**, **IR Mutatás**, **Akkumulátor Állapot** (Wii ihlette)
-- ✅ **Social & Spectator**: **SSL Social API** és **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Fejlett LED és On-Screen Binding (v9.4 Preview)
 - ✅ **Vezérlő Követés** (Vezérlőnként 6DOF, Gombok, Thumbstickek)
 - ✅ **Kézkövetés** (Kézenként 26 ízület, valós időben)
 - ✅ **Gesztusfelismerés**: Mutatás, Megragadás, Csípés, Hüvelykujj fel
@@ -187,7 +182,6 @@ Forradalmi **Aurora Compiler Pipeline**-unk és szabadalmaztatott algoritmusaink
 
 ### 12. GUI & Ablakok (v5.0+)
 - ✅ **Nem-téglalap Ablakok** (12+ Forma: Kör, Szív, Csillag, Bézier)
-- ✅ **SSL Csatornák**: Moduláris rácsos UI keretrendszer (Wii ihlette)
 - ✅ **Glassmorphism** & **Neumorphism** & **3D Marquee Szöveg**
 - ✅ **GPU-gyorsított Elrendezések** & Animációk (FadeIn, Slide, Scale)
 

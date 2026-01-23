@@ -1,4 +1,4 @@
-# SSL v9.3.2 Aurora - שפת התכנות האולטימטיבית 🚀
+# SSL v9.4 Aurora - שפת התכנות האולטימטיבית 🚀
 
 <div align="center">
 
@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 שפות טבעיות** - תכנת בשפת האם שלך (גרמנית, אנגלית, צרפתית, סינית וכו').
 - ⚡ **ביצועים טבעיים** - Backend של LLVM, הפשטות ללא עלות.
 
-**200+ תכונות | 17 חידושים עולמיים | ~18,500 שורות קוד**
+**200+ תכונות | 17 חידושים עולמיים | ~17,500 שורות קוד**
 
 ---
 
@@ -129,18 +129,13 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - ✅ **מיפוי נורמלים**, **SSR** (השתקפויות במרחב מסך) ו-**SSAO**
 - ✅ **אנימציית שלד**: טוען GLTF/GLB, סקינינג GPU (מקסימום 256 עצמות)
 - ✅ **Post-FX**: Bloom, Vignette, Film Grain, עיוות כרומטי, עומק שדה
-- ✅ **מצב רטרו**: מצב N64 ו-**מצב GC/Wii** (ערבוב TEV+ עם 16 שלבים, נאמן לחומרה)
-- ✅ **שירותי רקע**: **BackgroundConnect** (בהשראת Connect24)
-- ✅ **SGI Deep Framebuffering**: צינור נקודה צפה של 128 סיביות (v9.4 Preview)
+- ✅ **מצב רטרו**: מצב N64 (סינון 3 נקודות, דית'רינג אותנטי)
 
 ---
 
 ### 6. מציאות מורחבת (שלב 11) 🥽
 - ✅ **רינדור סטריאוסקופי** (Buffer כפול לעיניים, התאמת IPD)
 - ✅ **מעקב ראש 6DOF** & **חיזוי תנוחה**
-- ✅ **מעקב תנועה**: **שלט 6DOF**, **הצבעת IR**, **ניטור סוללה** (בהשראת ה-Wii)
-- ✅ **Social & Spectator**: **SSL Social API** ו-**Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: נוריות LED מתקדמות וצימוד על המסך (v9.4 Preview)
 - ✅ **מעקב בקרים** (6DOF לכל בקר, כפתורים, ג'ויסטיקים)
 - ✅ **מעקב ידיים** (26 מפרקים לכל יד, זמן אמת)
 - ✅ **זיהוי מחווה**: הצבעה, אחיזה, צביטה, אגודל למעלה
@@ -187,7 +182,6 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 ### 12. GUI וחלונות (v5.0+)
 - ✅ **חלונות לא מלבניים** (12+ צורות: עיגול, לב, כוכב, בזייה)
-- ✅ **ערוצי SSL**: שלד UI מודולרי מבוסס רשת (בהשראת ה-Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **טקסט מרקיזה תלת-ממדי**
 - ✅ **פריסות מואצות GPU** & אנימציות (FadeIn, Slide, Scale)
 

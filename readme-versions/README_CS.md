@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Přirozených Jazyků** - Programujte ve svém mateřském jazyce (Němčina, Angličtina, Francouzština, Čínština, atd.).
 - ⚡ **Nativní Výkon** - Backend LLVM, abstrakce s nulovými náklady.
 
-**200+ Funkcí | 17 Světových Inovací | ~18 500 Řádků Kódu**
+**200+ Funkcí | 17 Světových Inovací | ~17 500 Řádků Kódu**
 
 ---
 
@@ -129,18 +129,13 @@ Pro ochranu naší revoluční **Aurora Compiler Pipeline** a proprietárních a
 - ✅ **Normal Mapping**, **SSR** (Odrazy v Obrazovém Prostoru) a **SSAO**
 - ✅ **Skeletální Animace**: Načítač GLTF/GLB, GPU Skinning (max 256 kostí)
 - ✅ **Post-FX**: Bloom, Vignette, Filmové Zrno, Chromatická Aberace, Hloubka Ostrosti
-- ✅ **Retro Režim**: N64 & **GC/Wii Režim** (TEV+ 16-stupňové mísení, hardwarově věrné)
-- ✅ **Služby na Pozadí**: **BackgroundConnect** (inspirováno Connect24)
-- ✅ **SGI Deep Framebuffering**: 128-bitová floating point pipeline (v9.4 Preview)
+- ✅ **Retro Režim**: Režim N64 (3-bodové filtrování, autentický dithering)
 
 ---
 
 ### 6. Rozšířená Realita (Fáze 11) 🥽
 - ✅ **Stereoskopické Renderování** (Duální oční buffery, úprava IPD)
 - ✅ **Sledování Hlavy 6DOF** & **Predikce Pózy**
-- ✅ **Motion Tracking**: **Ovladač 6DOF**, **IR Ukazování**, **Stav Baterie** (vystřiženo z Wii)
-- ✅ **Social & Spectator**: **SSL Social API** a **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Pokročilé LED a On-Screen Binding (v9.4 Preview)
 - ✅ **Sledování Ovladačů** (6DOF na ovladač, Tlačítka, Páčky)
 - ✅ **Sledování Rukou** (26 kloubů na ruku, v reálném čase)
 - ✅ **Rozpoznávání Gest**: Ukazování, Úchop, Špetka, Palec nahoru
@@ -187,7 +182,6 @@ Pro ochranu naší revoluční **Aurora Compiler Pipeline** a proprietárních a
 
 ### 12. GUI & Okna (v5.0+)
 - ✅ **Neobdélníková Okna** (12+ Tvarů: Kruh, Srdce, Hvězda, Bézier)
-- ✅ **SSL Kanály**: Modulární mřížkový UI framework (inspirováno Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **3D Běžící Text**
 - ✅ **GPU akcelerované Layouty** & Animace (FadeIn, Slide, Scale)
 

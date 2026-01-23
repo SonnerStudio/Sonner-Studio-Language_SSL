@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Prirodnih Jezika** - Programirajte na svom materinjem jeziku (Njemački, Engleski, Francuski, Kineski, itd.).
 - ⚡ **Izvorne Performanse** - LLVM backend, apstrakcije bez troškova.
 
-**200+ Značajki | 17 Svjetskih Inovacija | ~18.500 Linija Koda**
+**200+ Značajki | 17 Svjetskih Inovacija | ~17.500 Linija Koda**
 
 ---
 
@@ -61,8 +61,8 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 | v8.0 | 2024 Q4 | Ekosustav | **3D Pogon**, **Fizika**, **Blockchain**, 37 Modula | ~10.000 |
 | v9.0 | 2026 Q1 | AAA Grafika | **Odgođeno Sjenčanje**, Raytracing, N64 Način | ~15.000 |
 | v9.2 | 2026 Q1 | XR & State of the Art | **Animacija**, **Volumetrija**, **SSGI**, **VR/AR**, **Praćenje Ruku** | ~17.000 |
-| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18 000 |
-| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18 500** |
+| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18.000 |
+| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18.500** |
 
 ---
 
@@ -129,18 +129,13 @@ Kako bismo zaštitili naš revolucionarni **Aurora Compiler Pipeline** i vlasni�
 - ✅ **Normalno Mapiranje**, **SSR** (Refleksije u Prostoru Zaslona) i **SSAO**
 - ✅ **Skeletna Animacija**: GLTF/GLB učitavač, GPU Skinning (maks. 256 kostiju)
 - ✅ **Post-FX**: Bloom, Vinjeta, Filmsko Zrno, Kromatska Aberacija, Dubinska Oštrina
-- ✅ **Retro Način**: N64 & **GC/Wii Način** (TEV+ blending s 16 faza, hardverski vjeran)
-- ✅ **Usluge u Pozadini**: **BackgroundConnect** (nadahnuto Connect24)
-- ✅ **SGI Deep Framebuffering**: 128-bitna floating point pipeline (v9.4 Preview)
+- ✅ **Retro Način**: N64 Način (Filtriranje u 3 točke, autentično titranje)
 
 ---
 
 ### 6. Proširena Stvarnost (Faza 11) 🥽
 - ✅ **Stereoskopsko Renderiranje** (Dvostruki međuspremnici za oči, prilagodba IPD-a)
 - ✅ **Praćenje Glave 6DOF** & **Predviđanje Poze**
-- ✅ **Motion Tracking**: **Kontroler 6DOF**, **IR Pokazivanje**, **Stanje Baterije** (nadahnuto Wii-jem)
-- ✅ **Social & Spectator**: **SSL Social API** i **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Napredne LED i On-Screen Binding (v9.4 Preview)
 - ✅ **Praćenje Kontrolera** (6DOF po kontroleru, Gumbi, Palice)
 - ✅ **Praćenje Ruku** (26 zglobova po ruci, u stvarnom vremenu)
 - ✅ **Prepoznavanje Gesti**: Pokazivanje, Grabljenje, Štipanje, Palac gore
@@ -187,7 +182,6 @@ Kako bismo zaštitili naš revolucionarni **Aurora Compiler Pipeline** i vlasni�
 
 ### 12. GUI & Prozori (v5.0+)
 - ✅ **Nepravokutni Prozori** (12+ Oblika: Krug, Srce, Zvijezda, Bézier)
-- ✅ **SSL Kanali**: Modularni mrežni UI okvir (nadahnut Wii-jem)
 - ✅ **Glassmorphism** & **Neumorphism** & **3D Marquee Tekst**
 - ✅ **GPU ubrzani rasporedi** & Animacije (FadeIn, Slide, Scale)
 

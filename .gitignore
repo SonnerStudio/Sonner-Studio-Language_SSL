@@ -4,6 +4,7 @@
 # Whitelist (Allow) these specific files/directories:
 !/.gitignore
 !/README*.md
+!/readme-versions/README*.md
 !/LICENSE*
 !/setup.ps1
 

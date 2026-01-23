@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Prirodzených Jazykov** - Programujte vo svojom materinskom jazyku (Nemčina, Angličtina, Francúzština, Čínština, atď.).
 - ⚡ **Natívny Výkon** - Backend LLVM, abstrakcie s nulovými nákladmi.
 
-**200+ Funkcií | 17 Svetových Inovácií | ~18 500 Riadkov Kódu**
+**200+ Funkcií | 17 Svetových Inovácií | ~17 500 Riadkov Kódu**
 
 ---
 
@@ -61,8 +61,8 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 | v8.0 | 2024 Q4 | Ekosystém | **3D Engine**, **Fyzika**, **Blockchain**, 37 Modulov | ~10 000 |
 | v9.0 | 2026 Q1 | AAA Grafika | **Deferred Shading**, Raytracing, Režim N64 | ~15 000 |
 | v9.2 | 2026 Q1 | XR & State of the Art | **Animácia**, **Volumetrika**, **SSGI**, **VR/AR**, **Sledovanie Rúk** | ~17 000 |
-| v9.3.2 | 2026 Q1 | Integration GC/Wii | TEV+, 6DOF Motion, SSL Channels | ~18 000 |
-| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18 500** |
+| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18.000 |
+| **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18.500** |
 
 ---
 
@@ -129,18 +129,13 @@ Pre ochranu našej revolučnej **Aurora Compiler Pipeline** a proprietárnych al
 - ✅ **Normal Mapping**, **SSR** (Odrazy v Obrazovom Priestore) a **SSAO**
 - ✅ **Skeletálna Animácia**: Načítač GLTF/GLB, GPU Skinning (max 256 kostí)
 - ✅ **Post-FX**: Bloom, Vignette, Filmové Zrno, Chromatická Aberácia, Hĺbka Ostrosti
-- ✅ **Retro Režim**: N64 & **GC/Wii Režim** (TEV+ 16-stupňové miešanie, hardvérovo verné)
-- ✅ **Služby na Pozadí**: **BackgroundConnect** (inšpirované Connect24)
-- ✅ **SGI Deep Framebuffering**: 128-bitová floating point pipeline (v9.4 Preview)
+- ✅ **Retro Režim**: Režim N64 (3-bodové filtrovanie, autentický dithering)
 
 ---
 
 ### 6. Rozšírená Realita (Fáza 11) 🥽
 - ✅ **Stereoskopické Renderovanie** (Duálne očné buffre, úprava IPD)
 - ✅ **Sledovanie Hlavy 6DOF** & **Predikcia Pózy**
-- ✅ **Motion Tracking**: **Ovládač 6DOF**, **IR Ukazovanie**, **Stav Batérie** (inšpirované Wii)
-- ✅ **Social & Spectator**: **SSL Social API** a **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Pokročilé LED a On-Screen Binding (v9.4 Preview)
 - ✅ **Sledovanie Ovládačov** (6DOF na ovládač, Tlačidlá, Páčky)
 - ✅ **Sledovanie Rúk** (26 kĺbov na ruku, v reálnom čase)
 - ✅ **Rozpoznávanie Gest**: Ukazovanie, Úchop, Štipka, Palec hore
@@ -187,7 +182,6 @@ Pre ochranu našej revolučnej **Aurora Compiler Pipeline** a proprietárnych al
 
 ### 12. GUI & Okná (v5.0+)
 - ✅ **Neobdĺžnikové Okná** (12+ Tvarov: Kruh, Srdce, Hviezda, Bézier)
-- ✅ **SSL Kanály**: Modulárny mriežkový UI framework (inšpirované Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **3D Bežiaci Text**
 - ✅ **GPU akcelerované Layouty** & Animácie (FadeIn, Slide, Scale)
 

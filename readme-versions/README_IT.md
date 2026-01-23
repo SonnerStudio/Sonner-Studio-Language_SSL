@@ -1,4 +1,4 @@
-# SSL v9.3.2 Aurora - Il Linguaggio di Programmazione Definitivo 🚀
+# SSL v9.4 Aurora - Il Linguaggio di Programmazione Definitivo 🚀
 
 <div align="center">
 
@@ -34,7 +34,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 ## 🎯 Cos'è SSL?
 
-**SSL (Sonner Studio Language) v9.3.2 "Aurora"** è il **linguaggio di programmazione più completo al mondo**, progettato per applicazioni ibride ad alte prestazioni. Fonde un runtime ultra-veloce basato su Rust con la flessibilità delle moderne tecnologie UI.
+**SSL (Sonner Studio Language) v9.4 "Aurora"** è il **linguaggio di programmazione più completo al mondo**, progettato per applicazioni hybride ad alte prestazioni. Fonde un runtime ultra-veloce basato su Rust con la flessibilità delle moderne tecnologie UI.
 
 ### Perché SSL?
 - 🎨 **Motore 3D Livello AAA** - Deferred Shading nativo, Volumetria e SSGI integrati.
@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Lingue Naturali** - Programma nella tua lingua madre (Tedesco, Inglese, Francese, Cinese, ecc.).
 - ⚡ **Prestazioni Native** - Backend LLVM, astrazioni a costo zero.
 
-**200+ funzionalità | 17 innovazioni mondiali | ~18.500 LOC**
+**200+ Funzionalità | 17 Innovazioni Mondiali | ~18.500 Righe di Codice**
 
 ---
 
@@ -70,8 +70,8 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 Per proteggere il nostro rivoluzionario **Aurora Compiler Pipeline** e gli algoritmi proprietari pur fornendo le massime prestazioni, la versione pubblica di SSL v9 è distribuita come un **binario ad alte prestazioni**.
 
-### Ultimo Rilascio: v9.3.2.0 Aurora
-*   **Versione**: 9.3.2.0 (Stabile)
+### Ultimo Rilascio: v9.4.0.0 Aurora
+*   **Versione**: 9.4.0.0 (Stabile)
 *   **Sicurezza**: Verificato, Firmato e in Sandbox.
 *   **Privacy**: Zero Telemetria. Tutti i calcoli rimangono locali sulla tua macchina.
 
@@ -129,17 +129,13 @@ Per proteggere il nostro rivoluzionario **Aurora Compiler Pipeline** e gli algor
 - ✅ **Normal Mapping**, **SSR** (Riflessi nello Spazio Schermo) e **SSAO**
 - ✅ **Animazione Scheletrica**: Caricatore GLTF/GLB, Skinning GPU (256 ossa max)
 - ✅ **Post-FX**: Bloom, Vignettatura, Grana Pellicola, Aberrazione Cromatica, Profondità di Campo
-- ✅ **Modalità Retro**: Modalità N64 & **GC/Wii Mode** (blending TEV+ 16 fasi, hardware autentico)
-- ✅ **Servizi in background**: **BackgroundConnect** (ispirato a Connect24)
+- ✅ **Modalità Retro**: Modalità N64 (Filtraggio a 3 punti, dithering autentico)
 
 ---
 
 ### 6. Realtà Estesa (Fase 11) 🥽
 - ✅ **Rendering Stereoscopico** (Doppio buffer oculare, regolazione IPD)
 - ✅ **Tracciamento Testa 6DOF** & **Previsione Posa**
-- ✅ **Motion Tracking**: **Controller 6DOF**, **Puntamento IR**, **Stato Batteria** (ispirato a Wii)
-- ✅ **Social & Spectator**: **SSL Social API** & **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: LED avanzati & On-Screen Binding (v9.4 Preview)
 - ✅ **Tracciamento Controller** (6DOF per controller, Pulsanti, Levette)
 - ✅ **Tracciamento Mani** (26 articolazioni per mano, tempo reale)
 - ✅ **Riconoscimento Gesti**: Indicare, Afferrare, Pizzicare, Pollice su
@@ -186,7 +182,6 @@ Per proteggere il nostro rivoluzionario **Aurora Compiler Pipeline** e gli algor
 
 ### 12. GUI & Finestre (v5.0+)
 - ✅ **Finestre Non-Rettangolari** (12+ Forme: Cerchio, Cuore, Stella, Bézier)
-- ✅ **SSL Channels**: Framework UI modulare a griglia (ispirato a Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **Testo Scorrevole 3D**
 - ✅ **Layout accelerati da GPU** & Animazioni (Dissolvenza, Scorrimento, Ridimensionamento)
 

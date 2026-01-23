@@ -34,7 +34,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 ## 🎯 O que é SSL?
 
-**SSL (Sonner Studio Language) v9.3.2 "Aurora"** é a **linguagem de programação mais abrangente do mundo**, desenhada para aplicações híbridas de alta performance. Combina um runtime ultra-rápido baseado em Rust com a flexibilidade das tecnologias de UI modernas.
+**SSL (Sonner Studio Language) v9.4 "Aurora"** é a **linguagem de programação mais abrangente do mundo**, desenhada para aplicações híbridas de alta performance. Combina um runtime ultra-rápido baseado em Rust com a flexibilidade das tecnologias de UI modernas.
 
 ### Porquê SSL?
 - 🎨 **Motor 3D Nível AAA** - Deferred Shading nativo, Volumetria e SSGI integrados.
@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Idiomas Naturais** - Programe na sua língua nativa (Alemão, Inglês, Francês, Chinês, etc.).
 - ⚡ **Performance Nativa** - Backend LLVM, abstrações de custo zero.
 
-**200+ recursos | 17 inovações mundiais | ~18.500 LOC**
+**200+ Funcionalidades | 17 Inovações Mundiais | ~18.500 Linhas de Código**
 
 ---
 
@@ -129,17 +129,13 @@ Para proteger a nossa revolucionária **Aurora Compiler Pipeline** e algoritmos 
 - ✅ **Normal Mapping**, **SSR** (Reflexos em Espaço de Ecrã) e **SSAO**
 - ✅ **Animação Esquelética**: Carregador GLTF/GLB, Skinning GPU (256 ossos máx)
 - ✅ **Post-FX**: Bloom, Vinheta, Grão de Filme, Aberração Cromática, Profundidade de Campo
-- ✅ **Modo Retro**: N64 & **GC/Wii Mode** (mesclagem TEV+ 16 etapas, hardware autêntico)
-- ✅ **Serviços de Segundo Plano**: **BackgroundConnect** (inspirado no Connect24)
+- ✅ **Modo Retro**: Modo N64 (Filtragem 3-pontos, dithering autêntico)
 
 ---
 
 ### 6. Realidade Estendida (Fase 11) 🥽
 - ✅ **Renderização Estereoscópica** (Buffers de olho duplos, ajuste IPD)
 - ✅ **Rastreamento de Cabeça 6DOF** & **Previsão de Pose**
-- ✅ **Motion Tracking**: **Controlador 6DOF**, **Apontamento IR**, **Monitorização de Bateria** (inspirado na Wii)
-- ✅ **Social & Spectator**: **SSL Social API** & **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: LED avançados & On-Screen Binding (v9.4 Preview)
 - ✅ **Rastreamento de Controladores** (6DOF por controlador, Botões, Thumbsticks)
 - ✅ **Rastreamento de Mãos** (26 articulações por mão, tempo real)
 - ✅ **Reconhecimento de Gestos**: Apontar, Agarrar, Beliscar, Polegar para cima
@@ -186,7 +182,6 @@ Para proteger a nossa revolucionária **Aurora Compiler Pipeline** e algoritmos 
 
 ### 12. GUI & Janelas (v5.0+)
 - ✅ **Janelas Não-Retangulares** (12+ Formas: Círculo, Coração, Estrela, Bézier)
-- ✅ **SSL Channels**: Framework de interface modular em grelha (inspirado na Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **Texto Marquee 3D**
 - ✅ **Layouts acelerados por GPU** & Animações (FadeIn, Slide, Scale)
 

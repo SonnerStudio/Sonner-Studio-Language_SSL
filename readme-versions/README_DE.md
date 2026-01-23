@@ -34,7 +34,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 ## 🎯 Was ist SSL?
 
-**SSL (Sonner Studio Language) v9.3.2 "Aurora"** ist die **weltweit umfassendste Programmiersprache**, entwickelt für hochperformante Hybrid-Anwendungen. Sie verschmilzt eine extrem schnelle Rust-basierte Runtime mit der Flexibilität moderner UI-Technologien.
+**SSL (Sonner Studio Language) v9.4 "Aurora"** ist die **weltweit umfassendste Programmiersprache**, entwickelt für hochperformante Hybrid-Anwendungen. Sie verschmilzt eine extrem schnelle Rust-basierte Runtime mit der Flexibilität moderner UI-Technologien.
 
 ### Warum SSL?
 - 🎨 **AAA-Level 3D Engine** - Native Deferred Shading, Volumetrics und SSGI direkt integriert.
@@ -129,18 +129,13 @@ Um unsere revolutionäre **Aurora Compiler Pipeline** und proprietäre Algorithm
 - ✅ **Normal Mapping**, **SSR** (Screen Space Reflections) und **SSAO**
 - ✅ **Skelett-Animation**: GLTF/GLB Loader, GPU Skinning (256 Bones max)
 - ✅ **Post-FX**: Bloom, Vignette, Film Grain, Chromatic Aberration, Schärfentiefe
-- ✅ **Retro-Modus**: N64 & **GC/Wii Mode** (TEV+ 16-Stufen Blending, hardwaregetreu)
-- ✅ **Hintergrund-Dienste**: **BackgroundConnect** (Connect24-inspiriert)
-- ✅ **SGI Deep Framebuffering**: 128-bit Floating Point Pipeline (v9.4 Preview)
+- ✅ **Retro-Modus**: N64 Mode (3-Punkt Filterung, Dithering hardwaregetreu)
 
 ---
 
 ### 6. Extended Reality (Phase 11) 🥽
 - ✅ **Stereoskopisches Rendering** (Duale Eye-Buffer, IPD-Anpassung)
 - ✅ **6DOF Head-Tracking** & **Pose-Vorhersage**
-- ✅ **Motion Tracking**: **6DOF Controller**, **IR-Pointing**, **Batterie-Status** (Wii-inspiriert)
-- ✅ **Social & Spectator**: **SSL Social API** & **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: Fortgeschrittene LED & On-Screen Binding (v9.4 Preview)
 - ✅ **Controller-Tracking** (6DOF pro Controller, Buttons, Thumbsticks)
 - ✅ **Hand-Tracking** (26 Gelenke pro Hand, Echtzeit)
 - ✅ **Gestenerkennung**: Zeigen, Greifen, Pinch, Daumen hoch
@@ -187,7 +182,6 @@ Um unsere revolutionäre **Aurora Compiler Pipeline** und proprietäre Algorithm
 
 ### 12. GUI & Fenster (v5.0+)
 - ✅ **Nicht-rechteckige Fenster** (12+ Formen: Kreis, Herz, Stern, Beziér)
-- ✅ **SSL Channels**: Modulares Grid-UI Framework (Wii-inspiriert)
 - ✅ **Glassmorphismus** & **Neumorphismus** & **3D Marquee Text**
 - ✅ **GPU-beschleunigte Layouts** & Animationen (FadeIn, Slide, Scale)
 
@@ -257,5 +251,5 @@ Um unsere revolutionäre **Aurora Compiler Pipeline** und proprietäre Algorithm
 
 ---
 
-*Zuletzt aktualisiert: 24. Januar 2026*
+*Zuletzt aktualisiert: 23. Januar 2026*
 *© 2024-2026 SonnerStudio Software- und Kunststudio. Alle Rechte vorbehalten.*

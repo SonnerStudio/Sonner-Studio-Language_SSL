@@ -1,4 +1,4 @@
-# SSL v9.3.2 Aurora - El Lenguaje de Programación Definitivo 🚀
+# SSL v9.4 Aurora - El Lenguaje de Programación Definitivo 🚀
 
 <div align="center">
 
@@ -34,7 +34,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 
 ## 🎯 ¿Qué es SSL?
 
-**SSL (Sonner Studio Language) v9.3.2 "Aurora"** es el **lenguaje de programación más completo del mundo**, diseñado para aplicaciones híbridas de alto rendimiento. Fusiona un tiempo de ejecución ultra-rápido basado en Rust con la flexibilidad de las tecnologías de UI modernas.
+**SSL (Sonner Studio Language) v9.4 "Aurora"** es el **lenguaje de programación más completo del mundo**, diseñado para aplicaciones híbridas de alto rendimiento. Fusiona un tiempo de ejecución ultra-rápido basado en Rust con la flexibilidad de las tecnologías de UI modernas.
 
 ### ¿Por qué SSL?
 - 🎨 **Motor 3D Nivel AAA** - Deferred Shading nativo, Volumetría y SSGI integrados.
@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 - 🌍 **16 Idiomas Naturales** - Programa en tu lengua materna (Alemán, Inglés, Francés, Chino, etc.).
 - ⚡ **Rendimiento Nativo** - Backend LLVM, abstracciones de costo cero.
 
-**200+ funciones | 17 innovaciones mundiales | ~18.500 LOC**
+**200+ Características | 17 Innovaciones Mundiales | ~18.500 Líneas de Código**
 
 ---
 
@@ -61,7 +61,7 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 | v8.0 | 2024 Q4 | Ecosistema | **Motor 3D**, **Física**, **Blockchain**, 37 Módulos | ~10.000 |
 | v9.0 | 2026 Q1 | Gráficos AAA | **Deferred Shading**, Raytracing, Modo N64 | ~15.000 |
 | v9.2 | 2026 Q1 | XR & Estado del Arte | **Animación**, **Volumetría**, **SSGI**, **VR/AR**, **Seguimiento de Manos** | ~17.000 |
-| v9.3.2 | 2026 Q1 | Integración GC/Wii | TEV+, 6DOF Motion, SSL Channels | ~18.000 |
+| v9.3.2 | 2026 Q1 | GC/Wii Integration | TEV+, 6DOF Motion, SSL Channels | ~18.000 |
 | **v9.4** | **2026 Q1** | **Social & Deep HDR** | **Social API**, **Feedback XL**, **128-bit FP** | **~18.500** |
 
 ---
@@ -129,17 +129,13 @@ Para proteger nuestro revolucionario **Pipeline de Compilador Aurora** y algorit
 - ✅ **Normal Mapping**, **SSR** (Reflejos en Espacio de Pantalla) y **SSAO**
 - ✅ **Animación Esquelética**: Cargador GLTF/GLB, Skinning GPU (256 huesos máx)
 - ✅ **Post-FX**: Bloom, Viñeta, Grano de Película, Aberración Cromática, Profundidad de Campo
-- ✅ **Modo Retro**: N64 & **GC/Wii Mode** (mezcla TEV+ 16 etapas, hardware auténtico)
-- ✅ **Servicios de fondo**: **BackgroundConnect** (inspirado en Connect24)
+- ✅ **Modo Retro**: Modo N64 (Filtrado de 3 puntos, tramado auténtico)
 
 ---
 
 ### 6. Realidad Extendida (Fase 11) 🥽
 - ✅ **Renderizado Estereoscópico** (Búferes de ojo duales, ajuste IPD)
 - ✅ **Seguimiento de Cabeza 6DOF** & **Predicción de Pose**
-- ✅ **Motion Tracking**: **Controlador 6DOF**, **Puntero IR**, **Estado de Batería** (inspirado en Wii)
-- ✅ **Social & Spectator**: **SSL Social API** & **Spectator Sync** (v9.4 Preview)
-- ✅ **Controller Feedback XL**: LED avanzados & On-Screen Binding (v9.4 Preview)
 - ✅ **Seguimiento de Controladores** (6DOF por controlador, Botones, Joysticks)
 - ✅ **Seguimiento de Manos** (26 articulaciones por mano, tiempo real)
 - ✅ **Reconocimiento de Gestos**: Apuntar, Agarrar, Pellizcar, Pulgar arriba
@@ -186,7 +182,6 @@ Para proteger nuestro revolucionario **Pipeline de Compilador Aurora** y algorit
 
 ### 12. GUI & Ventanas (v5.0+)
 - ✅ **Ventanas No-Rectangulares** (12+ Formas: Círculo, Corazón, Estrella, Bézier)
-- ✅ **SSL Channels**: Marco de UI modular en cuadrícula (inspirado en Wii)
 - ✅ **Glassmorphism** & **Neumorphism** & **Texto Marquesina 3D**
 - ✅ **Diseños acelerados por GPU** & Animaciones (Fundido, Deslizamiento, Escalado)
 
