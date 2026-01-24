@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-13    # Intel Mac
+          - os: macos-12    # Intel Mac (macos-13 is retired/deprecated)
             target: x86_64-apple-darwin
             artifact_name: ssl-v9-macos-intel
             asset_name: ssl-v9-macos-intel
@@ -41,7 +41,9 @@ jobs:
           override: true
 
       - name: Build Release
-        run: cargo build --release --target ${{ matrix.target }} --manifest-path ssl-v9/Cargo.toml
+        env:
+          RUST_BACKTRACE: 1
+        run: cargo build --release --verbose --target ${{ matrix.target }} --manifest-path ssl-v9/Cargo.toml
       
       # Rename binary for upload (Linux/Mac need mv, Windows needs rename or mv in pwsh)
       - name: Prepare Binary (Unix)
