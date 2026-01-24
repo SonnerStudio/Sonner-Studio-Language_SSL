@@ -101,6 +101,18 @@ SSL meets and exceeds international industry standards:
 
 For detailed instructions, see [INSTALLATION.md](INSTALLATION.md).
 
+### Quick Install (v9.4+)
+
+#### Windows (PowerShell)
+```powershell
+iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/setup.ps1 | iex
+```
+
+#### macOS / Linux (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+```
+
 ### Rapid Installation via Cargo
 
 Since SSL v5.0 uses a Rust runtime environment for initial execution, installation via Cargo is recommended.

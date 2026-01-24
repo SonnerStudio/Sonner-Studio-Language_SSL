@@ -26,6 +26,11 @@ Indítsa el az SSL v9 Aurorát másodpercek alatt közvetlenül az IDE-jében va
 ```powershell
 iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/setup.ps1 | iex
 ```
+
+### macOS / Linux (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+```
 *Ez a script automatikusan letölti a legújabb aláírt binárist, ellenőrzi a kompatibilitást és beállítja a környezetet.*
 
 </div>

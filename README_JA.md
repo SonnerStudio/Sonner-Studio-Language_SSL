@@ -26,6 +26,11 @@ SSL v9 Aurora を数秒で IDE やターミナルから直接起動できます�
 ```powershell
 iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/setup.ps1 | iex
 ```
+
+### macOS / Linux (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+```
 *このスクリプトは、署名された最新のバイナリを自動的にダウンロードし、互換性を確認して環境をセットアップします。*
 
 </div>

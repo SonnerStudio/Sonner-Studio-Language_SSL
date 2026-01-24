@@ -26,6 +26,11 @@
 ```powershell
 iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/setup.ps1 | iex
 ```
+
+### macOS / Linux (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+```
 *סקריפט זה מוריד אוטומטית את הבינארי החתום העדכני ביותר, מאמת תאימות ומגדיר את הסביבה שלך.*
 
 </div>

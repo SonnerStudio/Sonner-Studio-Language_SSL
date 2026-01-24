@@ -26,6 +26,11 @@
 ```powershell
 iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/setup.ps1 | iex
 ```
+
+### macOS / Linux (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+```
 *Этот скрипт автоматически загружает последнюю подписанную версию, проверяет совместимость и настраивает ваше окружение.*
 
 </div>
