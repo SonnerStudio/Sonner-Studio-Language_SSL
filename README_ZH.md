@@ -30,6 +30,11 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 ### macOS / Linux (Bash)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+
+### macOS (Manual)
+```bash
+./install_mac.sh
+```
 ```
 *该脚本会自动下载最新的签名二进制文件，验证兼容性并设置您的环境。*
 

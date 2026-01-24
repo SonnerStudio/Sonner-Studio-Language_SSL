@@ -30,6 +30,11 @@ iwr https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/ma
 ### macOS / Linux (Bash)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/SonnerStudio/Sonner-Studio-Language_SSL/main/install_mac.sh | bash
+
+### macOS (Manual)
+```bash
+./install_mac.sh
+```
 ```
 *Dieses Skript lädt automatisch die neueste signierte Binary herunter, prüft die Kompatibilität und richtet Ihre Umgebung ein.*
 
