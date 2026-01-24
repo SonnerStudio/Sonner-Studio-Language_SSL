@@ -1,6 +1,11 @@
 # Ignore EVERYTHING by default
 *
 
+# Project Source
+!/ssl-v9/
+!/ssl-v9/**
+
+
 # Whitelist (Allow) these specific files/directories:
 !/.gitignore
 !/README*.md
