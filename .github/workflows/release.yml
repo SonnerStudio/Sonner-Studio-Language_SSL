@@ -1,0 +1,58 @@
+name: Release Build
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger on version tags like v9.4.0
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-release:
+    name: Build & Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-13    # Intel Mac
+            target: x86_64-apple-darwin
+            artifact_name: ssl-v9-macos-intel
+            asset_name: ssl-v9-macos-intel
+          - os: macos-14    # ARM Mac (M1/M2/M3)
+            target: aarch64-apple-darwin
+            artifact_name: ssl-v9-macos-arm64
+            asset_name: ssl-v9-macos-arm64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact_name: ssl-v9.exe
+            asset_name: ssl-v9.exe
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: ${{ matrix.target }}
+          override: true
+
+      - name: Build Release
+        run: cargo build --release --target ${{ matrix.target }} --manifest-path ssl-v9/Cargo.toml
+      
+      # Rename binary for upload (Linux/Mac need mv, Windows needs rename or mv in pwsh)
+      - name: Prepare Binary (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          mv ssl-v9/target/${{ matrix.target }}/release/ssl-v9 ssl-v9/target/${{ matrix.target }}/release/${{ matrix.asset_name }}
+
+      - name: Upload Binary to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ssl-v9/target/${{ matrix.target }}/release/${{ matrix.asset_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}

@@ -23,4 +23,4 @@
 
 # Github Workflows (Optional, but usually good to keep)
 !/.github/
-!/.github/*
+!/.github/**
